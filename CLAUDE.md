@@ -185,13 +185,17 @@ Verwendet die offizielle **@iobroker/eslint-config** (v2.2.0):
 
 JSDoc-Warnungen sind normal - ioBroker-Standard erwartet Dokumentation.
 
-## Offene TODOs
+## Erledigte Aufgaben
 
 - [x] Unit Tests implementieren ✓ (95 Tests)
 - [x] README.md schreiben ✓
-- [ ] HTTPS Support (optional)
-- [ ] Windows/macOS mDNS Alternative (Bonjour)
+- [x] Dokumentation aktualisieren ✓
+- [x] Package-Validierung ✓ (@iobroker/testing)
 
 ## Bewusst nicht implementiert
 
+- **HTTPS Support**: Shelly Wall Display unterstützt kein HTTPS für Home-Assistant-Verbindungen. HTTPS würde nichts bringen und könnte die Kompatibilität brechen. (Quelle: [Shelly Community](https://community.shelly.cloud/topic/13467-https-host-name-support-for-home-assistant-integration))
+
 - **Rate Limiting**: Nicht sinnvoll - der Adapter macht nur URL-Redirects, es gibt keine schützenswerten Daten. Auth existiert nur um Shelly's Home-Assistant-Erwartung zu erfüllen.
+
+- **Windows/macOS mDNS (Bonjour)**: Manuelle IP-Eingabe funktioniert zuverlässig und ist im README dokumentiert. ioBroker-Server laufen typischerweise auf Linux. Die Komplexität einer Bonjour-Integration rechtfertigt den minimalen Nutzen nicht.
