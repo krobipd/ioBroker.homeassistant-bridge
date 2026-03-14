@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.5.2 — Official ioBroker ESLint Config (14. März 2026)
+
+### Änderungen
+
+- **@iobroker/eslint-config**: Umstellung auf offizielle ESLint-Konfiguration
+- **Prettier**: Code-Formatierung nach ioBroker-Standards
+- ESM-Module für Konfigurationsdateien (`.mjs`)
+- Entfernt: eigene ESLint-Konfiguration und separate Dependencies
+
+### Neue Scripts
+
+```bash
+npm run format       # Code formatieren
+npm run format:check # Formatierung prüfen
+```
+
+---
+
 ## v0.5.1 — Home Assistant 2026.3 (14. März 2026)
 
 ### Updates

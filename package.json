@@ -1,6 +1,6 @@
 {
   "name": "iobroker.homeassistant-bridge",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Emulates a minimal Home Assistant server so devices expecting a Home Assistant dashboard can display any custom web URL.",
   "author": {
     "name": "krobi"
@@ -32,13 +32,11 @@
     "express": "^5.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.0",
+    "@iobroker/eslint-config": "^2.2.0",
     "@iobroker/testing": "^5.0.0",
     "@iobroker/types": "^7.0.0",
     "@types/express": "^5.0.0",
-    "@types/node": "^25.0.0",
-    "eslint": "^10.0.0",
-    "globals": "^17.0.0"
+    "@types/node": "^25.0.0"
   },
   "main": "main.js",
   "files": [
@@ -51,6 +49,8 @@
   "scripts": {
     "test": "echo \"No tests yet\"",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   }
 }

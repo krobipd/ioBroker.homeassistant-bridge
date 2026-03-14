@@ -108,6 +108,7 @@ admin/
 
 | Version | Änderungen |
 |---------|------------|
+| 0.5.2 | @iobroker/eslint-config + Prettier |
 | 0.5.1 | HA_VERSION → 2026.3.1 |
 | 0.5.0 | Express 5, ESLint 10, Dependencies März 2026 |
 | 0.4.0 | js-controller 7, Admin 7, jsonConfig, encryptedNative |
@@ -116,8 +117,13 @@ admin/
 ## Befehle
 
 ```bash
-# Lint
+# Lint (offizielle @iobroker/eslint-config)
 npm run lint
+npm run lint:fix
+
+# Formatierung (Prettier)
+npm run format
+npm run format:check
 
 # Test (noch keine Tests implementiert)
 npm test
@@ -128,6 +134,14 @@ node main.js
 # mDNS Service prüfen
 avahi-browse _home-assistant._tcp -r -t
 ```
+
+## ESLint & Prettier
+
+Verwendet die offizielle **@iobroker/eslint-config** (v2.2.0):
+- `eslint.config.mjs` - ESLint Flat Config (ESM)
+- `prettier.config.mjs` - Prettier Konfiguration (ESM)
+
+JSDoc-Warnungen sind normal - ioBroker-Standard erwartet Dokumentation.
 
 ## Offene TODOs
 

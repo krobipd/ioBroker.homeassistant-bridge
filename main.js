@@ -45,7 +45,9 @@ class HomeAssistantBridge extends utils.Adapter {
                 this.log.info(`Target URL: ${config.visUrl}`);
 
                 if (/\blocalhost\b|127\.0\.0\.1/.test(config.visUrl)) {
-                    this.log.warn('visUrl contains localhost — the display cannot reach this! Use the real IP address.');
+                    this.log.warn(
+                        'visUrl contains localhost — the display cannot reach this! Use the real IP address.',
+                    );
                 }
             }
 
@@ -94,7 +96,7 @@ class HomeAssistantBridge extends utils.Adapter {
 }
 
 if (require.main !== module) {
-    module.exports = (options) => new HomeAssistantBridge(options);
+    module.exports = options => new HomeAssistantBridge(options);
 } else {
     new HomeAssistantBridge();
 }

@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "news": {
+      "0.5.2": {
+        "en": "Switched to official @iobroker/eslint-config with Prettier",
+        "de": "Umstellung auf offizielle @iobroker/eslint-config mit Prettier"
+      },
       "0.5.1": {
         "en": "Updated emulated Home Assistant version to 2026.3.1",
         "de": "Emulierte Home Assistant Version auf 2026.3.1 aktualisiert"
