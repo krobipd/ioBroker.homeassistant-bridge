@@ -24,21 +24,29 @@ class HomeAssistantBridge extends utils.Adapter {
             await this.setStateAsync('info.connection', false, true);
             await this.setStateAsync('info.clients', 0, true);
 
+            // Validate configuration
+            if (!this.config.visUrl) {
+                this.log.error('No redirect URL configured! Please configure a URL in the adapter settings.');
+            }
+
             const config = {
-                port:         this.config.port || 8123,
-                visUrl:       this.config.visUrl || 'http://localhost:8082/vis/',
+                port: this.config.port || 8123,
+                visUrl: this.config.visUrl || '',
                 authRequired: this.config.authRequired === true,
-                username:     this.config.username || 'admin',
-                password:     this.config.password || '',
-                mdnsEnabled:  this.config.mdnsEnabled !== false,
-                serviceName:  this.config.serviceName || 'ioBroker',
+                username: this.config.username || 'admin',
+                password: this.config.password || '',
+                mdnsEnabled: this.config.mdnsEnabled !== false,
+                serviceName: this.config.serviceName || 'ioBroker',
             };
 
             this.log.info(`Config: port=${config.port}, auth=${config.authRequired}, mdns=${config.mdnsEnabled}`);
-            this.log.info(`Target URL: ${config.visUrl}`);
 
-            if (/\blocalhost\b|127\.0\.0\.1/.test(config.visUrl)) {
-                this.log.warn('visUrl contains localhost — the display cannot reach this! Use the real IP address.');
+            if (config.visUrl) {
+                this.log.info(`Target URL: ${config.visUrl}`);
+
+                if (/\blocalhost\b|127\.0\.0\.1/.test(config.visUrl)) {
+                    this.log.warn('visUrl contains localhost — the display cannot reach this! Use the real IP address.');
+                }
             }
 
             this.webServer = new WebServer(this, config);
@@ -55,7 +63,9 @@ class HomeAssistantBridge extends utils.Adapter {
             this.log.info('Home Assistant Bridge running');
         } catch (error) {
             this.log.error(`Failed to start: ${error.message}`);
-            this.log.error(error.stack);
+            if (error.stack) {
+                this.log.debug(error.stack);
+            }
         }
     }
 
@@ -75,8 +85,8 @@ class HomeAssistantBridge extends utils.Adapter {
 
             await this.setStateAsync('info.connection', false, true);
             this.log.info('Home Assistant Bridge stopped');
-        } catch (e) {
-            this.log.error(`Shutdown error: ${e.message}`);
+        } catch (error) {
+            this.log.error(`Shutdown error: ${error.message}`);
         } finally {
             callback();
         }

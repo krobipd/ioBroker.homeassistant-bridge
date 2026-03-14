@@ -23,18 +23,26 @@
 3. **supportedMessages**
    - `stopInstance: true` für sauberes Herunterfahren
 
+4. **Adapter-Icon**
+   - SVG-Icon für den Adapter hinzugefügt
+
 ### Updates
 
 - **@iobroker/adapter-core**: 3.2.2 → 3.3.2
+- **HA_VERSION**: 2024.1.0 → 2024.12.0
 - **Dependencies**: @eslint/js, globals, @iobroker/types hinzugefügt
 - **ESLint 9**: Flat Config Format (`eslint.config.js`)
 - **LICENSE**: MIT-Lizenz-Datei hinzugefügt
 - **Repository URLs**: Korrigiert auf krobipd/iobroker.homeassistant-bridge
 
-### Code-Qualität
+### Code-Qualität & Refactoring
 
-- ESLint-Konfiguration hinzugefügt
-- Lint-Fehler in `lib/mdns.js` behoben (curly braces)
+- **lib/constants.js**: Neue Datei für gemeinsame Konstanten (DRY)
+- **Platzhalter entfernt**: UUID wird jetzt pro Instanz generiert (war `00000000-...`)
+- **visUrl Fallback entfernt**: Kein irreführender localhost-Default mehr
+- **Session Cleanup Logging**: Debug-Ausgabe wenn Sessions aufgeräumt werden
+- **Fehlerbehandlung verbessert**: Redirect ohne URL gibt JSON-Fehler statt Crash
+- **ESLint-Konfiguration** hinzugefügt
 - `tier: 3` in io-package.json gesetzt
 
 ---

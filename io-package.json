@@ -43,7 +43,7 @@
     "license": "MIT",
     "platform": "Javascript/Node.js",
     "main": "main.js",
-    "icon": "homeassistant-bridge.png",
+    "icon": "homeassistant-bridge.svg",
     "enabled": true,
     "tier": 3,
     "loglevel": "info",
