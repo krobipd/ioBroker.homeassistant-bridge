@@ -188,7 +188,7 @@ JSDoc-Warnungen sind normal - ioBroker-Standard erwartet Dokumentation.
 ## Offene TODOs
 
 - [ ] Unit Tests implementieren
-- [ ] README.md schreiben
+- [x] README.md schreiben ✓
 - [ ] HTTPS Support (optional)
 - [ ] Rate Limiting für Auth-Endpoints
 - [ ] Windows/macOS mDNS Alternative (Bonjour)

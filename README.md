@@ -1,4 +1,8 @@
-# Home Assistant Fake Server für ioBroker
+# ioBroker.homeassistant-bridge
+
+![Version](https://img.shields.io/badge/version-0.5.2-blue)
+![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 Ein minimaler Home-Assistant-Emulator für ioBroker.
 
@@ -69,8 +73,89 @@ der Bridge.
 
 ## Voraussetzungen
 
--   Node.js ≥ 18\
--   ioBroker js-controller ≥ 5\
+-   **Node.js ≥ 20**
+-   **ioBroker js-controller ≥ 7.0.0**
+-   **ioBroker Admin ≥ 7.0.0**
 -   Linux-System mit Avahi (für mDNS)
 
 ------------------------------------------------------------------------
+
+## Installation
+
+```bash
+cd /opt/iobroker
+npm install iobroker.homeassistant-bridge
+iobroker add homeassistant-bridge
+```
+
+Oder über die ioBroker Admin-Oberfläche: Adapter → Suche nach "homeassistant-bridge".
+
+------------------------------------------------------------------------
+
+## Konfiguration
+
+Die Konfiguration erfolgt über die Admin-Oberfläche (jsonConfig):
+
+| Option | Beschreibung | Standard |
+|--------|--------------|----------|
+| **Port** | HTTP-Port des Servers | 8123 |
+| **Redirect URL** | Ziel-URL für das Display (z.B. VIS) | *muss gesetzt werden* |
+| **mDNS aktivieren** | Avahi Service Discovery | aktiviert |
+| **Service-Name** | Name im Netzwerk | "ioBroker" |
+| **Auth aktivieren** | Credentials prüfen | deaktiviert |
+| **Benutzername** | Login-Name (wenn Auth aktiv) | "admin" |
+| **Passwort** | Login-Passwort (verschlüsselt gespeichert) | - |
+
+**Wichtig:** Die Redirect URL muss eine im Netzwerk erreichbare Adresse sein, z.B.:
+```
+http://192.168.1.100:8082/vis/index.html
+```
+
+`localhost` funktioniert nicht, da das Display die URL aufruft!
+
+------------------------------------------------------------------------
+
+## Troubleshooting
+
+### Display findet den Server nicht (mDNS)
+
+1. Prüfe ob Avahi läuft:
+   ```bash
+   systemctl status avahi-daemon
+   ```
+
+2. Prüfe ob der Service registriert ist:
+   ```bash
+   avahi-browse _home-assistant._tcp -r -t
+   ```
+
+3. Falls mDNS nicht funktioniert, nutze die manuelle Konfiguration am Display mit der IP-Adresse des ioBroker-Servers.
+
+### Avahi Berechtigungsfehler
+
+```bash
+sudo chown iobroker /etc/avahi/services
+```
+
+### Health-Check
+
+Der Adapter bietet einen Health-Endpoint:
+```
+http://<IP>:8123/health
+```
+
+------------------------------------------------------------------------
+
+## Changelog
+
+Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Versionshistorie.
+
+------------------------------------------------------------------------
+
+## Lizenz
+
+MIT License - siehe [LICENSE](LICENSE)
+
+------------------------------------------------------------------------
+
+*Entwickelt mit Unterstützung von Claude.ai*
