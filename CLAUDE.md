@@ -4,6 +4,21 @@
 
 **ioBroker HomeAssistant Bridge Adapter** - Emuliert einen minimalen Home Assistant Server, damit Geräte wie Shelly Wall Displays sich authentifizieren und dann auf ein ioBroker VIS Dashboard weitergeleitet werden können.
 
+**Status: Feature Complete ✓** (März 2026)
+
+## Shelly Wall Display - Wichtige Erkenntnisse
+
+Das Zielgerät (Shelly Wall Display XL) hat spezifische Limitationen:
+
+| Aspekt | Shelly Verhalten |
+|--------|------------------|
+| Protokoll | **Nur HTTP** - kein HTTPS Support für HA-Verbindungen |
+| Discovery | mDNS (`_home-assistant._tcp`) oder manuelle IP |
+| Auth | Erwartet vollständigen Home Assistant OAuth2-Flow |
+| Nach Auth | Folgt 302 Redirects nativ im WebView |
+
+Diese Limitationen bestimmen das Design des Adapters - wir emulieren nur was Shelly braucht und unterstützt.
+
 ## Architektur
 
 ```
@@ -167,8 +182,9 @@ npm run lint:fix
 npm run format
 npm run format:check
 
-# Test (noch keine Tests implementiert)
+# Tests ausführen (95 Tests)
 npm test
+npm run test:ci    # mit spec Reporter für CI
 
 # Adapter lokal testen
 node main.js
@@ -192,6 +208,18 @@ JSDoc-Warnungen sind normal - ioBroker-Standard erwartet Dokumentation.
 - [x] Dokumentation aktualisieren ✓
 - [x] Package-Validierung ✓ (@iobroker/testing)
 
+## Design-Philosophie
+
+**Prinzip: Minimale Komplexität für den Zweck**
+
+Der Adapter tut genau eine Sache: Shelly Wall Display zu einer beliebigen URL weiterleiten. Jede Entscheidung wurde daran gemessen:
+
+1. **Braucht das Zielgerät (Shelly) dieses Feature?**
+2. **Schützt es tatsächlich etwas Schützenswertes?**
+3. **Rechtfertigt der Nutzen die Komplexität?**
+
+Features die diese Fragen mit "Nein" beantworten, wurden bewusst nicht implementiert. Das hält den Adapter wartbar, verständlich und robust.
+
 ## Bewusst nicht implementiert
 
 - **HTTPS Support**: Shelly Wall Display unterstützt kein HTTPS für Home-Assistant-Verbindungen. HTTPS würde nichts bringen und könnte die Kompatibilität brechen. (Quelle: [Shelly Community](https://community.shelly.cloud/topic/13467-https-host-name-support-for-home-assistant-integration))
@@ -199,3 +227,15 @@ JSDoc-Warnungen sind normal - ioBroker-Standard erwartet Dokumentation.
 - **Rate Limiting**: Nicht sinnvoll - der Adapter macht nur URL-Redirects, es gibt keine schützenswerten Daten. Auth existiert nur um Shelly's Home-Assistant-Erwartung zu erfüllen.
 
 - **Windows/macOS mDNS (Bonjour)**: Manuelle IP-Eingabe funktioniert zuverlässig und ist im README dokumentiert. ioBroker-Server laufen typischerweise auf Linux. Die Komplexität einer Bonjour-Integration rechtfertigt den minimalen Nutzen nicht.
+
+## Test-Abdeckung
+
+```
+test/
+├── testConstants.js    → Shared Constants (10 Tests)
+├── testWebServer.js    → HTTP Endpoints, Auth, Sessions (26 Tests)
+├── testMdns.js         → mDNS Service, XML Generation (17 Tests)
+└── testPackageFiles.js → @iobroker/testing Validierung (42 Tests)
+
+Total: 95 Tests
+```
