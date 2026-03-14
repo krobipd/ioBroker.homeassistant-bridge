@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.5.0 — Express 5 & Dependencies Update (14. März 2026)
+
+### Major Updates
+
+- **Express**: 4.x → 5.2.1 (bessere async/await Unterstützung, modernere API)
+- **ESLint**: 9.x → 10.0.3
+- **@eslint/js**: 9.x → 10.0.1
+- **@types/node**: 22.x → 25.5.0
+- **globals**: 16.x → 17.4.0
+
+### Kompatibilität
+
+- Alle Dependencies auf März 2026 Versionen aktualisiert
+- Express 5 Migration ohne Breaking Changes (Code war bereits kompatibel)
+- Getestet und funktionsfähig mit Node.js 20+
+
+---
+
 ## v0.4.0 — js-controller 7 & Admin 7 Update (14. März 2026)
 
 ### Breaking Changes
