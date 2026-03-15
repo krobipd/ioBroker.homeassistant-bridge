@@ -1,30 +1,36 @@
-'use strict';
+import crypto from 'node:crypto';
+import type { Application, Request, Response, NextFunction } from 'express';
+import express from 'express';
+import type { Server } from 'node:http';
+import { HA_VERSION, SESSION_TTL_MS, CLEANUP_INTERVAL_MS, LOGIN_SCHEMA } from './constants';
+import type { AdapterConfig, SessionData, AdapterInterface } from './types';
 
-const crypto = require('node:crypto');
-const express = require('express');
-const { HA_VERSION, SESSION_TTL_MS, CLEANUP_INTERVAL_MS, LOGIN_SCHEMA } = require('./constants');
+/** Express web server emulating Home Assistant API */
+export class WebServer {
+    private readonly adapter: AdapterInterface;
+    private readonly config: AdapterConfig;
+    private readonly app: Application;
+    private server: Server | null = null;
+    public readonly sessions: Map<string, SessionData> = new Map();
+    private connectedClients = 0;
+    private cleanupTimer: ReturnType<typeof setInterval> | null = null;
+    public readonly instanceUuid: string;
 
-class WebServer {
-    constructor(adapter, config) {
+    constructor(adapter: AdapterInterface, config: AdapterConfig) {
         this.adapter = adapter;
         this.config = config;
         this.app = express();
-        this.server = null;
-        this.sessions = new Map();
-        this.connectedClients = 0;
-        this.cleanupTimer = null;
-        // Generate a persistent UUID for this instance
         this.instanceUuid = crypto.randomUUID();
     }
 
-    /** @returns {string} Configured service name */
-    get serviceName() {
+    /** Configured service name */
+    get serviceName(): string {
         return this.config.serviceName || 'ioBroker';
     }
 
     // --- Helpers ---
 
-    json(res, data, status = 200) {
+    private json(res: Response, data: unknown, status = 200): void {
         res.status(status).json(data);
     }
 
@@ -34,13 +40,13 @@ class WebServer {
      * @param key
      * @param data
      */
-    createSession(key, data = {}) {
+    createSession(key: string, data: Omit<SessionData, 'created'> = {}): string {
         this.sessions.set(key, { ...data, created: Date.now() });
         return key;
     }
 
     /** Periodic cleanup of expired sessions */
-    cleanupSessions() {
+    public cleanupSessions(): void {
         const now = Date.now();
         let cleaned = 0;
         for (const [key, session] of this.sessions) {
@@ -56,12 +62,12 @@ class WebServer {
 
     // --- Middleware ---
 
-    setupMiddleware() {
+    private setupMiddleware(): void {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
 
         // Request logging — use debug level to keep production logs clean
-        this.app.use((req, _res, next) => {
+        this.app.use((req: Request, _res: Response, next: NextFunction) => {
             this.adapter.log.debug(`${req.method} ${req.path}`);
             next();
         });
@@ -69,20 +75,20 @@ class WebServer {
 
     // --- Routes ---
 
-    setupRoutes() {
+    private setupRoutes(): void {
         this.setupApiRoutes();
         this.setupAuthRoutes();
         this.setupMiscRoutes();
         this.setupCatchAll();
     }
 
-    setupApiRoutes() {
+    private setupApiRoutes(): void {
         // CRITICAL: trailing slash — Shelly checks this endpoint for discovery
-        this.app.get('/api/', (_req, res) => {
+        this.app.get('/api/', (_req: Request, res: Response) => {
             this.json(res, { message: 'API running.' });
         });
 
-        this.app.get('/api/config', (_req, res) => {
+        this.app.get('/api/config', (_req: Request, res: Response) => {
             this.json(res, {
                 components: ['http', 'api', 'frontend', 'homeassistant'],
                 config_dir: '/config',
@@ -97,7 +103,7 @@ class WebServer {
             });
         });
 
-        this.app.get('/api/discovery_info', (req, res) => {
+        this.app.get('/api/discovery_info', (req: Request, res: Response) => {
             const baseUrl = `http://${req.hostname}:${this.config.port}`;
             this.json(res, {
                 base_url: baseUrl,
@@ -112,14 +118,14 @@ class WebServer {
 
         // Stub-Endpoints for HA-API compatibility
         for (const path of ['/api/states', '/api/services', '/api/events']) {
-            this.app.get(path, (_req, res) => this.json(res, []));
+            this.app.get(path, (_req: Request, res: Response) => this.json(res, []));
         }
-        this.app.get('/api/error_log', (_req, res) => this.json(res, ''));
+        this.app.get('/api/error_log', (_req: Request, res: Response) => this.json(res, ''));
     }
 
-    setupAuthRoutes() {
+    private setupAuthRoutes(): void {
         // Step 0: Auth providers
-        this.app.get('/auth/providers', (_req, res) => {
+        this.app.get('/auth/providers', (_req: Request, res: Response) => {
             this.json(res, [
                 {
                     name: 'Home Assistant Local',
@@ -130,7 +136,7 @@ class WebServer {
         });
 
         // Step 1: Initiate login flow
-        this.app.post('/auth/login_flow', (_req, res) => {
+        this.app.post('/auth/login_flow', (_req: Request, res: Response) => {
             const flowId = crypto.randomUUID();
             this.createSession(flowId);
             this.adapter.log.debug(`Auth flow created: ${flowId}`);
@@ -147,12 +153,12 @@ class WebServer {
         });
 
         // Step 2: Submit credentials
-        this.app.post('/auth/login_flow/:flowId', (req, res) => {
-            const { flowId } = req.params;
+        this.app.post('/auth/login_flow/:flowId', (req: Request, res: Response) => {
+            const flowId = req.params.flowId as string;
 
             if (!this.sessions.has(flowId)) {
                 this.adapter.log.warn(`Unknown flow_id: ${flowId}`);
-                return this.json(
+                this.json(
                     res,
                     {
                         type: 'abort',
@@ -161,14 +167,15 @@ class WebServer {
                     },
                     400,
                 );
+                return;
             }
 
             // Validate credentials if auth is enabled
             if (this.config.authRequired) {
-                const { username, password } = req.body;
+                const { username, password } = req.body as { username?: string; password?: string };
                 if (username !== this.config.username || password !== this.config.password) {
                     this.adapter.log.warn('Invalid credentials');
-                    return this.json(
+                    this.json(
                         res,
                         {
                             type: 'form',
@@ -181,6 +188,7 @@ class WebServer {
                         },
                         400,
                     );
+                    return;
                 }
             }
 
@@ -202,30 +210,32 @@ class WebServer {
         });
 
         // Step 3: Exchange code for token
-        this.app.post('/auth/token', (req, res) => {
-            const { code, grant_type } = req.body;
+        this.app.post('/auth/token', (req: Request, res: Response) => {
+            const { code, grant_type } = req.body as { code?: string; grant_type?: string };
 
-            if (grant_type === 'authorization_code' && this.sessions.has(code)) {
+            if (grant_type === 'authorization_code' && code && this.sessions.has(code)) {
                 this.sessions.delete(code);
                 this.connectedClients++;
-                this.adapter.setStateAsync('info.clients', this.connectedClients, true);
+                void this.adapter.setStateAsync('info.clients', this.connectedClients, true);
                 this.adapter.log.info('Display authenticated successfully');
 
-                return this.json(res, {
+                this.json(res, {
                     access_token: crypto.randomUUID(),
                     token_type: 'Bearer',
                     refresh_token: crypto.randomUUID(),
                     expires_in: 1800,
                 });
+                return;
             }
 
             // Refresh token — issue new token
             if (grant_type === 'refresh_token') {
-                return this.json(res, {
+                this.json(res, {
                     access_token: crypto.randomUUID(),
                     token_type: 'Bearer',
                     expires_in: 1800,
                 });
+                return;
             }
 
             this.adapter.log.warn(`Token exchange failed: grant_type=${grant_type}`);
@@ -240,8 +250,8 @@ class WebServer {
         });
     }
 
-    setupMiscRoutes() {
-        this.app.get('/health', (_req, res) => {
+    private setupMiscRoutes(): void {
+        this.app.get('/health', (_req: Request, res: Response) => {
             this.json(res, {
                 status: 'ok',
                 adapter: 'homeassistant-bridge',
@@ -255,7 +265,7 @@ class WebServer {
             });
         });
 
-        this.app.get('/manifest.json', (_req, res) => {
+        this.app.get('/manifest.json', (_req: Request, res: Response) => {
             this.json(res, {
                 name: this.serviceName,
                 short_name: this.serviceName,
@@ -267,10 +277,10 @@ class WebServer {
         });
 
         // Redirect — Display WebView follows 302 natively
-        this.app.get('/', (_req, res) => {
+        this.app.get('/', (_req: Request, res: Response) => {
             if (!this.config.visUrl) {
                 this.adapter.log.error('No redirect URL configured!');
-                return this.json(
+                this.json(
                     res,
                     {
                         error: 'No redirect URL configured',
@@ -278,14 +288,15 @@ class WebServer {
                     },
                     500,
                 );
+                return;
             }
             this.adapter.log.info(`Redirecting to: ${this.config.visUrl}`);
             res.redirect(this.config.visUrl);
         });
     }
 
-    setupCatchAll() {
-        this.app.use((req, res) => {
+    private setupCatchAll(): void {
+        this.app.use((req: Request, res: Response) => {
             this.adapter.log.debug(`404: ${req.method} ${req.path}`);
             this.json(res, { error: 'Not Found', path: req.path }, 404);
         });
@@ -293,7 +304,7 @@ class WebServer {
 
     // --- Lifecycle ---
 
-    async start() {
+    async start(): Promise<void> {
         return new Promise((resolve, reject) => {
             this.setupMiddleware();
             this.setupRoutes();
@@ -303,7 +314,7 @@ class WebServer {
                 resolve();
             });
 
-            this.server.on('error', error => {
+            this.server.on('error', (error: NodeJS.ErrnoException) => {
                 const msg =
                     error.code === 'EADDRINUSE'
                         ? `Port ${this.config.port} is already in use!`
@@ -317,7 +328,7 @@ class WebServer {
         });
     }
 
-    async stop() {
+    async stop(): Promise<void> {
         if (this.cleanupTimer) {
             clearInterval(this.cleanupTimer);
             this.cleanupTimer = null;
@@ -337,4 +348,4 @@ class WebServer {
     }
 }
 
-module.exports = WebServer;
+export default WebServer;

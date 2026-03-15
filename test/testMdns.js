@@ -1,8 +1,8 @@
 'use strict';
 
 const { expect } = require('chai');
-const MDNSService = require('../lib/mdns');
-const { HA_VERSION } = require('../lib/constants');
+const { MDNSService } = require('../build/lib/mdns');
+const { HA_VERSION } = require('../build/lib/constants');
 
 // Mock adapter for testing
 function createMockAdapter() {

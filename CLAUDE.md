@@ -24,11 +24,14 @@ Diese Limitationen bestimmen das Design des Adapters - wir emulieren nur was She
 ## Architektur
 
 ```
-main.js                 → Adapter-Hauptklasse (extends utils.Adapter)
-lib/
-├── constants.js        → Gemeinsame Konstanten (HA_VERSION, SESSION_TTL, etc.)
-├── webserver.js        → Express 5 HTTP Server + HA API Emulation
-└── mdns.js             → Avahi mDNS Service Discovery (nur Linux)
+src/
+├── main.ts             → Adapter-Hauptklasse (extends utils.Adapter)
+└── lib/
+    ├── constants.ts    → Gemeinsame Konstanten (HA_VERSION, SESSION_TTL, etc.)
+    ├── types.ts        → TypeScript Interfaces (AdapterConfig, SessionData, etc.)
+    ├── webserver.ts    → Express 5 HTTP Server + HA API Emulation
+    └── mdns.ts         → Avahi mDNS Service Discovery (nur Linux)
+build/                  → Kompilierter JavaScript Code (gitignored)
 admin/
 ├── jsonConfig.json     → Admin UI Konfiguration (3 Tabs)
 └── homeassistant-bridge.svg → Adapter Icon
@@ -109,6 +112,7 @@ admin/
 
 | Version | Änderungen |
 |---------|------------|
+| 0.6.0 | **TypeScript Migration** - src/ mit .ts Dateien, strict mode |
 | 0.5.2 | @iobroker/eslint-config + Prettier |
 | 0.5.1 | HA_VERSION → 2026.3.1 |
 | 0.5.0 | Express 5, Dependencies März 2026 |
@@ -118,18 +122,22 @@ admin/
 ## Befehle
 
 ```bash
+# Build (TypeScript → JavaScript)
+npm run build
+npm run watch        # Watch mode
+
 # Lint & Format
 npm run lint
 npm run lint:fix
 npm run format
 npm run format:check
 
-# Tests (95 Tests)
+# Tests (95 Tests, inkl. automatischem Build)
 npm test
 npm run test:ci
 
 # Adapter lokal testen
-node main.js
+node build/main.js
 
 # mDNS Service prüfen
 avahi-browse _home-assistant._tcp -r -t

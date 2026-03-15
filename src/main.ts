@@ -1,23 +1,36 @@
-'use strict';
+import * as utils from '@iobroker/adapter-core';
+import { MDNSService } from './lib/mdns';
+import { WebServer } from './lib/webserver';
+import type { AdapterConfig } from './lib/types';
 
-const utils = require('@iobroker/adapter-core');
-const MDNSService = require('./lib/mdns');
-const WebServer = require('./lib/webserver');
+/** Native adapter configuration from io-package.json */
+interface NativeConfig {
+    port: number;
+    visUrl: string;
+    authRequired: boolean;
+    username: string;
+    password: string;
+    mdnsEnabled: boolean;
+    serviceName: string;
+}
 
 class HomeAssistantBridge extends utils.Adapter {
-    constructor(options) {
+    private mdnsService: MDNSService | null = null;
+    private webServer: WebServer | null = null;
+
+    declare config: NativeConfig;
+
+    public constructor(options: Partial<utils.AdapterOptions> = {}) {
         super({
             ...options,
             name: 'homeassistant-bridge',
         });
 
-        this.mdnsService = null;
-        this.webServer = null;
         this.on('ready', this.onReady.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
-    async onReady() {
+    private async onReady(): Promise<void> {
         this.log.info('Starting Home Assistant Bridge...');
 
         try {
@@ -29,7 +42,7 @@ class HomeAssistantBridge extends utils.Adapter {
                 this.log.error('No redirect URL configured! Please configure a URL in the adapter settings.');
             }
 
-            const config = {
+            const config: AdapterConfig = {
                 port: this.config.port || 8123,
                 visUrl: this.config.visUrl || '',
                 authRequired: this.config.authRequired === true,
@@ -64,14 +77,15 @@ class HomeAssistantBridge extends utils.Adapter {
             await this.setStateAsync('info.connection', true, true);
             this.log.info('Home Assistant Bridge running');
         } catch (error) {
-            this.log.error(`Failed to start: ${error.message}`);
-            if (error.stack) {
-                this.log.debug(error.stack);
+            const err = error as Error;
+            this.log.error(`Failed to start: ${err.message}`);
+            if (err.stack) {
+                this.log.debug(err.stack);
             }
         }
     }
 
-    async onUnload(callback) {
+    private async onUnload(callback: () => void): Promise<void> {
         try {
             this.log.info('Shutting down...');
 
@@ -88,7 +102,8 @@ class HomeAssistantBridge extends utils.Adapter {
             await this.setStateAsync('info.connection', false, true);
             this.log.info('Home Assistant Bridge stopped');
         } catch (error) {
-            this.log.error(`Shutdown error: ${error.message}`);
+            const err = error as Error;
+            this.log.error(`Shutdown error: ${err.message}`);
         } finally {
             callback();
         }
@@ -96,7 +111,9 @@ class HomeAssistantBridge extends utils.Adapter {
 }
 
 if (require.main !== module) {
-    module.exports = options => new HomeAssistantBridge(options);
+    // Export the constructor in compact mode
+    module.exports = (options: Partial<utils.AdapterOptions> | undefined) => new HomeAssistantBridge(options);
 } else {
-    new HomeAssistantBridge();
+    // Otherwise start the instance directly
+    (() => new HomeAssistantBridge())();
 }

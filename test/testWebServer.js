@@ -2,8 +2,8 @@
 
 const { expect } = require('chai');
 const http = require('node:http');
-const WebServer = require('../lib/webserver');
-const { HA_VERSION } = require('../lib/constants');
+const { WebServer } = require('../build/lib/webserver');
+const { HA_VERSION } = require('../build/lib/constants');
 
 // Mock adapter for testing
 function createMockAdapter() {

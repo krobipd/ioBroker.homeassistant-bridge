@@ -1,7 +1,7 @@
 'use strict';
 
 const { expect } = require('chai');
-const { HA_VERSION, SESSION_TTL_MS, CLEANUP_INTERVAL_MS, LOGIN_SCHEMA } = require('../lib/constants');
+const { HA_VERSION, SESSION_TTL_MS, CLEANUP_INTERVAL_MS, LOGIN_SCHEMA } = require('../build/lib/constants');
 
 describe('constants', () => {
     describe('HA_VERSION', () => {

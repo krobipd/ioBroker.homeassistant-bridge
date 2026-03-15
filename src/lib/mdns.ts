@@ -1,26 +1,33 @@
-'use strict';
-
-const crypto = require('node:crypto');
-const fs = require('node:fs');
-const os = require('node:os');
-const { execSync } = require('node:child_process');
-const { HA_VERSION } = require('./constants');
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import os from 'node:os';
+import { execSync } from 'node:child_process';
+import { HA_VERSION } from './constants';
+import type { AdapterConfig, AdapterInterface } from './types';
 
 const AVAHI_SERVICE_DIR = '/etc/avahi/services';
 const AVAHI_SERVICE_FILE = `${AVAHI_SERVICE_DIR}/homeassistant-bridge.service`;
 
-class MDNSService {
-    constructor(adapter, config) {
+/** Avahi mDNS service for Home Assistant discovery */
+export class MDNSService {
+    private readonly adapter: AdapterInterface;
+    private readonly config: AdapterConfig;
+    public readonly uuid: string;
+    public active = false;
+
+    constructor(adapter: AdapterInterface, config: AdapterConfig) {
         this.adapter = adapter;
         this.config = config;
         this.uuid = crypto.randomUUID();
-        this.active = false;
     }
 
     /** First non-internal IPv4 address */
-    getLocalIP() {
+    getLocalIP(): string {
         const interfaces = os.networkInterfaces();
         for (const ifaces of Object.values(interfaces)) {
+            if (!ifaces) {
+                continue;
+            }
             for (const iface of ifaces) {
                 if (iface.family === 'IPv4' && !iface.internal) {
                     return iface.address;
@@ -31,7 +38,7 @@ class MDNSService {
     }
 
     /** Check if avahi-daemon is running */
-    isAvahiRunning() {
+    isAvahiRunning(): boolean {
         for (const cmd of ['systemctl is-active avahi-daemon', 'pgrep avahi-daemon']) {
             try {
                 execSync(cmd, { stdio: 'ignore' });
@@ -50,7 +57,7 @@ class MDNSService {
      * @param port
      * @param baseUrl
      */
-    buildServiceXml(serviceName, port, baseUrl) {
+    buildServiceXml(serviceName: string, port: number, baseUrl: string): string {
         return [
             '<?xml version="1.0" standalone=\'no\'?>',
             '<!DOCTYPE service-group SYSTEM "avahi-service.dtd">',
@@ -72,18 +79,18 @@ class MDNSService {
     }
 
     /** Reload avahi-daemon to pick up the new service file */
-    reloadAvahi() {
+    private reloadAvahi(): void {
         try {
             execSync('avahi-daemon --reload 2>/dev/null || kill -HUP $(pgrep avahi-daemon)', {
                 stdio: 'ignore',
-                shell: true,
+                shell: '/bin/sh',
             });
         } catch {
             // non-critical — avahi polls service dir anyway
         }
     }
 
-    start() {
+    start(): void {
         if (!this.isAvahiRunning()) {
             this.adapter.log.error('mDNS: Avahi daemon is not running!');
             this.adapter.log.error(
@@ -115,14 +122,15 @@ class MDNSService {
             this.adapter.log.info(`mDNS: UUID: ${this.uuid}`);
             this.adapter.log.info('mDNS: Verify: avahi-browse _home-assistant._tcp -r -t');
         } catch (error) {
-            this.adapter.log.error(`mDNS: Failed to write service file: ${error.message}`);
-            if (error.code === 'EACCES') {
+            const err = error as NodeJS.ErrnoException;
+            this.adapter.log.error(`mDNS: Failed to write service file: ${err.message}`);
+            if (err.code === 'EACCES') {
                 this.adapter.log.error('mDNS: Permission denied — run: sudo chown iobroker /etc/avahi/services');
             }
         }
     }
 
-    stop() {
+    stop(): void {
         if (!this.active) {
             return;
         }
@@ -134,11 +142,12 @@ class MDNSService {
                 this.adapter.log.info('mDNS: Service file removed');
             }
         } catch (error) {
-            this.adapter.log.warn(`mDNS: Could not remove service file: ${error.message}`);
+            const err = error as Error;
+            this.adapter.log.warn(`mDNS: Could not remove service file: ${err.message}`);
         }
 
         this.active = false;
     }
 }
 
-module.exports = MDNSService;
+export default MDNSService;

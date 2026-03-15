@@ -54,7 +54,7 @@
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
-    "main": "main.js",
+    "main": "build/main.js",
     "icon": "homeassistant-bridge.svg",
     "extIcon": "https://raw.githubusercontent.com/krobipd/iobroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg",
     "enabled": true,
