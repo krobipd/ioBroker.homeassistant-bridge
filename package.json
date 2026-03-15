@@ -3,7 +3,8 @@
 	"version": "0.6.2",
 	"description": "Emulates a minimal Home Assistant server so devices expecting a Home Assistant dashboard can display any custom web URL.",
 	"author": {
-		"name": "krobi"
+		"name": "krobi",
+		"email": "krobi@power-dreams.com"
 	},
 	"homepage": "https://github.com/krobipd/iobroker.homeassistant-bridge",
 	"license": "MIT",

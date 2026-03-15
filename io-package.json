@@ -54,7 +54,7 @@
 			"de": "Emuliert einen minimalen Home Assistant Server, sodass Geräte mit Home-Assistant-Dashboard-Unterstützung beliebige Web-URLs anzeigen können."
 		},
 		"authors": [
-			"krobi"
+			"krobi <krobi@power-dreams.com>"
 		],
 		"keywords": [
 			"homeassistant",
