@@ -1,6 +1,6 @@
 # CLAUDE.md - Projekt-Wissen für Claude
 
-> **Hinweis:** Dieses Projekt nutzt die gemeinsame ioBroker-Wissensbasis unter `../CLAUDE.md`. Diese enthält allgemeine Best Practices, Standard-Konfigurationen und Workflows für alle ioBroker-Adapter-Projekte. Die vorliegende Datei ergänzt diese mit projekt-spezifischen Details.
+> **Hinweis:** Dieses Projekt nutzt die gemeinsame ioBroker-Wissensbasis unter `../CLAUDE.md` (lokal, nicht im Git-Repo). Diese enthält allgemeine Best Practices, Standard-Konfigurationen und Workflows für alle ioBroker-Adapter-Projekte. **Bitte beide Dateien aktuell halten** - Änderungen an Standards gehören in die globale Datei, projekt-spezifisches Wissen hierher.
 
 ## Projekt-Übersicht
 
