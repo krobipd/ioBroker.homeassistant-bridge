@@ -6,7 +6,7 @@ export default [
         languageOptions: {
             parserOptions: {
                 projectService: {
-                    allowDefaultProject: ['*.mjs'],
+                    allowDefaultProject: ['*.mjs', 'test/*.ts'],
                 },
                 tsconfigRootDir: import.meta.dirname,
             },
@@ -14,7 +14,7 @@ export default [
     },
     {
         // Test files use Mocha globals
-        files: ['test/**/*.js'],
+        files: ['test/**/*.ts'],
         languageOptions: {
             globals: {
                 describe: 'readonly',
@@ -27,6 +27,6 @@ export default [
         },
     },
     {
-        ignores: ['build/**', 'node_modules/**', 'admin/**', 'test/**', 'scripts/**'],
+        ignores: ['build/**', 'node_modules/**', 'admin/**', 'scripts/**'],
     },
 ];

@@ -179,10 +179,12 @@ Features die diese Fragen mit "Nein" beantworten, wurden bewusst nicht implement
 
 ```
 test/
-├── testConstants.js    → Shared Constants (10 Tests)
-├── testWebServer.js    → HTTP Endpoints, Auth, Sessions (26 Tests)
-├── testMdns.js         → mDNS Service, XML Generation (17 Tests)
-└── testPackageFiles.js → @iobroker/testing Validierung (42 Tests)
+├── testConstants.ts    → Shared Constants (10 Tests)
+├── testMdns.ts         → mDNS Service, XML Generation (17 Tests)
+├── testWebServer.ts    → HTTP Endpoints, Auth, Sessions (26 Tests)
+└── testPackageFiles.ts → @iobroker/testing Validierung (42 Tests)
 
-Total: 95 Tests
+Total: 95 Tests (alle TypeScript)
 ```
+
+Die Tests werden mit `tsconfig.test.json` kompiliert und aus `build/test/` ausgeführt.

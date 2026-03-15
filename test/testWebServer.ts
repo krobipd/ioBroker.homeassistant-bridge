@@ -1,29 +1,45 @@
-'use strict';
+import { expect } from 'chai';
+import http from 'node:http';
+import { WebServer } from '../src/lib/webserver';
+import { HA_VERSION } from '../src/lib/constants';
+import type { AdapterConfig } from '../src/lib/types';
 
-const { expect } = require('chai');
-const http = require('node:http');
-const { WebServer } = require('../build/lib/webserver');
-const { HA_VERSION } = require('../build/lib/constants');
+interface MockAdapter {
+    log: {
+        debug: () => void;
+        info: () => void;
+        warn: () => void;
+        error: () => void;
+    };
+    setStateAsync: () => Promise<void>;
+}
 
 // Mock adapter for testing
-function createMockAdapter() {
+function createMockAdapter(): MockAdapter {
     return {
         log: {
-            debug: () => {},
-            info: () => {},
-            warn: () => {},
-            error: () => {},
+            debug: (): void => {},
+            info: (): void => {},
+            warn: (): void => {},
+            error: (): void => {},
         },
-        setStateAsync: () => Promise.resolve(),
+        setStateAsync: (): Promise<void> => Promise.resolve(),
     };
 }
 
+interface HttpResponse {
+    statusCode: number | undefined;
+    headers: http.IncomingHttpHeaders;
+    body: unknown;
+    rawBody: string;
+}
+
 // Helper to make HTTP requests
-function httpRequest(options, body = null) {
+function httpRequest(options: http.RequestOptions, body: unknown = null): Promise<HttpResponse> {
     return new Promise((resolve, reject) => {
-        const req = http.request(options, (res) => {
+        const req = http.request(options, res => {
             let data = '';
-            res.on('data', (chunk) => (data += chunk));
+            res.on('data', (chunk: Buffer) => (data += chunk.toString()));
             res.on('end', () => {
                 try {
                     resolve({
@@ -51,10 +67,10 @@ function httpRequest(options, body = null) {
 }
 
 describe('WebServer', () => {
-    let server;
-    let adapter;
+    let server: WebServer;
+    let adapter: MockAdapter;
     const TEST_PORT = 18123; // Use non-standard port for tests
-    const config = {
+    const config: AdapterConfig = {
         port: TEST_PORT,
         visUrl: 'http://example.com/vis',
         authRequired: false,
@@ -66,7 +82,7 @@ describe('WebServer', () => {
 
     before(async () => {
         adapter = createMockAdapter();
-        server = new WebServer(adapter, config);
+        server = new WebServer(adapter as never, config);
         await server.start();
     });
 
@@ -76,9 +92,7 @@ describe('WebServer', () => {
 
     describe('constructor', () => {
         it('should generate a valid UUID', () => {
-            expect(server.instanceUuid).to.match(
-                /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
-            );
+            expect(server.instanceUuid).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
         });
 
         it('should return configured service name', () => {
@@ -108,9 +122,10 @@ describe('WebServer', () => {
             });
 
             expect(res.statusCode).to.equal(200);
-            expect(res.body.version).to.equal(HA_VERSION);
-            expect(res.body.location_name).to.equal('TestServer');
-            expect(res.body.unit_system.temperature).to.equal('°C');
+            const body = res.body as { version: string; location_name: string; unit_system: { temperature: string } };
+            expect(body.version).to.equal(HA_VERSION);
+            expect(body.location_name).to.equal('TestServer');
+            expect(body.unit_system.temperature).to.equal('°C');
         });
 
         it('GET /api/discovery_info should return discovery info', async () => {
@@ -122,9 +137,10 @@ describe('WebServer', () => {
             });
 
             expect(res.statusCode).to.equal(200);
-            expect(res.body.version).to.equal(HA_VERSION);
-            expect(res.body.requires_api_password).to.be.true;
-            expect(res.body.uuid).to.equal(server.instanceUuid);
+            const body = res.body as { version: string; requires_api_password: boolean; uuid: string };
+            expect(body.version).to.equal(HA_VERSION);
+            expect(body.requires_api_password).to.be.true;
+            expect(body.uuid).to.equal(server.instanceUuid);
         });
 
         it('GET /api/states should return empty array', async () => {
@@ -186,8 +202,9 @@ describe('WebServer', () => {
             });
 
             expect(res.statusCode).to.equal(200);
-            expect(res.body).to.be.an('array').with.lengthOf(1);
-            expect(res.body[0].type).to.equal('homeassistant');
+            const body = res.body as { type: string }[];
+            expect(body).to.be.an('array').with.lengthOf(1);
+            expect(body[0].type).to.equal('homeassistant');
         });
 
         it('POST /auth/login_flow should create a flow', async () => {
@@ -203,11 +220,10 @@ describe('WebServer', () => {
             );
 
             expect(res.statusCode).to.equal(200);
-            expect(res.body.type).to.equal('form');
-            expect(res.body.flow_id).to.match(
-                /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
-            );
-            expect(res.body.step_id).to.equal('init');
+            const body = res.body as { type: string; flow_id: string; step_id: string };
+            expect(body.type).to.equal('form');
+            expect(body.flow_id).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
+            expect(body.step_id).to.equal('init');
         });
 
         it('POST /auth/login_flow/:flowId with unknown flow should return error', async () => {
@@ -223,8 +239,9 @@ describe('WebServer', () => {
             );
 
             expect(res.statusCode).to.equal(400);
-            expect(res.body.type).to.equal('abort');
-            expect(res.body.reason).to.equal('unknown_flow');
+            const body = res.body as { type: string; reason: string };
+            expect(body.type).to.equal('abort');
+            expect(body.reason).to.equal('unknown_flow');
         });
 
         it('should complete full auth flow', async () => {
@@ -240,7 +257,8 @@ describe('WebServer', () => {
                 {},
             );
             expect(flowRes.statusCode).to.equal(200);
-            const flowId = flowRes.body.flow_id;
+            const flowBody = flowRes.body as { flow_id: string };
+            const flowId = flowBody.flow_id;
 
             // Step 2: Submit credentials
             const credRes = await httpRequest(
@@ -254,8 +272,9 @@ describe('WebServer', () => {
                 { username: 'admin', password: 'secret' },
             );
             expect(credRes.statusCode).to.equal(200);
-            expect(credRes.body.type).to.equal('create_entry');
-            const code = credRes.body.result;
+            const credBody = credRes.body as { type: string; result: string };
+            expect(credBody.type).to.equal('create_entry');
+            const code = credBody.result;
 
             // Step 3: Exchange code for token
             const tokenRes = await httpRequest(
@@ -269,9 +288,10 @@ describe('WebServer', () => {
                 `grant_type=authorization_code&code=${code}`,
             );
             expect(tokenRes.statusCode).to.equal(200);
-            expect(tokenRes.body.access_token).to.exist;
-            expect(tokenRes.body.token_type).to.equal('Bearer');
-            expect(tokenRes.body.refresh_token).to.exist;
+            const tokenBody = tokenRes.body as { access_token: string; token_type: string; refresh_token: string };
+            expect(tokenBody.access_token).to.exist;
+            expect(tokenBody.token_type).to.equal('Bearer');
+            expect(tokenBody.refresh_token).to.exist;
         });
 
         it('POST /auth/token with refresh_token should return new token', async () => {
@@ -287,8 +307,9 @@ describe('WebServer', () => {
             );
 
             expect(res.statusCode).to.equal(200);
-            expect(res.body.access_token).to.exist;
-            expect(res.body.token_type).to.equal('Bearer');
+            const body = res.body as { access_token: string; token_type: string };
+            expect(body.access_token).to.exist;
+            expect(body.token_type).to.equal('Bearer');
         });
     });
 
@@ -302,9 +323,10 @@ describe('WebServer', () => {
             });
 
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('ok');
-            expect(res.body.adapter).to.equal('homeassistant-bridge');
-            expect(res.body.version).to.equal(HA_VERSION);
+            const body = res.body as { status: string; adapter: string; version: string };
+            expect(body.status).to.equal('ok');
+            expect(body.adapter).to.equal('homeassistant-bridge');
+            expect(body.version).to.equal(HA_VERSION);
         });
 
         it('GET /manifest.json should return PWA manifest', async () => {
@@ -316,8 +338,9 @@ describe('WebServer', () => {
             });
 
             expect(res.statusCode).to.equal(200);
-            expect(res.body.name).to.equal('TestServer');
-            expect(res.body.display).to.equal('standalone');
+            const body = res.body as { name: string; display: string };
+            expect(body.name).to.equal('TestServer');
+            expect(body.display).to.equal('standalone');
         });
 
         it('GET / should redirect to visUrl', async () => {
@@ -341,12 +364,13 @@ describe('WebServer', () => {
             });
 
             expect(res.statusCode).to.equal(404);
-            expect(res.body.error).to.equal('Not Found');
+            const body = res.body as { error: string };
+            expect(body.error).to.equal('Not Found');
         });
     });
 
     describe('Session management', () => {
-        it('should cleanup expired sessions', async () => {
+        it('should cleanup expired sessions', () => {
             // Clear any existing sessions from previous tests
             server.sessions.clear();
 
@@ -366,18 +390,22 @@ describe('WebServer', () => {
 });
 
 describe('WebServer without visUrl', () => {
-    let server;
-    let adapter;
+    let server: WebServer;
+    let adapter: MockAdapter;
     const TEST_PORT = 18124;
 
     before(async () => {
         adapter = createMockAdapter();
-        server = new WebServer(adapter, {
+        const noVisConfig: AdapterConfig = {
             port: TEST_PORT,
             visUrl: '', // No redirect URL configured
             authRequired: false,
+            username: '',
+            password: '',
+            mdnsEnabled: false,
             serviceName: 'TestServer',
-        });
+        };
+        server = new WebServer(adapter as never, noVisConfig);
         await server.start();
     });
 
@@ -394,25 +422,28 @@ describe('WebServer without visUrl', () => {
         });
 
         expect(res.statusCode).to.equal(500);
-        expect(res.body.error).to.equal('No redirect URL configured');
+        const body = res.body as { error: string };
+        expect(body.error).to.equal('No redirect URL configured');
     });
 });
 
 describe('WebServer with auth required', () => {
-    let server;
-    let adapter;
+    let server: WebServer;
+    let adapter: MockAdapter;
     const TEST_PORT = 18125;
 
     before(async () => {
         adapter = createMockAdapter();
-        server = new WebServer(adapter, {
+        const authConfig: AdapterConfig = {
             port: TEST_PORT,
             visUrl: 'http://example.com',
             authRequired: true,
             username: 'testuser',
             password: 'testpass',
+            mdnsEnabled: false,
             serviceName: 'AuthServer',
-        });
+        };
+        server = new WebServer(adapter as never, authConfig);
         await server.start();
     });
 
@@ -432,7 +463,8 @@ describe('WebServer with auth required', () => {
             },
             {},
         );
-        const flowId = flowRes.body.flow_id;
+        const flowBody = flowRes.body as { flow_id: string };
+        const flowId = flowBody.flow_id;
 
         // Submit wrong credentials
         const res = await httpRequest(
@@ -447,7 +479,8 @@ describe('WebServer with auth required', () => {
         );
 
         expect(res.statusCode).to.equal(400);
-        expect(res.body.errors.base).to.equal('invalid_auth');
+        const body = res.body as { errors: { base: string } };
+        expect(body.errors.base).to.equal('invalid_auth');
     });
 
     it('should accept valid credentials', async () => {
@@ -462,7 +495,8 @@ describe('WebServer with auth required', () => {
             },
             {},
         );
-        const flowId = flowRes.body.flow_id;
+        const flowBody = flowRes.body as { flow_id: string };
+        const flowId = flowBody.flow_id;
 
         // Submit correct credentials
         const res = await httpRequest(
@@ -477,6 +511,7 @@ describe('WebServer with auth required', () => {
         );
 
         expect(res.statusCode).to.equal(200);
-        expect(res.body.type).to.equal('create_entry');
+        const body = res.body as { type: string };
+        expect(body.type).to.equal('create_entry');
     });
 });

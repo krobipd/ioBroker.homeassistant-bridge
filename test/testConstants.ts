@@ -1,7 +1,5 @@
-'use strict';
-
-const { expect } = require('chai');
-const { HA_VERSION, SESSION_TTL_MS, CLEANUP_INTERVAL_MS, LOGIN_SCHEMA } = require('../build/lib/constants');
+import { expect } from 'chai';
+import { HA_VERSION, SESSION_TTL_MS, CLEANUP_INTERVAL_MS, LOGIN_SCHEMA } from '../src/lib/constants';
 
 describe('constants', () => {
     describe('HA_VERSION', () => {
@@ -49,8 +47,8 @@ describe('constants', () => {
         it('should have username and password fields', () => {
             expect(LOGIN_SCHEMA).to.have.lengthOf(2);
 
-            const usernameField = LOGIN_SCHEMA.find((f) => f.name === 'username');
-            const passwordField = LOGIN_SCHEMA.find((f) => f.name === 'password');
+            const usernameField = LOGIN_SCHEMA.find(f => f.name === 'username');
+            const passwordField = LOGIN_SCHEMA.find(f => f.name === 'password');
 
             expect(usernameField).to.exist;
             expect(passwordField).to.exist;

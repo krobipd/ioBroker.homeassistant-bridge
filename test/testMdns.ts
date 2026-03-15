@@ -1,42 +1,66 @@
-'use strict';
+import { expect } from 'chai';
+import { MDNSService } from '../src/lib/mdns';
+import { HA_VERSION } from '../src/lib/constants';
+import type { AdapterConfig } from '../src/lib/types';
 
-const { expect } = require('chai');
-const { MDNSService } = require('../build/lib/mdns');
-const { HA_VERSION } = require('../build/lib/constants');
+interface LogEntry {
+    level: string;
+    msg: string;
+}
+
+interface MockAdapter {
+    log: {
+        debug: (msg: string) => void;
+        info: (msg: string) => void;
+        warn: (msg: string) => void;
+        error: (msg: string) => void;
+    };
+    _logs: LogEntry[];
+}
 
 // Mock adapter for testing
-function createMockAdapter() {
-    const logs = [];
+function createMockAdapter(): MockAdapter {
+    const logs: LogEntry[] = [];
     return {
         log: {
-            debug: (msg) => logs.push({ level: 'debug', msg }),
-            info: (msg) => logs.push({ level: 'info', msg }),
-            warn: (msg) => logs.push({ level: 'warn', msg }),
-            error: (msg) => logs.push({ level: 'error', msg }),
+            debug: (msg: string): void => {
+                logs.push({ level: 'debug', msg });
+            },
+            info: (msg: string): void => {
+                logs.push({ level: 'info', msg });
+            },
+            warn: (msg: string): void => {
+                logs.push({ level: 'warn', msg });
+            },
+            error: (msg: string): void => {
+                logs.push({ level: 'error', msg });
+            },
         },
         _logs: logs,
     };
 }
 
 describe('MDNSService', () => {
-    let service;
-    let adapter;
-    const config = {
+    let service: MDNSService;
+    let adapter: MockAdapter;
+    const config: AdapterConfig = {
         port: 8123,
-        serviceName: 'TestService',
+        visUrl: 'http://example.com',
+        authRequired: false,
+        username: 'admin',
+        password: 'secret',
         mdnsEnabled: true,
+        serviceName: 'TestService',
     };
 
     beforeEach(() => {
         adapter = createMockAdapter();
-        service = new MDNSService(adapter, config);
+        service = new MDNSService(adapter as never, config);
     });
 
     describe('constructor', () => {
         it('should generate a valid UUID', () => {
-            expect(service.uuid).to.match(
-                /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
-            );
+            expect(service.uuid).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
         });
 
         it('should not be active initially', () => {
@@ -148,7 +172,7 @@ describe('MDNSService', () => {
 
             if (!service.active) {
                 // Avahi not running - should have logged errors
-                const errorLogs = adapter._logs.filter((l) => l.level === 'error');
+                const errorLogs = adapter._logs.filter(l => l.level === 'error');
                 expect(errorLogs.length).to.be.greaterThan(0);
             }
         });
@@ -158,7 +182,16 @@ describe('MDNSService', () => {
 describe('MDNSService with default serviceName', () => {
     it('should use ioBroker as default service name', () => {
         const adapter = createMockAdapter();
-        const service = new MDNSService(adapter, { port: 8123 });
+        const defaultConfig: AdapterConfig = {
+            port: 8123,
+            visUrl: 'http://example.com',
+            authRequired: false,
+            username: '',
+            password: '',
+            mdnsEnabled: true,
+            serviceName: 'ioBroker',
+        };
+        const service = new MDNSService(adapter as never, defaultConfig);
 
         // serviceName is not set, so buildServiceXml should get undefined
         // The actual default is handled in the start() method
