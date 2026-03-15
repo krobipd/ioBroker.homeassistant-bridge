@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "homeassistant-bridge",
-		"version": "0.6.2",
+		"version": "0.6.3",
 		"news": {
 			"0.6.2": {
 				"en": "Added complete JSDoc documentation, ESLint now passes without warnings",
