@@ -1,7 +1,8 @@
 # ioBroker.homeassistant-bridge
 
-![Version](https://img.shields.io/badge/version-0.5.2-blue)
+![Version](https://img.shields.io/badge/version-0.6.2-blue)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 Ein minimaler Home-Assistant-Emulator für ioBroker.
@@ -142,6 +143,40 @@ sudo chown iobroker /etc/avahi/services
 Der Adapter bietet einen Health-Endpoint:
 ```
 http://<IP>:8123/health
+```
+
+------------------------------------------------------------------------
+
+## Entwicklung
+
+Der Adapter ist vollständig in **TypeScript** geschrieben mit `strict` Mode.
+
+```bash
+# Build
+npm run build
+
+# Tests (95 Tests)
+npm test
+
+# Lint
+npm run lint
+
+# Watch-Mode für Entwicklung
+npm run watch
+```
+
+### Projektstruktur
+
+```
+src/
+├── main.ts           # Adapter-Hauptklasse
+└── lib/
+    ├── constants.ts  # Gemeinsame Konstanten
+    ├── types.ts      # TypeScript Interfaces
+    ├── webserver.ts  # Express HTTP Server
+    └── mdns.ts       # Avahi mDNS Service
+test/                 # TypeScript Tests
+build/                # Kompilierter JavaScript Code
 ```
 
 ------------------------------------------------------------------------

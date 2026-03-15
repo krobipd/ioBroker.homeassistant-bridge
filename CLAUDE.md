@@ -117,6 +117,7 @@ scripts/
 
 | Version | Änderungen |
 |---------|------------|
+| 0.6.2 | JSDoc-Dokumentation komplett, ESLint 0 Warnings |
 | 0.6.1 | GitHub Actions CI + Release Workflows |
 | 0.6.0 | **TypeScript Migration** - src/ mit .ts Dateien, strict mode |
 | 0.5.2 | @iobroker/eslint-config + Prettier |

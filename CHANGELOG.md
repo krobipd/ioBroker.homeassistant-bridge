@@ -1,5 +1,41 @@
 # Changelog
 
+## v0.6.2 — JSDoc Documentation (15. März 2026)
+
+### Verbesserungen
+
+- **JSDoc-Dokumentation**: Vollständige JSDoc-Kommentare für alle TypeScript-Interfaces, Klassen und Methoden
+- ESLint läuft jetzt ohne Warnungen (0 Errors, 0 Warnings)
+
+---
+
+## v0.6.1 — GitHub Actions (15. März 2026)
+
+### Neue Features
+
+- **GitHub Actions CI**: Automatische Tests für Node.js 20, 22, 24
+- **GitHub Actions Release**: Automatische Release-Erstellung bei Tag-Push
+
+---
+
+## v0.6.0 — TypeScript Migration (15. März 2026)
+
+### Major Changes
+
+- **Vollständige TypeScript-Migration**: Gesamter Quellcode in `src/` ist jetzt TypeScript
+- **TypeScript Tests**: Alle Tests migriert nach TypeScript (`test/*.ts`)
+- **Strict Mode**: TypeScript `strict: true` aktiviert
+- Separate `tsconfig.json`, `tsconfig.build.json`, `tsconfig.test.json`
+
+### Technische Details
+
+- Source-Files: `src/main.ts`, `src/lib/*.ts`
+- Test-Files: `test/*.ts` (kompiliert nach `build/test/`)
+- Build: `tsc -p tsconfig.build.json`
+- Test-Build: `tsc -p tsconfig.test.json`
+
+---
+
 ## v0.5.2 — Official ioBroker ESLint Config (14. März 2026)
 
 ### Änderungen

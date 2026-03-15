@@ -16,6 +16,12 @@ export class WebServer {
     private cleanupTimer: ReturnType<typeof setInterval> | null = null;
     public readonly instanceUuid: string;
 
+    /**
+     * Creates a new WebServer instance
+     *
+     * @param adapter - Adapter interface for logging and state management
+     * @param config - Adapter configuration
+     */
     constructor(adapter: AdapterInterface, config: AdapterConfig) {
         this.adapter = adapter;
         this.config = config;
@@ -37,8 +43,8 @@ export class WebServer {
     /**
      * Create a session entry with automatic expiration
      *
-     * @param key
-     * @param data
+     * @param key - Unique session identifier
+     * @param data - Additional session data
      */
     createSession(key: string, data: Omit<SessionData, 'created'> = {}): string {
         this.sessions.set(key, { ...data, created: Date.now() });
@@ -304,6 +310,7 @@ export class WebServer {
 
     // --- Lifecycle ---
 
+    /** Start the web server and session cleanup timer */
     async start(): Promise<void> {
         return new Promise((resolve, reject) => {
             this.setupMiddleware();
@@ -328,6 +335,7 @@ export class WebServer {
         });
     }
 
+    /** Stop the web server and cleanup timer */
     async stop(): Promise<void> {
         if (this.cleanupTimer) {
             clearInterval(this.cleanupTimer);

@@ -15,6 +15,12 @@ export class MDNSService {
     public readonly uuid: string;
     public active = false;
 
+    /**
+     * Creates a new MDNSService instance
+     *
+     * @param adapter - Adapter interface for logging
+     * @param config - Adapter configuration
+     */
     constructor(adapter: AdapterInterface, config: AdapterConfig) {
         this.adapter = adapter;
         this.config = config;
@@ -53,9 +59,9 @@ export class MDNSService {
     /**
      * Build Avahi service XML
      *
-     * @param serviceName
-     * @param port
-     * @param baseUrl
+     * @param serviceName - Name of the service for mDNS discovery
+     * @param port - Port number for the service
+     * @param baseUrl - Base URL for the service
      */
     buildServiceXml(serviceName: string, port: number, baseUrl: string): string {
         return [
@@ -90,6 +96,7 @@ export class MDNSService {
         }
     }
 
+    /** Start mDNS broadcasting via Avahi */
     start(): void {
         if (!this.isAvahiRunning()) {
             this.adapter.log.error('mDNS: Avahi daemon is not running!');
@@ -130,6 +137,7 @@ export class MDNSService {
         }
     }
 
+    /** Stop mDNS broadcasting and remove service file */
     stop(): void {
         if (!this.active) {
             return;
