@@ -6,7 +6,7 @@
 		"name": "krobi",
 		"email": "krobi@power-dreams.com"
 	},
-	"homepage": "https://github.com/krobipd/iobroker.homeassistant-bridge",
+	"homepage": "https://github.com/krobipd/ioBroker.homeassistant-bridge",
 	"license": "MIT",
 	"keywords": [
 		"ioBroker",
@@ -20,10 +20,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/krobipd/iobroker.homeassistant-bridge.git"
+		"url": "https://github.com/krobipd/ioBroker.homeassistant-bridge.git"
 	},
 	"bugs": {
-		"url": "https://github.com/krobipd/iobroker.homeassistant-bridge/issues"
+		"url": "https://github.com/krobipd/ioBroker.homeassistant-bridge/issues"
 	},
 	"engines": {
 		"node": ">=20"
