@@ -6,6 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/krobipd)
 ![npm downloads](https://img.shields.io/npm/dt/iobroker.homeassistant-bridge)
+![Installations](https://iobroker.live/badges/homeassistant-bridge-installed.svg)
 
 A minimal Home Assistant emulator for ioBroker.
 
