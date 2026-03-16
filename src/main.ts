@@ -6,6 +6,7 @@ import type { AdapterConfig } from './lib/types';
 /** Native adapter configuration from io-package.json */
 interface NativeConfig {
     port: number;
+    bindAddress: string;
     visUrl: string;
     authRequired: boolean;
     username: string;
@@ -44,6 +45,7 @@ class HomeAssistantBridge extends utils.Adapter {
 
             const config: AdapterConfig = {
                 port: this.config.port || 8123,
+                bindAddress: this.config.bindAddress || '0.0.0.0',
                 visUrl: this.config.visUrl || '',
                 authRequired: this.config.authRequired === true,
                 username: this.config.username || 'admin',

@@ -45,6 +45,7 @@ describe('MDNSService', () => {
     let adapter: MockAdapter;
     const config: AdapterConfig = {
         port: 8123,
+        bindAddress: '0.0.0.0',
         visUrl: 'http://example.com',
         authRequired: false,
         username: 'admin',
@@ -184,6 +185,7 @@ describe('MDNSService with default serviceName', () => {
         const adapter = createMockAdapter();
         const defaultConfig: AdapterConfig = {
             port: 8123,
+            bindAddress: '0.0.0.0',
             visUrl: 'http://example.com',
             authRequired: false,
             username: '',

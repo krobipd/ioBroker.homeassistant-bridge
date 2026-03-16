@@ -72,6 +72,7 @@ describe('WebServer', () => {
     const TEST_PORT = 18123; // Use non-standard port for tests
     const config: AdapterConfig = {
         port: TEST_PORT,
+        bindAddress: '0.0.0.0',
         visUrl: 'http://example.com/vis',
         authRequired: false,
         username: 'admin',
@@ -398,6 +399,7 @@ describe('WebServer without visUrl', () => {
         adapter = createMockAdapter();
         const noVisConfig: AdapterConfig = {
             port: TEST_PORT,
+            bindAddress: '0.0.0.0',
             visUrl: '', // No redirect URL configured
             authRequired: false,
             username: '',
@@ -436,6 +438,7 @@ describe('WebServer with auth required', () => {
         adapter = createMockAdapter();
         const authConfig: AdapterConfig = {
             port: TEST_PORT,
+            bindAddress: '0.0.0.0',
             visUrl: 'http://example.com',
             authRequired: true,
             username: 'testuser',
@@ -513,5 +516,93 @@ describe('WebServer with auth required', () => {
         expect(res.statusCode).to.equal(200);
         const body = res.body as { type: string };
         expect(body.type).to.equal('create_entry');
+    });
+});
+
+describe('WebServer bindAddress', () => {
+    it('should bind to 0.0.0.0 by default', async () => {
+        const adapter = createMockAdapter();
+        const config: AdapterConfig = {
+            port: 18126,
+            bindAddress: '0.0.0.0',
+            visUrl: 'http://example.com',
+            authRequired: false,
+            username: '',
+            password: '',
+            mdnsEnabled: false,
+            serviceName: 'Test',
+        };
+        const server = new WebServer(adapter as never, config);
+        await server.start();
+
+        const bound = server.boundAddress;
+        expect(bound).to.not.be.null;
+        expect(bound!.address).to.equal('0.0.0.0');
+        expect(bound!.port).to.equal(18126);
+
+        await server.stop();
+    });
+
+    it('should bind to 127.0.0.1 when configured', async () => {
+        const adapter = createMockAdapter();
+        const config: AdapterConfig = {
+            port: 18127,
+            bindAddress: '127.0.0.1',
+            visUrl: 'http://example.com',
+            authRequired: false,
+            username: '',
+            password: '',
+            mdnsEnabled: false,
+            serviceName: 'Test',
+        };
+        const server = new WebServer(adapter as never, config);
+        await server.start();
+
+        const bound = server.boundAddress;
+        expect(bound).to.not.be.null;
+        expect(bound!.address).to.equal('127.0.0.1');
+        expect(bound!.port).to.equal(18127);
+
+        await server.stop();
+    });
+
+    it('should fallback to 0.0.0.0 when bindAddress is empty', async () => {
+        const adapter = createMockAdapter();
+        const config: AdapterConfig = {
+            port: 18128,
+            bindAddress: '',
+            visUrl: 'http://example.com',
+            authRequired: false,
+            username: '',
+            password: '',
+            mdnsEnabled: false,
+            serviceName: 'Test',
+        };
+        const server = new WebServer(adapter as never, config);
+        await server.start();
+
+        const bound = server.boundAddress;
+        expect(bound).to.not.be.null;
+        expect(bound!.address).to.equal('0.0.0.0');
+
+        await server.stop();
+    });
+
+    it('should return null for boundAddress when server not running', () => {
+        const adapter = createMockAdapter();
+        const config: AdapterConfig = {
+            port: 18129,
+            bindAddress: '127.0.0.1',
+            visUrl: 'http://example.com',
+            authRequired: false,
+            username: '',
+            password: '',
+            mdnsEnabled: false,
+            serviceName: 'Test',
+        };
+        const server = new WebServer(adapter as never, config);
+
+        // Server not started yet
+        expect(server.boundAddress).to.be.null;
     });
 });

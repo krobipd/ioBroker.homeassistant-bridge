@@ -34,6 +34,14 @@ export class WebServer {
         return this.config.serviceName || 'ioBroker';
     }
 
+    /** Returns the actual address the server is bound to, or null if not running */
+    get boundAddress(): { address: string; port: number } | null {
+        if (!this.server) return null;
+        const addr = this.server.address();
+        if (typeof addr === 'string' || !addr) return null;
+        return { address: addr.address, port: addr.port };
+    }
+
     // --- Helpers ---
 
     private json(res: Response, data: unknown, status = 200): void {
@@ -316,8 +324,9 @@ export class WebServer {
             this.setupMiddleware();
             this.setupRoutes();
 
-            this.server = this.app.listen(this.config.port, () => {
-                this.adapter.log.info(`Web server listening on port ${this.config.port}`);
+            const bindAddress = this.config.bindAddress || '0.0.0.0';
+            this.server = this.app.listen(this.config.port, bindAddress, () => {
+                this.adapter.log.info(`Web server listening on ${bindAddress}:${this.config.port}`);
                 resolve();
             });
 

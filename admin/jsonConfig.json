@@ -24,6 +24,21 @@
           "max": 65535,
           "sm": 6
         },
+        "bindAddress": {
+          "type": "ip",
+          "label": {
+            "en": "Bind to Interface",
+            "de": "Interface binden"
+          },
+          "tooltip": {
+            "en": "Select network interface to listen on (0.0.0.0 = all interfaces)",
+            "de": "Netzwerk-Interface auswählen (0.0.0.0 = alle Interfaces)"
+          },
+          "listenOnAllPorts": true,
+          "onlyIp4": true,
+          "noInternal": false,
+          "sm": 6
+        },
         "visUrl": {
           "type": "text",
           "label": {

@@ -1,8 +1,12 @@
 {
 	"common": {
 		"name": "homeassistant-bridge",
-		"version": "0.6.3",
+		"version": "0.7.0",
 		"news": {
+			"0.7.0": {
+				"en": "Added network interface selection dropdown for bind address",
+				"de": "Netzwerk-Interface-Auswahl für Bind-Adresse hinzugefügt"
+			},
 			"0.6.3": {
 				"en": "Fixed repository URL format for Admin UI GitHub installation",
 				"de": "Repository-URL-Format für Admin-UI GitHub-Installation korrigiert"
@@ -107,6 +111,7 @@
 	},
 	"native": {
 		"port": 8123,
+		"bindAddress": "0.0.0.0",
 		"visUrl": "",
 		"authRequired": false,
 		"username": "admin",

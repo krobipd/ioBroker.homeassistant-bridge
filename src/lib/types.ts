@@ -6,6 +6,8 @@
 export interface AdapterConfig {
     /** HTTP port for the web server */
     port: number;
+    /** IP address to bind the server to (0.0.0.0 = all interfaces) */
+    bindAddress: string;
     /** URL to redirect to after authentication */
     visUrl: string;
     /** Whether authentication is required */
