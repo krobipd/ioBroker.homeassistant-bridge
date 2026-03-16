@@ -67,6 +67,7 @@ scripts/
 ```javascript
 {
     port: 8123,           // HTTP Port
+    bindAddress: "0.0.0.0", // Interface binden (0.0.0.0 = alle)
     visUrl: "",           // Redirect URL (MUSS gesetzt sein!)
     authRequired: false,  // Credentials validieren?
     username: "admin",    // Nur wenn authRequired=true
@@ -117,6 +118,8 @@ scripts/
 
 | Version | Änderungen |
 |---------|------------|
+| 0.7.0 | **Interface-Auswahl** - bindAddress mit IP-Dropdown (type: "ip") |
+| 0.6.3 | Repository-URL-Format für Admin-UI GitHub-Installation korrigiert |
 | 0.6.2 | JSDoc-Dokumentation komplett, ESLint 0 Warnings |
 | 0.6.1 | GitHub Actions CI + Release Workflows |
 | 0.6.0 | **TypeScript Migration** - src/ mit .ts Dateien, strict mode |
@@ -139,7 +142,7 @@ npm run lint:fix
 npm run format
 npm run format:check
 
-# Tests (95 Tests, inkl. automatischem Build)
+# Tests (99 Tests, inkl. automatischem Build)
 npm test
 npm run test:ci
 
@@ -182,10 +185,10 @@ Features die diese Fragen mit "Nein" beantworten, wurden bewusst nicht implement
 test/
 ├── testConstants.ts    → Shared Constants (10 Tests)
 ├── testMdns.ts         → mDNS Service, XML Generation (17 Tests)
-├── testWebServer.ts    → HTTP Endpoints, Auth, Sessions (26 Tests)
+├── testWebServer.ts    → HTTP Endpoints, Auth, Sessions, bindAddress (30 Tests)
 └── testPackageFiles.ts → @iobroker/testing Validierung (42 Tests)
 
-Total: 95 Tests (alle TypeScript)
+Total: 99 Tests (alle TypeScript)
 ```
 
 Die Tests werden mit `tsconfig.test.json` kompiliert und aus `build/test/` ausgeführt.
