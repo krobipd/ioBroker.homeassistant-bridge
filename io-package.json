@@ -30,18 +30,6 @@
 			"0.5.1": {
 				"en": "Updated emulated Home Assistant version to 2026.3.1",
 				"de": "Emulierte Home Assistant Version auf 2026.3.1 aktualisiert"
-			},
-			"0.5.0": {
-				"en": "Express 5 upgrade, ESLint 10, all dependencies updated to March 2026 versions",
-				"de": "Express 5 Upgrade, ESLint 10, alle Dependencies auf März 2026 aktualisiert"
-			},
-			"0.4.0": {
-				"en": "Updated for js-controller 7 & Admin 7, jsonConfig UI, Node.js 20+, encryptedNative for password",
-				"de": "Update für js-controller 7 & Admin 7, jsonConfig UI, Node.js 20+, encryptedNative für Passwort"
-			},
-			"0.3.0": {
-				"en": "Code cleanup: removed uuid/body-parser deps, fixed mDNS XML bug, session cleanup, DRY refactor",
-				"de": "Code-Cleanup: uuid/body-parser entfernt, mDNS XML-Bug gefixt, Session-Cleanup, DRY-Refactor"
 			}
 		},
 		"titleLang": {
