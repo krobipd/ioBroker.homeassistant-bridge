@@ -1,6 +1,6 @@
 # ioBroker.homeassistant-bridge
 
-![Version](https://img.shields.io/badge/version-0.8.1-blue)
+![Version](https://img.shields.io/badge/version-0.8.2-blue)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -162,6 +162,9 @@ build/                # Compiled JavaScript code
 ---
 
 ## Changelog
+
+### 0.8.2 (2026-03-17)
+- Migrate to @alcalzone/release-script, enable npm Trusted Publishing
 
 ### 0.8.1 (2026-03-16)
 - Fix automated release pipeline (remove legacy ci.yml and release.yml workflows)
