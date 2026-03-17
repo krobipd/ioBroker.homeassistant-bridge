@@ -61,13 +61,7 @@ The display recognizes the bridge as a Home Assistant server.
 
 ## Installation
 
-```bash
-cd /opt/iobroker
-npm install iobroker.homeassistant-bridge
-iobroker add homeassistant-bridge
-```
-
-Or via the ioBroker Admin UI: Adapters -> Search for "homeassistant-bridge".
+Install via the ioBroker Admin UI: **Adapters → Search for "homeassistant-bridge"**.
 
 ---
 
