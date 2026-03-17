@@ -1,6 +1,5 @@
 # Changelog
-
-## **WORK IN PROGRESS**
+## 0.8.2 (2026-03-17)
 
 - Migrate to @alcalzone/release-script for automated releases
 - Enable npm Trusted Publishing (OIDC), remove legacy npm token

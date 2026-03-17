@@ -1,169 +1,182 @@
 {
-	"common": {
-		"name": "homeassistant-bridge",
-		"version": "0.8.1",
-		"news": {
-			"0.8.1": {
-				"en": "Fix automated release pipeline (remove legacy workflows)",
-				"de": "Automatische Release-Pipeline korrigiert (veraltete Workflows entfernt)",
-				"ru": "Исправлен автоматический конвейер выпуска (удалены устаревшие рабочие процессы)",
-				"pt": "Correção do pipeline de lançamento automatizado (remoção de workflows legados)",
-				"nl": "Automatische release-pipeline gecorrigeerd (verouderde workflows verwijderd)",
-				"fr": "Correction du pipeline de release automatisé (suppression des workflows obsolètes)",
-				"it": "Correzione del pipeline di rilascio automatizzato (rimozione dei workflow legacy)",
-				"es": "Corrección del pipeline de lanzamiento automatizado (eliminación de workflows heredados)",
-				"pl": "Naprawiono automatyczny potok wydań (usunięto przestarzałe przepływy pracy)",
-				"uk": "Виправлено автоматичний конвеєр випуску (видалено застарілі робочі процеси)",
-				"zh-cn": "修复自动化发布流水线（移除旧版工作流）"
-			},
-			"0.8.0": {
-				"en": "ioBroker repository compliance: official testing actions, all translations, donation link",
-				"de": "ioBroker Repository-Konformität: offizielle Test-Actions, alle Übersetzungen, Spendenlink",
-				"ru": "Соответствие репозиторию ioBroker: официальные тестовые actions, все переводы, ссылка для пожертвований",
-				"pt": "Conformidade com repositório ioBroker: actions de teste oficiais, todas traduções, link de doação",
-				"nl": "ioBroker repository-conformiteit: officiële test-actions, alle vertalingen, donatie-link",
-				"fr": "Conformité au dépôt ioBroker: actions de test officielles, toutes les traductions, lien de don",
-				"it": "Conformità al repository ioBroker: actions di test ufficiali, tutte le traduzioni, link donazione",
-				"es": "Conformidad con el repositorio ioBroker: actions de prueba oficiales, todas las traducciones, enlace de donación",
-				"pl": "Zgodność z repozytorium ioBroker: oficjalne actions testowe, wszystkie tłumaczenia, link do darowizny",
-				"uk": "Відповідність репозиторію ioBroker: офіційні тестові actions, всі переклади, посилання для пожертв",
-				"zh-cn": "ioBroker存储库合规性：官方测试actions、所有翻译、捐款链接"
-			},
-			"0.7.0": {
-				"en": "Added network interface selection dropdown for bind address",
-				"de": "Netzwerk-Interface-Auswahl für Bind-Adresse hinzugefügt",
-				"ru": "Добавлен выбор сетевого интерфейса для адреса привязки",
-				"pt": "Adicionada seleção de interface de rede para endereço de ligação",
-				"nl": "Netwerkintefaceselectie toegevoegd voor bindadres",
-				"fr": "Ajout de la sélection d'interface réseau pour l'adresse de liaison",
-				"it": "Aggiunta selezione dell'interfaccia di rete per l'indirizzo di binding",
-				"es": "Añadida selección de interfaz de red para dirección de enlace",
-				"pl": "Dodano wybór interfejsu sieciowego dla adresu powiązania",
-				"uk": "Додано вибір мережевого інтерфейсу для адреси прив'язки",
-				"zh-cn": "为绑定地址添加了网络接口选择下拉菜单"
-			}
-		},
-		"titleLang": {
-			"en": "Home Assistant Emulation Bridge",
-			"de": "Home Assistant Emulation Bridge",
-			"ru": "Мост эмуляции Home Assistant",
-			"pt": "Ponte de Emulação do Home Assistant",
-			"nl": "Home Assistant Emulatiebrug",
-			"fr": "Pont d'Émulation Home Assistant",
-			"it": "Bridge di Emulazione Home Assistant",
-			"es": "Puente de Emulación de Home Assistant",
-			"pl": "Most emulacji Home Assistant",
-			"uk": "Міст емуляції Home Assistant",
-			"zh-cn": "Home Assistant仿真桥"
-		},
-		"desc": {
-			"en": "Emulates a minimal Home Assistant server so devices expecting a Home Assistant dashboard can display any custom web URL.",
-			"de": "Emuliert einen minimalen Home Assistant Server, sodass Geräte mit Home-Assistant-Dashboard-Unterstützung beliebige Web-URLs anzeigen können.",
-			"ru": "Эмулирует минимальный сервер Home Assistant, чтобы устройства, ожидающие панель управления Home Assistant, могли отображать любой пользовательский URL.",
-			"pt": "Emula um servidor Home Assistant mínimo para que dispositivos que esperam um painel do Home Assistant possam exibir qualquer URL web personalizado.",
-			"nl": "Emuleert een minimale Home Assistant server zodat apparaten die een Home Assistant dashboard verwachten elke aangepaste web-URL kunnen weergeven.",
-			"fr": "Émule un serveur Home Assistant minimal pour que les appareils attendant un tableau de bord Home Assistant puissent afficher n'importe quelle URL web personnalisée.",
-			"it": "Emula un server Home Assistant minimale in modo che i dispositivi che si aspettano una dashboard Home Assistant possano visualizzare qualsiasi URL web personalizzato.",
-			"es": "Emula un servidor Home Assistant mínimo para que los dispositivos que esperan un panel de Home Assistant puedan mostrar cualquier URL web personalizada.",
-			"pl": "Emuluje minimalny serwer Home Assistant, dzięki czemu urządzenia oczekujące pulpitu nawigacyjnego Home Assistant mogą wyświetlać dowolny niestandardowy adres URL.",
-			"uk": "Емулює мінімальний сервер Home Assistant, щоб пристрої, що очікують панель Home Assistant, могли відображати будь-яку користувацьку URL-адресу.",
-			"zh-cn": "模拟一个最小的Home Assistant服务器，使期望Home Assistant仪表板的设备能够显示任何自定义网址。"
-		},
-		"authors": [
-			"krobi <krobi@power-dreams.com>"
-		],
-		"keywords": [
-			"homeassistant",
-			"home-assistant",
-			"shelly",
-			"wall display",
-			"vis",
-			"bridge"
-		],
-		"licenseInformation": {
-			"license": "MIT",
-			"type": "free"
-		},
-		"platform": "Javascript/Node.js",
-		"icon": "homeassistant-bridge.svg",
-		"extIcon": "https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg",
-		"readme": "https://github.com/krobipd/ioBroker.homeassistant-bridge/blob/main/README.md",
-		"enabled": true,
-		"tier": 3,
-		"loglevel": "info",
-		"mode": "daemon",
-		"type": "infrastructure",
-		"compact": true,
-		"connectionType": "local",
-		"dataSource": "push",
-		"adminUI": {
-			"config": "json"
-		},
-		"supportedMessages": {
-			"stopInstance": true
-		},
-		"dependencies": [
-			{
-				"js-controller": ">=7.0.0"
-			}
-		],
-		"globalDependencies": [
-			{
-				"admin": ">=7.6.20"
-			}
-		]
-	},
-	"encryptedNative": [
-		"password"
-	],
-	"protectedNative": [
-		"password"
-	],
-	"native": {
-		"port": 8123,
-		"bindAddress": "0.0.0.0",
-		"visUrl": "",
-		"authRequired": false,
-		"username": "admin",
-		"password": "",
-		"mdnsEnabled": true,
-		"serviceName": "ioBroker"
-	},
-	"objects": [],
-	"instanceObjects": [
-		{
-			"_id": "info",
-			"type": "channel",
-			"common": {
-				"name": "Information"
-			},
-			"native": {}
-		},
-		{
-			"_id": "info.connection",
-			"type": "state",
-			"common": {
-				"role": "indicator.connected",
-				"name": "Server is running",
-				"type": "boolean",
-				"read": true,
-				"write": false,
-				"def": false
-			},
-			"native": {}
-		},
-		{
-			"_id": "info.clients",
-			"type": "state",
-			"common": {
-				"role": "value",
-				"name": "Connected Shelly Displays",
-				"type": "number",
-				"read": true,
-				"write": false,
-				"def": 0
-			},
-			"native": {}
-		}
-	]
+  "common": {
+    "name": "homeassistant-bridge",
+    "version": "0.8.2",
+    "news": {
+      "0.8.2": {
+        "en": "Migrate to @alcalzone/release-script for automated releases\nEnable npm Trusted Publishing (OIDC), remove legacy npm token",
+        "de": "Migration auf @alcalzone/Release-script für automatisierte Versionen\nAktiviere npm Trusted Publishing (OIDC), legacy npm token",
+        "ru": "Migrate to @alcalzone/releasescript для автоматизированных релизов\nВключить npm Trusted Publishing (OIDC), удалить устаревший токен npm",
+        "pt": "Migrar para @alcalzone/release-script para versões automatizadas\nActivar a publicação confiável do npm (OIDC), remover o símbolo legado do npm",
+        "nl": "Migreren naar @alcalzone/release-script voor geautomatiseerde releases\nNpm Trusted Publishing (OIDC) inschakelen, legacy npm token verwijderen",
+        "fr": "Migrer vers @alcalzone/release-script pour les versions automatisées\nActiver npm Trusted Publishing (OIDC), supprimer le legs npm token",
+        "it": "Migrare a @alcalzone/release-script per le versioni automatizzate\nAbilitare npm Trusted Publishing (OIDC), rimuovere il token npm legacy",
+        "es": "Migrar a @alcalzone/release-script para versiones automatizadas\nActivar npm Trusted Publishing (OIDC), eliminar el legado npm token",
+        "pl": "Migrate to @ alcalzone / release- script for automatic releases\nWłącz npm Zaufane Publishing (OIDC), usuń poprzednią npm token",
+        "uk": "Migrate to @alcalzone/видання для автоматизованих релізів\nУвімкнути npm Trusted Publishing (OIDC), видалити дані npm token",
+        "zh-cn": "移动到 @alcalzone/ 释放- 标记用于自动发布\n启用 npm 信任的出版( OIDC), 删除遗留 npm 令牌"
+      },
+      "0.8.1": {
+        "en": "Fix automated release pipeline (remove legacy workflows)",
+        "de": "Automatische Release-Pipeline korrigiert (veraltete Workflows entfernt)",
+        "ru": "Исправлен автоматический конвейер выпуска (удалены устаревшие рабочие процессы)",
+        "pt": "Correção do pipeline de lançamento automatizado (remoção de workflows legados)",
+        "nl": "Automatische release-pipeline gecorrigeerd (verouderde workflows verwijderd)",
+        "fr": "Correction du pipeline de release automatisé (suppression des workflows obsolètes)",
+        "it": "Correzione del pipeline di rilascio automatizzato (rimozione dei workflow legacy)",
+        "es": "Corrección del pipeline de lanzamiento automatizado (eliminación de workflows heredados)",
+        "pl": "Naprawiono automatyczny potok wydań (usunięto przestarzałe przepływy pracy)",
+        "uk": "Виправлено автоматичний конвеєр випуску (видалено застарілі робочі процеси)",
+        "zh-cn": "修复自动化发布流水线（移除旧版工作流）"
+      },
+      "0.8.0": {
+        "en": "ioBroker repository compliance: official testing actions, all translations, donation link",
+        "de": "ioBroker Repository-Konformität: offizielle Test-Actions, alle Übersetzungen, Spendenlink",
+        "ru": "Соответствие репозиторию ioBroker: официальные тестовые actions, все переводы, ссылка для пожертвований",
+        "pt": "Conformidade com repositório ioBroker: actions de teste oficiais, todas traduções, link de doação",
+        "nl": "ioBroker repository-conformiteit: officiële test-actions, alle vertalingen, donatie-link",
+        "fr": "Conformité au dépôt ioBroker: actions de test officielles, toutes les traductions, lien de don",
+        "it": "Conformità al repository ioBroker: actions di test ufficiali, tutte le traduzioni, link donazione",
+        "es": "Conformidad con el repositorio ioBroker: actions de prueba oficiales, todas las traducciones, enlace de donación",
+        "pl": "Zgodność z repozytorium ioBroker: oficjalne actions testowe, wszystkie tłumaczenia, link do darowizny",
+        "uk": "Відповідність репозиторію ioBroker: офіційні тестові actions, всі переклади, посилання для пожертв",
+        "zh-cn": "ioBroker存储库合规性：官方测试actions、所有翻译、捐款链接"
+      },
+      "0.7.0": {
+        "en": "Added network interface selection dropdown for bind address",
+        "de": "Netzwerk-Interface-Auswahl für Bind-Adresse hinzugefügt",
+        "ru": "Добавлен выбор сетевого интерфейса для адреса привязки",
+        "pt": "Adicionada seleção de interface de rede para endereço de ligação",
+        "nl": "Netwerkintefaceselectie toegevoegd voor bindadres",
+        "fr": "Ajout de la sélection d'interface réseau pour l'adresse de liaison",
+        "it": "Aggiunta selezione dell'interfaccia di rete per l'indirizzo di binding",
+        "es": "Añadida selección de interfaz de red para dirección de enlace",
+        "pl": "Dodano wybór interfejsu sieciowego dla adresu powiązania",
+        "uk": "Додано вибір мережевого інтерфейсу для адреси прив'язки",
+        "zh-cn": "为绑定地址添加了网络接口选择下拉菜单"
+      }
+    },
+    "titleLang": {
+      "en": "Home Assistant Emulation Bridge",
+      "de": "Home Assistant Emulation Bridge",
+      "ru": "Мост эмуляции Home Assistant",
+      "pt": "Ponte de Emulação do Home Assistant",
+      "nl": "Home Assistant Emulatiebrug",
+      "fr": "Pont d'Émulation Home Assistant",
+      "it": "Bridge di Emulazione Home Assistant",
+      "es": "Puente de Emulación de Home Assistant",
+      "pl": "Most emulacji Home Assistant",
+      "uk": "Міст емуляції Home Assistant",
+      "zh-cn": "Home Assistant仿真桥"
+    },
+    "desc": {
+      "en": "Emulates a minimal Home Assistant server so devices expecting a Home Assistant dashboard can display any custom web URL.",
+      "de": "Emuliert einen minimalen Home Assistant Server, sodass Geräte mit Home-Assistant-Dashboard-Unterstützung beliebige Web-URLs anzeigen können.",
+      "ru": "Эмулирует минимальный сервер Home Assistant, чтобы устройства, ожидающие панель управления Home Assistant, могли отображать любой пользовательский URL.",
+      "pt": "Emula um servidor Home Assistant mínimo para que dispositivos que esperam um painel do Home Assistant possam exibir qualquer URL web personalizado.",
+      "nl": "Emuleert een minimale Home Assistant server zodat apparaten die een Home Assistant dashboard verwachten elke aangepaste web-URL kunnen weergeven.",
+      "fr": "Émule un serveur Home Assistant minimal pour que les appareils attendant un tableau de bord Home Assistant puissent afficher n'importe quelle URL web personnalisée.",
+      "it": "Emula un server Home Assistant minimale in modo che i dispositivi che si aspettano una dashboard Home Assistant possano visualizzare qualsiasi URL web personalizzato.",
+      "es": "Emula un servidor Home Assistant mínimo para que los dispositivos que esperan un panel de Home Assistant puedan mostrar cualquier URL web personalizada.",
+      "pl": "Emuluje minimalny serwer Home Assistant, dzięki czemu urządzenia oczekujące pulpitu nawigacyjnego Home Assistant mogą wyświetlać dowolny niestandardowy adres URL.",
+      "uk": "Емулює мінімальний сервер Home Assistant, щоб пристрої, що очікують панель Home Assistant, могли відображати будь-яку користувацьку URL-адресу.",
+      "zh-cn": "模拟一个最小的Home Assistant服务器，使期望Home Assistant仪表板的设备能够显示任何自定义网址。"
+    },
+    "authors": [
+      "krobi <krobi@power-dreams.com>"
+    ],
+    "keywords": [
+      "homeassistant",
+      "home-assistant",
+      "shelly",
+      "wall display",
+      "vis",
+      "bridge"
+    ],
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "homeassistant-bridge.svg",
+    "extIcon": "https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg",
+    "readme": "https://github.com/krobipd/ioBroker.homeassistant-bridge/blob/main/README.md",
+    "enabled": true,
+    "tier": 3,
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "infrastructure",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "push",
+    "adminUI": {
+      "config": "json"
+    },
+    "supportedMessages": {
+      "stopInstance": true
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=7.0.0"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.20"
+      }
+    ]
+  },
+  "encryptedNative": [
+    "password"
+  ],
+  "protectedNative": [
+    "password"
+  ],
+  "native": {
+    "port": 8123,
+    "bindAddress": "0.0.0.0",
+    "visUrl": "",
+    "authRequired": false,
+    "username": "admin",
+    "password": "",
+    "mdnsEnabled": true,
+    "serviceName": "ioBroker"
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Server is running",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.clients",
+      "type": "state",
+      "common": {
+        "role": "value",
+        "name": "Connected Shelly Displays",
+        "type": "number",
+        "read": true,
+        "write": false,
+        "def": 0
+      },
+      "native": {}
+    }
+  ]
 }
