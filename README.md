@@ -127,40 +127,6 @@ http://<IP>:8123/health
 
 ---
 
-## Development
-
-The adapter is written entirely in **TypeScript** with `strict` mode.
-
-```bash
-# Build
-npm run build
-
-# Tests (99 tests)
-npm test
-
-# Lint
-npm run lint
-
-# Watch mode for development
-npm run watch
-```
-
-### Project Structure
-
-```
-src/
-├── main.ts           # Adapter main class
-└── lib/
-    ├── constants.ts  # Shared constants
-    ├── types.ts      # TypeScript interfaces
-    ├── webserver.ts  # Express HTTP server
-    └── mdns.ts       # Avahi mDNS service
-test/                 # TypeScript tests
-build/                # Compiled JavaScript code
-```
-
----
-
 ## Changelog
 
 ### 0.8.3 (2026-03-18)
