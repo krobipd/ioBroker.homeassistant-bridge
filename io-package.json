@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.8.4",
+    "version": "0.8.5",
     "news": {
+      "0.8.5": {
+        "en": "Admin UI: interface selector moved before port; port field removed (fixed at 8123)",
+        "de": "Admin UI: Interface-Auswahl vor Port verschoben; Port-Feld entfernt (fest auf 8123)",
+        "ru": "Admin UI: выбор интерфейса перемещён перед портом; поле порта удалено (фиксировано на 8123)",
+        "pt": "Admin UI: seletor de interface movido antes da porta; campo de porta removido (fixo em 8123)",
+        "nl": "Admin UI: interface-selector voor poort geplaatst; poortveld verwijderd (vast op 8123)",
+        "fr": "Admin UI: sélecteur d'interface déplacé avant le port; champ port supprimé (fixé à 8123)",
+        "it": "Admin UI: selettore interfaccia spostato prima della porta; campo porta rimosso (fisso a 8123)",
+        "es": "Admin UI: selector de interfaz movido antes del puerto; campo de puerto eliminado (fijo en 8123)",
+        "pl": "Admin UI: selektor interfejsu przeniesiony przed port; pole portu usunięte (stałe 8123)",
+        "uk": "Admin UI: вибір інтерфейсу переміщено перед портом; поле порту видалено (фіксовано на 8123)",
+        "zh-cn": "管理界面：将接口选择器移至端口之前；删除端口字段（固定为8123）"
+      },
       "0.8.4": {
         "en": "Logging cleanup: auth flow, redirect and config details moved to debug; remove redundant start/stop info messages",
         "de": "Logging-Bereinigung: Auth-Flow, Redirect und Konfigurationsdetails auf Debug-Level verschoben; redundante Start/Stop-Info-Meldungen entfernt",

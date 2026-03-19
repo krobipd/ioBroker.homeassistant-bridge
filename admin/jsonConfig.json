@@ -6,19 +6,6 @@
 			"type": "panel",
 			"label": "Main Settings",
 			"items": {
-				"port": {
-					"type": "number",
-					"label": "HTTP Port",
-					"tooltip": "Port for the emulated Home Assistant server (default: 8123)",
-					"default": 8123,
-					"min": 1,
-					"max": 65535,
-					"xs": 12,
-					"sm": 6,
-					"md": 4,
-					"lg": 4,
-					"xl": 4
-				},
 				"bindAddress": {
 					"type": "ip",
 					"label": "Bind to Interface",

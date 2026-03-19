@@ -98,6 +98,9 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.8.5 (2026-03-19)
+- Admin UI: interface selector moved before port; port field removed (fixed at 8123)
+
 ### 0.8.4 (2026-03-19)
 - Logging cleanup: auth flow, redirect and config details moved to debug; remove redundant start/stop messages
 
