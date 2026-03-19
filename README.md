@@ -8,47 +8,19 @@
 ![Installations](https://iobroker.live/badges/homeassistant-bridge-installed.svg)
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/krobipd)
 
-![Logo](https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg)
+<img src="https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg" width="100" />
 
-A minimal Home Assistant emulator for ioBroker.
-
-This adapter allows devices that only support Home Assistant dashboards to connect to a fake Home Assistant server and be redirected to any custom web URL.
+Emulates a minimal Home Assistant server so that devices like the **Shelly Wall Display XL** can be redirected to any custom web URL — without running a real Home Assistant Core.
 
 ---
 
-## Purpose
+## Features
 
-Devices like the **Shelly Wall Display XL** officially only allow connection to a Home Assistant server.
-
-With this bridge, you can display:
-
-- an ioBroker VIS dashboard
-- a VIS-2 instance
-- a custom dashboard
-- or any internal/external web application
-
-**without running a real Home Assistant Core**.
-
----
-
-## Tested Devices
-
-- Shelly Wall Display XL
-
-This allows running an ioBroker VIS natively on the Wall Display.
-
----
-
-## How It Works
-
-The adapter:
-
-- Emulates relevant Home Assistant API endpoints
-- Provides a `_home-assistant._tcp` mDNS service
-- Implements a minimal OAuth2-like auth flow
-- Redirects to the configured target URL after successful authentication
-
-The display recognizes the bridge as a Home Assistant server.
+- **Home Assistant Emulation** — minimal HA API compatible with Shelly Wall Display XL
+- **mDNS Discovery** — automatic detection via Avahi (`_home-assistant._tcp`)
+- **OAuth2-like Auth Flow** — full login flow emulation, optional credential validation
+- **Flexible Redirect** — send the display to any ioBroker VIS, VIS-2, or custom web URL
+- **Modern Admin UI** — JSON-Config for easy configuration
 
 ---
 
