@@ -57,22 +57,17 @@ http://192.168.1.100:8082/vis/index.html
 
 ---
 
-## mDNS Note
+## Troubleshooting
 
-The adapter registers a `_home-assistant._tcp` service via Avahi for automatic discovery.
+### Display cannot find the server (mDNS)
 
-In my tests, automatic discovery did not work reliably. Manual configuration works stably:
+The adapter registers a `_home-assistant._tcp` service via Avahi. Automatic discovery did not work reliably in tests — manual configuration is more stable:
 
 ```
 IP:   <ioBroker-IP>
 Port: 8123
 ```
 
----
-
-## Troubleshooting
-
-### Display cannot find the server (mDNS)
 
 1. Check if Avahi is running:
    ```bash
