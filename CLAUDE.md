@@ -36,10 +36,7 @@ admin/
 ├── jsonConfig.json     → Admin UI Konfiguration (3 Tabs)
 └── homeassistant-bridge.svg → Adapter Icon
 .github/workflows/
-├── ci.yml              → CI: Build, Lint, Test (Node 20, 22, 24)
-└── release.yml         → Auto-Release bei Tag-Push (v*)
-scripts/
-└── version.js          → Versionierung (patch/minor/major)
+└── test-and-release.yml  → Einziger Workflow: CI + Release bei Tag-Push
 ```
 
 ## Wichtige API-Endpoints
@@ -110,28 +107,26 @@ scripts/
 
 ## Git Repository
 
-- **URL**: https://github.com/krobipd/iobroker.homeassistant-bridge
+- **URL**: https://github.com/krobipd/ioBroker.homeassistant-bridge (großes B!)
 - **Branch**: main
 - **Autor**: krobi
 
 ## Status
 
-**Auf npm veröffentlicht** ✅ — `iobroker.homeassistant-bridge@0.8.1`
-**ioBroker Repository PR** ✅ — https://github.com/ioBroker/ioBroker.repositories/pull/5632 (ausstehend)
-**Release-Pipeline** ✅ — vollautomatisch via `test-and-release.yml`
+**Auf npm veröffentlicht** ✅ — `iobroker.homeassistant-bridge@0.8.3`
+**ioBroker Repository PR** ✅ — https://github.com/ioBroker/ioBroker.repositories/pull/5642 (ausstehend)
+**Release-Pipeline** ✅ — vollautomatisch via `test-and-release.yml` (einziger Workflow!)
 
 ## Versionshistorie (Kurzfassung)
 
 | Version | Änderungen |
 |---------|------------|
+| 0.8.3 | Code cleanup: info.clients entfernt (misleading), dead code, DRY |
+| 0.8.2 | npm Trusted Publishing fix: case-sensitive Repo-Name (ioBroker großes B) |
 | 0.8.1 | Release-Pipeline Fix (alte Workflows entfernt, permissions hinzugefügt) |
 | 0.8.0 | ioBroker-Konformität, alle Übersetzungen, PayPal Donation Link |
-| 0.7.0 | **Interface-Auswahl** - bindAddress mit IP-Dropdown (type: "ip") |
-| 0.6.3 | Repository-URL-Format für Admin-UI GitHub-Installation korrigiert |
-| 0.6.2 | JSDoc-Dokumentation komplett, ESLint 0 Warnings |
-| 0.6.0 | **TypeScript Migration** - src/ mit .ts Dateien, strict mode |
-| 0.4.0 | js-controller 7, Admin 7, jsonConfig, encryptedNative |
-| 0.3.0 | Code Cleanup, mDNS XML Bug Fix, Session Cleanup |
+| 0.7.0 | Interface-Auswahl — bindAddress mit IP-Dropdown (type: "ip") |
+| 0.6.0 | TypeScript Migration — src/ mit .ts Dateien, strict mode |
 
 ## Befehle
 
@@ -152,11 +147,15 @@ npm run test:package      # Nur Package-Tests (für CI check-phase)
 npm run test:integration  # Alle Tests (für CI test-phase)
 npm run check             # TypeScript Typ-Prüfung ohne Build
 
-# Versionierung (erstellt Commit + Tag)
-npm run version:patch   # 0.6.1 → 0.6.2
-npm run version:minor   # 0.6.1 → 0.7.0
-npm run version:major   # 0.6.1 → 1.0.0
-# Danach: git push && git push origin v<version>
+# Release (via @alcalzone/release-script mit manual-review Plugin)
+# → manual-review blockiert interaktiv, daher manueller Workaround:
+# 1. CHANGELOG.md unter ## **WORK IN PROGRESS** befüllen
+# 2. npm run build   (NICHT npm test — zerstört Production-Build!)
+# 3. Version in package.json + io-package.json manuell bumpen
+# 4. CHANGELOG: ## **WORK IN PROGRESS** → ## X.Y.Z (datum)
+# 5. README: Badge + Changelog-Section aktualisieren
+# 6. git add ... && git commit -m "chore: release vX.Y.Z"
+# 7. git tag vX.Y.Z && git push && git push origin vX.Y.Z
 
 # Adapter lokal testen
 node build/main.js
