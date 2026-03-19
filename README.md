@@ -8,6 +8,8 @@
 ![Installations](https://iobroker.live/badges/homeassistant-bridge-installed.svg)
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/krobipd)
 
+![Logo](https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg)
+
 A minimal Home Assistant emulator for ioBroker.
 
 This adapter allows devices that only support Home Assistant dashboards to connect to a fake Home Assistant server and be redirected to any custom web URL.
@@ -144,38 +146,14 @@ http://<IP>:8123/health
 ### 0.7.0 (2026-03-16)
 - Added network interface selection dropdown for bind address
 
-### 0.6.3 (2026-03-15)
-- Fixed repository URL format for Admin UI GitHub installation
-
-### 0.6.2 (2026-03-15)
-- Added complete JSDoc documentation
-- ESLint now passes without warnings
-
-### 0.6.1 (2026-03-15)
-- Added GitHub Actions CI and release workflows
-
-### 0.6.0 (2026-03-14)
-- Migrated to TypeScript with strict mode
-
-### 0.5.0 (2026-03-13)
-- Express 5 upgrade
-- All dependencies updated to March 2026 versions
-
-### 0.4.0 (2026-03-12)
-- Updated for js-controller 7 & Admin 7
-- jsonConfig UI
-- Node.js 20+ required
-- encryptedNative for password
-
-### 0.3.0 (2026-03-11)
-- Code cleanup
-- Fixed mDNS XML bug
-- Session cleanup
-- DRY refactor
+Older changelog: [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
 ## Support
+
+- [ioBroker Forum](https://forum.iobroker.net/)
+- [GitHub Issues](https://github.com/krobipd/ioBroker.homeassistant-bridge/issues)
 
 If this adapter is useful to you, consider supporting its development via the PayPal badge at the top of this page.
 
