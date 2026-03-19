@@ -1,12 +1,12 @@
 # ioBroker.homeassistant-bridge
 
-![Version](https://img.shields.io/badge/version-0.8.3-blue)
+[![npm version](https://img.shields.io/npm/v/iobroker.homeassistant-bridge)](https://www.npmjs.com/package/iobroker.homeassistant-bridge)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-[![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/krobipd)
-![npm downloads](https://img.shields.io/npm/dt/iobroker.homeassistant-bridge)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![npm downloads](https://img.shields.io/npm/dt/iobroker.homeassistant-bridge)](https://www.npmjs.com/package/iobroker.homeassistant-bridge)
 ![Installations](https://iobroker.live/badges/homeassistant-bridge-installed.svg)
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/krobipd)
 
 A minimal Home Assistant emulator for ioBroker.
 
@@ -177,9 +177,7 @@ http://<IP>:8123/health
 
 ## Support
 
-If this adapter is useful to you, consider supporting its development:
-
-[![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/krobipd)
+If this adapter is useful to you, consider supporting its development via the PayPal badge at the top of this page.
 
 ---
 
