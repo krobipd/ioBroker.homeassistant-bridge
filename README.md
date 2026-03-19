@@ -107,6 +107,9 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.8.6 (2026-03-19)
+- Admin UI fully translated into all 11 languages; i18n refactored to use short semantic keys
+
 ### 0.8.5 (2026-03-19)
 - Admin UI: interface selector moved before port; port field removed (fixed at 8123)
 

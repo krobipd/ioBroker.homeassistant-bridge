@@ -4,12 +4,12 @@
 	"items": {
 		"mainTab": {
 			"type": "panel",
-			"label": "Main Settings",
+			"label": "mainTab",
 			"items": {
 				"bindAddress": {
 					"type": "ip",
-					"label": "Bind to Interface",
-					"tooltip": "Select network interface to listen on (0.0.0.0 = all interfaces)",
+					"label": "bindAddress",
+					"tooltip": "bindAddressTooltip",
 					"listenOnAllPorts": true,
 					"onlyIp4": true,
 					"noInternal": false,
@@ -21,8 +21,8 @@
 				},
 				"serviceName": {
 					"type": "text",
-					"label": "Service Name",
-					"tooltip": "Name shown on the display during discovery",
+					"label": "serviceName",
+					"tooltip": "serviceNameTooltip",
 					"default": "ioBroker",
 					"xs": 12,
 					"sm": 6,
@@ -32,8 +32,8 @@
 				},
 				"visUrl": {
 					"type": "text",
-					"label": "Redirect URL",
-					"tooltip": "URL where devices will be redirected after authentication (e.g., http://192.168.1.100:8082/vis/)",
+					"label": "visUrl",
+					"tooltip": "visUrlTooltip",
 					"placeholder": "http://192.168.1.100:8082/vis/",
 					"xs": 12,
 					"sm": 12,
@@ -43,7 +43,7 @@
 				},
 				"_warning": {
 					"type": "staticText",
-					"text": "**Important:** Do not use 'localhost' or '127.0.0.1' - use the actual IP address of your ioBroker server!",
+					"text": "warningLocalhost",
 					"style": {
 						"color": "#ff9800"
 					},
@@ -57,12 +57,12 @@
 		},
 		"mdnsTab": {
 			"type": "panel",
-			"label": "mDNS Discovery",
+			"label": "mdnsTab",
 			"items": {
 				"mdnsEnabled": {
 					"type": "checkbox",
-					"label": "Enable mDNS Discovery",
-					"tooltip": "Broadcast the service via mDNS so devices can find it automatically (requires Avahi on Linux)",
+					"label": "mdnsEnabled",
+					"tooltip": "mdnsEnabledTooltip",
 					"default": true,
 					"xs": 12,
 					"sm": 12,
@@ -72,7 +72,7 @@
 				},
 				"_mdnsInfo": {
 					"type": "staticText",
-					"text": "mDNS uses Avahi on Linux. Install with: `sudo apt install avahi-daemon`\n\nIf mDNS is disabled or not working, enter the URL manually on the display:\n`http://YOUR_IP:8123`",
+					"text": "mdnsInfo",
 					"xs": 12,
 					"sm": 12,
 					"md": 12,
@@ -83,12 +83,12 @@
 		},
 		"authTab": {
 			"type": "panel",
-			"label": "Authentication",
+			"label": "authTab",
 			"items": {
 				"authRequired": {
 					"type": "checkbox",
-					"label": "Require Authentication",
-					"tooltip": "If enabled, devices must enter valid credentials to authenticate",
+					"label": "authRequired",
+					"tooltip": "authRequiredTooltip",
 					"default": false,
 					"xs": 12,
 					"sm": 12,
@@ -98,7 +98,7 @@
 				},
 				"username": {
 					"type": "text",
-					"label": "Username",
+					"label": "username",
 					"default": "admin",
 					"hidden": "!data.authRequired",
 					"xs": 12,
@@ -109,7 +109,7 @@
 				},
 				"password": {
 					"type": "password",
-					"label": "Password",
+					"label": "password",
 					"visible": true,
 					"hidden": "!data.authRequired",
 					"xs": 12,
@@ -120,7 +120,7 @@
 				},
 				"_authInfo": {
 					"type": "staticText",
-					"text": "Note: Authentication is optional. The display will always go through the authentication flow, but credentials are only validated if this option is enabled.",
+					"text": "authInfo",
 					"hidden": "data.authRequired",
 					"xs": 12,
 					"sm": 12,

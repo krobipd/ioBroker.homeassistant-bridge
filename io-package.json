@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.8.5",
+    "version": "0.8.6",
     "news": {
+      "0.8.6": {
+        "en": "Admin UI fully translated into all 11 languages; i18n refactored to use short semantic keys",
+        "de": "Admin UI vollständig in alle 11 Sprachen übersetzt; i18n auf kurze semantische Keys umgestellt",
+        "ru": "Интерфейс Admin UI полностью переведён на 11 языков; i18n рефакторинг на короткие семантические ключи",
+        "pt": "Admin UI totalmente traduzida para 11 idiomas; i18n refatorado para usar chaves semânticas curtas",
+        "nl": "Admin UI volledig vertaald in 11 talen; i18n gerefactord naar korte semantische sleutels",
+        "fr": "Interface Admin UI entièrement traduite en 11 langues; i18n refactorisé avec des clés sémantiques courtes",
+        "it": "Admin UI completamente tradotta in 11 lingue; i18n refactoring con chiavi semantiche brevi",
+        "es": "Admin UI completamente traducida a 11 idiomas; i18n refactorizado con claves semánticas cortas",
+        "pl": "Admin UI w pełni przetłumaczone na 11 języków; i18n zrefaktoryzowane na krótkie klucze semantyczne",
+        "uk": "Admin UI повністю перекладено на 11 мов; i18n рефакторинг на короткі семантичні ключі",
+        "zh-cn": "管理界面完整翻译为11种语言；i18n重构为短语义键"
+      },
       "0.8.5": {
         "en": "Admin UI: interface selector moved before port; port field removed (fixed at 8123)",
         "de": "Admin UI: Interface-Auswahl vor Port verschoben; Port-Feld entfernt (fest auf 8123)",
