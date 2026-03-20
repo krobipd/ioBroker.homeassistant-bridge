@@ -93,7 +93,7 @@
         "pl": "Zgodność z repozytorium ioBroker: oficjalne actions testowe, wszystkie tłumaczenia, link do darowizny",
         "uk": "Відповідність репозиторію ioBroker: офіційні тестові actions, всі переклади, посилання для пожертв",
         "zh-cn": "ioBroker存储库合规性：官方测试actions、所有翻译、捐款链接"
-      },
+      }
     },
     "titleLang": {
       "en": "Home Assistant Emulation Bridge",
