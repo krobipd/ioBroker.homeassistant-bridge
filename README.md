@@ -66,6 +66,15 @@ http://192.168.1.100:8082/vis/index.html
 
 ---
 
+## State Tree
+
+```
+homeassistant-bridge.0.
+└── info.connection      — Server is running (bool)
+```
+
+---
+
 ## Troubleshooting
 
 ### Display cannot find the server (mDNS)
@@ -127,9 +136,6 @@ http://<IP>:8123/health
 
 ### 0.8.1 (2026-03-16)
 - Fix automated release pipeline (remove legacy ci.yml and release.yml workflows)
-
-### 0.8.0 (2026-03-16)
-- ioBroker repository compliance: official testing actions, all translations, donation link
 
 Older changelog: [CHANGELOG.md](CHANGELOG.md)
 
