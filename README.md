@@ -30,7 +30,7 @@ Emulates a minimal Home Assistant server so that devices like the **Shelly Wall 
 - **Node.js >= 20**
 - **ioBroker js-controller >= 7.0.0**
 - **ioBroker Admin >= 7.6.20**
-- Linux system with Avahi (for mDNS)
+- Linux system with Avahi (optional, for mDNS auto-discovery)
 
 ---
 
@@ -80,13 +80,12 @@ homeassistant-bridge.0.
 
 ### Display cannot find the server (mDNS)
 
-The adapter registers a `_home-assistant._tcp` service via Avahi. Automatic discovery did not work reliably in tests — manual configuration is more stable:
+The adapter registers a `_home-assistant._tcp` service via Avahi. If the display does not find the server automatically, configure it manually:
 
 ```
 IP:   <ioBroker-IP>
 Port: 8123
 ```
-
 
 1. Check if Avahi is running:
    ```bash

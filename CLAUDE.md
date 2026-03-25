@@ -33,7 +33,7 @@ src/
     └── mdns.ts         → Avahi mDNS Service Discovery (nur Linux)
 build/                  → Kompilierter JavaScript Code (gitignored)
 admin/
-├── jsonConfig.json     → Admin UI Konfiguration (3 Tabs)
+├── jsonConfig.json     → Admin UI Konfiguration (Single Page, 4 Sektionen)
 └── homeassistant-bridge.svg → Adapter Icon
 .github/workflows/
 └── test-and-release.yml  → Einziger Workflow: CI + Release bei Tag-Push
@@ -113,7 +113,7 @@ admin/
 
 ## Status
 
-**Auf npm veröffentlicht** ✅ — `iobroker.homeassistant-bridge@0.8.7`
+**Auf npm veröffentlicht** ✅ — `iobroker.homeassistant-bridge@0.8.8`
 **ioBroker Repository PR** ✅ — https://github.com/ioBroker/ioBroker.repositories/pull/5642 (ausstehend)
 **Release-Pipeline** ✅ — vollautomatisch via `test-and-release.yml` (einziger Workflow!)
 
@@ -127,6 +127,7 @@ admin/
 
 | Version | Änderungen |
 |---------|------------|
+| 0.8.8 | Single-Page Admin UI, sync onUnload fix, Ko-fi Icon entfernt, translate Script |
 | 0.8.7 | Fix Repository-URL für Admin UI GitHub-Installation (.git Suffix entfernt) |
 | 0.8.6 | Admin UI i18n: alle 11 Sprachen, kurze semantische Keys |
 | 0.8.5 | Admin UI: Port-Feld entfernt (8123 fix), bindAddress zuerst; README Ports-Sektion |
