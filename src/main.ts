@@ -84,7 +84,7 @@ class HomeAssistantBridge extends utils.Adapter {
         }
     }
 
-    private async onUnload(callback: () => void): Promise<void> {
+    private onUnload(callback: () => void): void {
         try {
             if (this.mdnsService) {
                 this.mdnsService.stop();
@@ -92,12 +92,11 @@ class HomeAssistantBridge extends utils.Adapter {
             }
 
             if (this.webServer) {
-                await this.webServer.stop();
+                this.webServer.stop().catch((err: Error) => this.log.error(`Server stop error: ${err.message}`));
                 this.webServer = null;
             }
 
-            await this.setStateAsync('info.connection', false, true);
-            this.log.info('Home Assistant Bridge stopped');
+            void this.setState('info.connection', { val: false, ack: true });
         } catch (error) {
             const err = error as Error;
             this.log.error(`Shutdown error: ${err.message}`);

@@ -117,26 +117,26 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.8.8 (2026-03-25)
+- Simplified admin UI to single page, fixed synchronous shutdown
+
 ### 0.8.7 (2026-03-21)
 - Fix repository URL format for Admin UI GitHub installation
 
 ### 0.8.6 (2026-03-19)
-- Admin UI fully translated into all 11 languages; i18n refactored to use short semantic keys
+- Admin UI fully translated into all 11 languages
 
 ### 0.8.5 (2026-03-19)
-- Admin UI: interface selector moved before port; port field removed (fixed at 8123)
+- Admin UI: port field removed (fixed at 8123)
 
 ### 0.8.4 (2026-03-19)
-- Logging cleanup: auth flow, redirect and config details moved to debug; remove redundant start/stop messages
+- Logging cleanup: auth flow, redirect and config moved to debug
 
 ### 0.8.3 (2026-03-18)
 - Remove unused `info.clients` state and dead code cleanup
 
 ### 0.8.2 (2026-03-17)
 - Migrate to @alcalzone/release-script, enable npm Trusted Publishing
-
-### 0.8.1 (2026-03-16)
-- Fix automated release pipeline (remove legacy ci.yml and release.yml workflows)
 
 Older changelog: [CHANGELOG.md](CHANGELOG.md)
 

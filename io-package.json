@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.8.7",
+    "version": "0.8.8",
     "news": {
+      "0.8.8": {
+        "en": "Simplified admin UI to single page, fixed onUnload to be synchronous",
+        "de": "Vereinfachte Admin-Benutzeroberfläche auf eine einzelne Seite, onUnload wurde auf Synchronität korrigiert",
+        "ru": "Упрощенный пользовательский интерфейс администратора до одной страницы, исправлена ​​синхронизация onUnload.",
+        "pt": "UI de administração simplificada para página única, onUnload corrigido para ser síncrono",
+        "nl": "Vereenvoudigde beheerdersinterface naar één pagina, opgelost bij Unload om synchroon te zijn",
+        "fr": "Interface utilisateur d'administration simplifiée sur une seule page, correction de onUnload pour être synchrone",
+        "it": "Interfaccia utente di amministrazione semplificata su una singola pagina, corretta la modalità di scaricamento in modo sincrono",
+        "es": "Interfaz de usuario de administración simplificada para una sola página, fijada en la descarga para que sea sincrónica",
+        "pl": "Uproszczony interfejs administratora na jednej stronie, naprawiono synchronizację onUnload",
+        "uk": "Спрощений інтерфейс адміністратора на одній сторінці, виправлено функцію Unload для синхронізації",
+        "zh-cn": "将管理 UI 简化为单页，修复 onUnload 同步"
+      },
       "0.8.7": {
         "en": "Fix repository URL format for Admin UI GitHub installation",
         "de": "Repository-URL-Format für Admin UI GitHub-Installation korrigiert",
@@ -80,19 +93,6 @@
         "pl": "Migrate to @ alcalzone / release- script for automatic releases\nWłącz npm Zaufane Publishing (OIDC), usuń poprzednią npm token",
         "uk": "Migrate to @alcalzone/видання для автоматизованих релізів\nУвімкнути npm Trusted Publishing (OIDC), видалити дані npm token",
         "zh-cn": "移动到 @alcalzone/ 释放- 标记用于自动发布\n启用 npm 信任的出版( OIDC), 删除遗留 npm 令牌"
-      },
-      "0.8.1": {
-        "en": "Fix automated release pipeline (remove legacy workflows)",
-        "de": "Automatische Release-Pipeline korrigiert (veraltete Workflows entfernt)",
-        "ru": "Исправлен автоматический конвейер выпуска (удалены устаревшие рабочие процессы)",
-        "pt": "Correção do pipeline de lançamento automatizado (remoção de workflows legados)",
-        "nl": "Automatische release-pipeline gecorrigeerd (verouderde workflows verwijderd)",
-        "fr": "Correction du pipeline de release automatisé (suppression des workflows obsolètes)",
-        "it": "Correzione del pipeline di rilascio automatizzato (rimozione dei workflow legacy)",
-        "es": "Corrección del pipeline de lanzamiento automatizado (eliminación de workflows heredados)",
-        "pl": "Naprawiono automatyczny potok wydań (usunięto przestarzałe przepływy pracy)",
-        "uk": "Виправлено автоматичний конвеєр випуску (видалено застарілі робочі процеси)",
-        "zh-cn": "修复自动化发布流水线（移除旧版工作流）"
       }
     },
     "titleLang": {

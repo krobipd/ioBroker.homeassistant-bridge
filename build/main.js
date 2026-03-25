@@ -91,18 +91,17 @@ class HomeAssistantBridge extends utils.Adapter {
             }
         }
     }
-    async onUnload(callback) {
+    onUnload(callback) {
         try {
             if (this.mdnsService) {
                 this.mdnsService.stop();
                 this.mdnsService = null;
             }
             if (this.webServer) {
-                await this.webServer.stop();
+                this.webServer.stop().catch((err) => this.log.error(`Server stop error: ${err.message}`));
                 this.webServer = null;
             }
-            await this.setStateAsync('info.connection', false, true);
-            this.log.info('Home Assistant Bridge stopped');
+            void this.setState('info.connection', { val: false, ack: true });
         }
         catch (error) {
             const err = error;

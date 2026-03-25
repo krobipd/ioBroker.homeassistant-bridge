@@ -1,4 +1,11 @@
 # Changelog
+## 0.8.8 (2026-03-25)
+
+- Simplified admin UI from tabs to single page layout
+- Fixed onUnload to be synchronous (prevents SIGKILL on shutdown)
+- Removed broken Ko-fi icon from donation button
+- Added translate script
+
 ## 0.8.7 (2026-03-21)
 
 - Fix repository URL format for Admin UI GitHub installation (remove `.git` suffix)
