@@ -11,6 +11,8 @@ interface MockAdapter {
         warn: () => void;
         error: () => void;
     };
+    setInterval: (callback: () => void, ms: number) => unknown;
+    clearInterval: (id: unknown) => void;
 }
 
 // Mock adapter for testing
@@ -22,6 +24,8 @@ function createMockAdapter(): MockAdapter {
             warn: (): void => {},
             error: (): void => {},
         },
+        setInterval: (cb: () => void, ms: number): unknown => setInterval(cb, ms),
+        clearInterval: (id: unknown): void => clearInterval(id as ReturnType<typeof setInterval>),
     };
 }
 

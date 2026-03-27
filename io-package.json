@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.8.8",
+    "version": "0.8.9",
     "news": {
+      "0.8.9": {
+        "en": "Use adapter timer methods instead of native setInterval, add Windows/macOS to CI, README license with full MIT text, split old changelog",
+        "de": "Adapter-Timer-Methoden statt nativem setInterval verwenden, Windows/macOS zur CI hinzugefügt, README-Lizenz mit vollständigem MIT-Text, alte Changelog-Einträge ausgelagert",
+        "ru": "Использование адаптерных методов таймера вместо нативного setInterval, добавлены Windows/macOS в CI, README лицензия с полным текстом MIT, разделение старого журнала изменений",
+        "pt": "Usar métodos de timer do adaptador em vez de setInterval nativo, Windows/macOS adicionados ao CI, licença README com texto MIT completo, separação do changelog antigo",
+        "nl": "Adapter-timermethoden gebruiken in plaats van native setInterval, Windows/macOS toegevoegd aan CI, README-licentie met volledige MIT-tekst, oud changelog gesplitst",
+        "fr": "Utiliser les méthodes de timer de l adaptateur au lieu de setInterval natif, Windows/macOS ajoutés au CI, licence README avec texte MIT complet, ancien changelog séparé",
+        "it": "Utilizzo dei metodi timer dell adattatore invece di setInterval nativo, Windows/macOS aggiunti al CI, licenza README con testo MIT completo, changelog vecchio separato",
+        "es": "Usar métodos de temporizador del adaptador en lugar de setInterval nativo, Windows/macOS añadidos al CI, licencia README con texto MIT completo, changelog antiguo separado",
+        "pl": "Używanie metod timera adaptera zamiast natywnego setInterval, Windows/macOS dodane do CI, licencja README z pełnym tekstem MIT, stary changelog rozdzielony",
+        "uk": "Використання методів таймера адаптера замість нативного setInterval, додано Windows/macOS до CI, ліцензія README з повним текстом MIT, старий журнал змін розділено",
+        "zh-cn": "使用适配器定时器方法代替原生setInterval，CI添加Windows/macOS，README许可证包含完整MIT文本，拆分旧更新日志"
+      },
       "0.8.8": {
         "en": "Simplified admin UI to single page, fixed onUnload to be synchronous",
         "de": "Vereinfachte Admin-Benutzeroberfläche auf eine einzelne Seite, onUnload wurde auf Synchronität korrigiert",
@@ -80,19 +93,6 @@
         "pl": "Usuń niewykorzystany stan 'info.clients' (był wprowadzającym w błąd licznik, a nie rzeczywiste aktywne połączenia)\nUsuń martwy kod: 'SessionData.flowId', 'connectedClients', 'AdapterInterface.setStateAsync'\nUproszczenie podpisu \"createSession\"",
         "uk": "Видаліть невикористаний стан `info.clients` (відсутній в оману мулятивний лічильник, не активні з'єднання)\nВидалити мертвий код: `SessionData.flowId`, `connectedClients`, `apperInterface.setStateAsync`\nСпрощуємо підпис `createSession`",
         "zh-cn": "删除未使用的“ info.clients”状态(是一个误导的累积计数器,而不是实际的主动连接)\n删除已死代码: 'SessionData.flowId ' 、`连接客户 ' 、`Adapter Interface.setStateAsync'\n简化“创建会议”签名"
-      },
-      "0.8.2": {
-        "en": "Migrate to @alcalzone/release-script for automated releases\nEnable npm Trusted Publishing (OIDC), remove legacy npm token",
-        "de": "Migration auf @alcalzone/Release-script für automatisierte Versionen\nAktiviere npm Trusted Publishing (OIDC), legacy npm token",
-        "ru": "Migrate to @alcalzone/releasescript для автоматизированных релизов\nВключить npm Trusted Publishing (OIDC), удалить устаревший токен npm",
-        "pt": "Migrar para @alcalzone/release-script para versões automatizadas\nActivar a publicação confiável do npm (OIDC), remover o símbolo legado do npm",
-        "nl": "Migreren naar @alcalzone/release-script voor geautomatiseerde releases\nNpm Trusted Publishing (OIDC) inschakelen, legacy npm token verwijderen",
-        "fr": "Migrer vers @alcalzone/release-script pour les versions automatisées\nActiver npm Trusted Publishing (OIDC), supprimer le legs npm token",
-        "it": "Migrare a @alcalzone/release-script per le versioni automatizzate\nAbilitare npm Trusted Publishing (OIDC), rimuovere il token npm legacy",
-        "es": "Migrar a @alcalzone/release-script para versiones automatizadas\nActivar npm Trusted Publishing (OIDC), eliminar el legado npm token",
-        "pl": "Migrate to @ alcalzone / release- script for automatic releases\nWłącz npm Zaufane Publishing (OIDC), usuń poprzednią npm token",
-        "uk": "Migrate to @alcalzone/видання для автоматизованих релізів\nУвімкнути npm Trusted Publishing (OIDC), видалити дані npm token",
-        "zh-cn": "移动到 @alcalzone/ 释放- 标记用于自动发布\n启用 npm 信任的出版( OIDC), 删除遗留 npm 令牌"
       }
     },
     "titleLang": {

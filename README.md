@@ -116,6 +116,9 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.8.9 (2026-03-28)
+- Use adapter timer methods, add Windows/macOS to CI, full MIT license text
+
 ### 0.8.8 (2026-03-25)
 - Simplified admin UI to single page, fixed synchronous shutdown
 
@@ -133,9 +136,6 @@ http://<IP>:8123/health
 
 ### 0.8.3 (2026-03-18)
 - Remove unused `info.clients` state and dead code cleanup
-
-### 0.8.2 (2026-03-17)
-- Migrate to @alcalzone/release-script, enable npm Trusted Publishing
 
 Older changelog: [CHANGELOG.md](CHANGELOG.md)
 
@@ -157,9 +157,27 @@ This adapter is free and open source. If you find it useful, consider buying me 
 
 ## License
 
-MIT License - see [LICENSE](LICENSE)
+MIT License
 
 Copyright (c) 2026 krobi <krobi@power-dreams.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ---
 

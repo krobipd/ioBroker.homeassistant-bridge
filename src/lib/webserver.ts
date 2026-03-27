@@ -12,7 +12,7 @@ export class WebServer {
     private readonly app: Application;
     private server: Server | null = null;
     public readonly sessions: Map<string, SessionData> = new Map();
-    private cleanupTimer: ReturnType<typeof setInterval> | null = null;
+    private cleanupTimer: unknown = null;
     public readonly instanceUuid: string;
 
     /**
@@ -337,15 +337,15 @@ export class WebServer {
                 reject(error);
             });
 
-            // Session cleanup timer
-            this.cleanupTimer = setInterval(() => this.cleanupSessions(), CLEANUP_INTERVAL_MS);
+            // Session cleanup timer (adapter-managed for automatic cleanup on unload)
+            this.cleanupTimer = this.adapter.setInterval(() => this.cleanupSessions(), CLEANUP_INTERVAL_MS);
         });
     }
 
     /** Stop the web server and cleanup timer */
     async stop(): Promise<void> {
         if (this.cleanupTimer) {
-            clearInterval(this.cleanupTimer);
+            this.adapter.clearInterval(this.cleanupTimer);
             this.cleanupTimer = null;
         }
 

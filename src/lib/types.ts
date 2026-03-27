@@ -37,4 +37,8 @@ export interface AdapterInterface {
         warn: (msg: string) => void;
         error: (msg: string) => void;
     };
+    /** Adapter-managed setInterval (auto-cleanup on unload) */
+    setInterval: (callback: () => void, ms: number) => any;
+    /** Adapter-managed clearInterval */
+    clearInterval: (id: any) => void;
 }

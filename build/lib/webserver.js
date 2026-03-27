@@ -284,14 +284,14 @@ class WebServer {
                 this.adapter.log.error(msg);
                 reject(error);
             });
-            // Session cleanup timer
-            this.cleanupTimer = setInterval(() => this.cleanupSessions(), constants_1.CLEANUP_INTERVAL_MS);
+            // Session cleanup timer (adapter-managed for automatic cleanup on unload)
+            this.cleanupTimer = this.adapter.setInterval(() => this.cleanupSessions(), constants_1.CLEANUP_INTERVAL_MS);
         });
     }
     /** Stop the web server and cleanup timer */
     async stop() {
         if (this.cleanupTimer) {
-            clearInterval(this.cleanupTimer);
+            this.adapter.clearInterval(this.cleanupTimer);
             this.cleanupTimer = null;
         }
         return new Promise(resolve => {
