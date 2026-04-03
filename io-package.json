@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.8.11",
+    "version": "0.8.12",
     "news": {
+      "0.8.12": {
+        "en": "Modernize dev tooling (esbuild, TypeScript 5.9 pin, testing-action-check v2)",
+        "de": "Dev-Tooling modernisiert (esbuild, TypeScript 5.9 Pin, testing-action-check v2)",
+        "ru": "Модернизация инструментов разработки (esbuild, TypeScript 5.9, testing-action-check v2)",
+        "pt": "Modernização das ferramentas de desenvolvimento (esbuild, TypeScript 5.9, testing-action-check v2)",
+        "nl": "Ontwikkeltools gemoderniseerd (esbuild, TypeScript 5.9 pin, testing-action-check v2)",
+        "fr": "Modernisation des outils de développement (esbuild, TypeScript 5.9, testing-action-check v2)",
+        "it": "Modernizzazione degli strumenti di sviluppo (esbuild, TypeScript 5.9, testing-action-check v2)",
+        "es": "Modernización de herramientas de desarrollo (esbuild, TypeScript 5.9, testing-action-check v2)",
+        "pl": "Modernizacja narzędzi programistycznych (esbuild, TypeScript 5.9, testing-action-check v2)",
+        "uk": "Модернізація інструментів розробки (esbuild, TypeScript 5.9, testing-action-check v2)",
+        "zh-cn": "开发工具现代化（esbuild、TypeScript 5.9 固定、testing-action-check v2）"
+      },
       "0.8.11": {
         "en": "Add error middleware for malformed JSON requests (400 instead of 500)",
         "de": "Fehler-Middleware für fehlerhafte JSON-Anfragen hinzugefügt (400 statt 500)",
@@ -80,19 +93,6 @@
         "pl": "Admin UI w pełni przetłumaczone na 11 języków; i18n zrefaktoryzowane na krótkie klucze semantyczne",
         "uk": "Admin UI повністю перекладено на 11 мов; i18n рефакторинг на короткі семантичні ключі",
         "zh-cn": "管理界面完整翻译为11种语言；i18n重构为短语义键"
-      },
-      "0.8.5": {
-        "en": "Admin UI: interface selector moved before port; port field removed (fixed at 8123)",
-        "de": "Admin UI: Interface-Auswahl vor Port verschoben; Port-Feld entfernt (fest auf 8123)",
-        "ru": "Admin UI: выбор интерфейса перемещён перед портом; поле порта удалено (фиксировано на 8123)",
-        "pt": "Admin UI: seletor de interface movido antes da porta; campo de porta removido (fixo em 8123)",
-        "nl": "Admin UI: interface-selector voor poort geplaatst; poortveld verwijderd (vast op 8123)",
-        "fr": "Admin UI: sélecteur d'interface déplacé avant le port; champ port supprimé (fixé à 8123)",
-        "it": "Admin UI: selettore interfaccia spostato prima della porta; campo porta rimosso (fisso a 8123)",
-        "es": "Admin UI: selector de interfaz movido antes del puerto; campo de puerto eliminado (fijo en 8123)",
-        "pl": "Admin UI: selektor interfejsu przeniesiony przed port; pole portu usunięte (stałe 8123)",
-        "uk": "Admin UI: вибір інтерфейсу переміщено перед портом; поле порту видалено (фіксовано на 8123)",
-        "zh-cn": "管理界面：将接口选择器移至端口之前；删除端口字段（固定为8123）"
       }
     },
     "titleLang": {

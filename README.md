@@ -116,6 +116,9 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.8.12 (2026-04-03)
+- Modernize dev tooling (esbuild, TypeScript 5.9 pin, testing-action-check v2)
+
 ### 0.8.11 (2026-03-28)
 - Add error middleware for malformed JSON requests (returns 400 instead of 500)
 
@@ -133,9 +136,6 @@ http://<IP>:8123/health
 
 ### 0.8.6 (2026-03-19)
 - Admin UI fully translated into all 11 languages
-
-### 0.8.5 (2026-03-19)
-- Admin UI: port field removed (fixed at 8123)
 
 Older changelog: [CHANGELOG.md](CHANGELOG.md)
 
