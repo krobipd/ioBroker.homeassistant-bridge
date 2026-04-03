@@ -27,6 +27,16 @@ export default [
         },
     },
     {
-        ignores: ['build/**', 'node_modules/**', 'admin/**', 'scripts/**'],
+        ignores: [
+            '.dev-server/',
+            '.vscode/',
+            '*.test.js',
+            'test/**',
+            '*.config.mjs',
+            'build',
+            'admin',
+            'node_modules',
+            '**/adapter-config.d.ts',
+        ],
     },
 ];
