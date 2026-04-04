@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.8.12",
+    "version": "0.9.0",
     "news": {
+      "0.9.0": {
+        "en": "Replace Avahi mDNS with bonjour-service for cross-platform support (Linux, macOS, Windows)",
+        "de": "Avahi mDNS durch bonjour-service ersetzt für plattformübergreifende Unterstützung (Linux, macOS, Windows)",
+        "ru": "Замена Avahi mDNS на bonjour-service для кроссплатформенной поддержки (Linux, macOS, Windows)",
+        "pt": "Substituição do Avahi mDNS pelo bonjour-service para suporte multiplataforma (Linux, macOS, Windows)",
+        "nl": "Avahi mDNS vervangen door bonjour-service voor cross-platform ondersteuning (Linux, macOS, Windows)",
+        "fr": "Remplacement d'Avahi mDNS par bonjour-service pour le support multiplateforme (Linux, macOS, Windows)",
+        "it": "Sostituzione di Avahi mDNS con bonjour-service per supporto multipiattaforma (Linux, macOS, Windows)",
+        "es": "Reemplazo de Avahi mDNS por bonjour-service para soporte multiplataforma (Linux, macOS, Windows)",
+        "pl": "Zamiana Avahi mDNS na bonjour-service dla obsługi wieloplatformowej (Linux, macOS, Windows)",
+        "uk": "Заміна Avahi mDNS на bonjour-service для кросплатформної підтримки (Linux, macOS, Windows)",
+        "zh-cn": "将 Avahi mDNS 替换为 bonjour-service 以支持跨平台（Linux、macOS、Windows）"
+      },
       "0.8.12": {
         "en": "Modernize dev tooling (esbuild, TypeScript 5.9 pin, testing-action-check v2)",
         "de": "Dev-Tooling modernisiert (esbuild, TypeScript 5.9 Pin, testing-action-check v2)",
@@ -80,19 +93,6 @@
         "pl": "Naprawiono format URL repozytorium dla instalacji z GitHub przez Admin UI",
         "uk": "Виправлено формат URL репозиторію для встановлення через Admin UI з GitHub",
         "zh-cn": "修复存储库URL格式以支持通过管理界面从GitHub安装"
-      },
-      "0.8.6": {
-        "en": "Admin UI fully translated into all 11 languages; i18n refactored to use short semantic keys",
-        "de": "Admin UI vollständig in alle 11 Sprachen übersetzt; i18n auf kurze semantische Keys umgestellt",
-        "ru": "Интерфейс Admin UI полностью переведён на 11 языков; i18n рефакторинг на короткие семантические ключи",
-        "pt": "Admin UI totalmente traduzida para 11 idiomas; i18n refatorado para usar chaves semânticas curtas",
-        "nl": "Admin UI volledig vertaald in 11 talen; i18n gerefactord naar korte semantische sleutels",
-        "fr": "Interface Admin UI entièrement traduite en 11 langues; i18n refactorisé avec des clés sémantiques courtes",
-        "it": "Admin UI completamente tradotta in 11 lingue; i18n refactoring con chiavi semantiche brevi",
-        "es": "Admin UI completamente traducida a 11 idiomas; i18n refactorizado con claves semánticas cortas",
-        "pl": "Admin UI w pełni przetłumaczone na 11 języków; i18n zrefaktoryzowane na krótkie klucze semantyczne",
-        "uk": "Admin UI повністю перекладено на 11 мов; i18n рефакторинг на короткі семантичні ключі",
-        "zh-cn": "管理界面完整翻译为11种语言；i18n重构为短语义键"
       }
     },
     "titleLang": {

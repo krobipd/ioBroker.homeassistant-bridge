@@ -1,203 +1,189 @@
-import { expect } from 'chai';
-import { MDNSService } from '../src/lib/mdns';
-import { HA_VERSION } from '../src/lib/constants';
-import type { AdapterConfig } from '../src/lib/types';
+import { expect } from "chai";
+import { MDNSService } from "../src/lib/mdns";
+import type { AdapterConfig } from "../src/lib/types";
 
 interface LogEntry {
-    level: string;
-    msg: string;
+  level: string;
+  msg: string;
 }
 
 interface MockAdapter {
-    log: {
-        debug: (msg: string) => void;
-        info: (msg: string) => void;
-        warn: (msg: string) => void;
-        error: (msg: string) => void;
-    };
-    _logs: LogEntry[];
+  log: {
+    debug: (msg: string) => void;
+    info: (msg: string) => void;
+    warn: (msg: string) => void;
+    error: (msg: string) => void;
+  };
+  _logs: LogEntry[];
 }
 
 // Mock adapter for testing
 function createMockAdapter(): MockAdapter {
-    const logs: LogEntry[] = [];
-    return {
-        log: {
-            debug: (msg: string): void => {
-                logs.push({ level: 'debug', msg });
-            },
-            info: (msg: string): void => {
-                logs.push({ level: 'info', msg });
-            },
-            warn: (msg: string): void => {
-                logs.push({ level: 'warn', msg });
-            },
-            error: (msg: string): void => {
-                logs.push({ level: 'error', msg });
-            },
-        },
-        _logs: logs,
-    };
+  const logs: LogEntry[] = [];
+  return {
+    log: {
+      debug: (msg: string): void => {
+        logs.push({ level: "debug", msg });
+      },
+      info: (msg: string): void => {
+        logs.push({ level: "info", msg });
+      },
+      warn: (msg: string): void => {
+        logs.push({ level: "warn", msg });
+      },
+      error: (msg: string): void => {
+        logs.push({ level: "error", msg });
+      },
+    },
+    _logs: logs,
+  };
 }
 
-describe('MDNSService', () => {
-    let service: MDNSService;
-    let adapter: MockAdapter;
-    const config: AdapterConfig = {
-        port: 8123,
-        bindAddress: '0.0.0.0',
-        visUrl: 'http://example.com',
-        authRequired: false,
-        username: 'admin',
-        password: 'secret',
-        mdnsEnabled: true,
-        serviceName: 'TestService',
-    };
+describe("MDNSService", () => {
+  let service: MDNSService;
+  let adapter: MockAdapter;
+  const config: AdapterConfig = {
+    port: 8123,
+    bindAddress: "0.0.0.0",
+    visUrl: "http://example.com",
+    authRequired: false,
+    username: "admin",
+    password: "secret",
+    mdnsEnabled: true,
+    serviceName: "TestService",
+  };
 
-    beforeEach(() => {
-        adapter = createMockAdapter();
-        service = new MDNSService(adapter as never, config);
+  beforeEach(() => {
+    adapter = createMockAdapter();
+    service = new MDNSService(adapter as never, config);
+  });
+
+  afterEach(() => {
+    service.stop();
+  });
+
+  describe("constructor", () => {
+    it("should generate a valid UUID", () => {
+      expect(service.uuid).to.match(
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+      );
     });
 
-    describe('constructor', () => {
-        it('should generate a valid UUID', () => {
-            expect(service.uuid).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
-        });
-
-        it('should not be active initially', () => {
-            expect(service.active).to.be.false;
-        });
+    it("should not be active initially", () => {
+      expect(service.active).to.be.false;
     });
 
-    describe('getLocalIP', () => {
-        it('should return an IP address string', () => {
-            const ip = service.getLocalIP();
-            expect(ip).to.be.a('string');
-            // Should be either a valid IPv4 or fallback 127.0.0.1
-            expect(ip).to.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
-        });
+    it("should generate unique UUIDs per instance", () => {
+      const service2 = new MDNSService(adapter as never, config);
+      expect(service.uuid).to.not.equal(service2.uuid);
+    });
+  });
+
+  describe("getLocalIP", () => {
+    it("should return an IP address string", () => {
+      const ip = service.getLocalIP();
+      expect(ip).to.be.a("string");
+      // Should be either a valid IPv4 or fallback 127.0.0.1
+      expect(ip).to.match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/);
+    });
+  });
+
+  describe("start/stop lifecycle", () => {
+    it("should not throw on start", () => {
+      expect(() => service.start()).to.not.throw();
     });
 
-    describe('buildServiceXml', () => {
-        it('should generate valid XML', () => {
-            const xml = service.buildServiceXml('TestName', 8123, 'http://192.168.1.100:8123');
-
-            expect(xml).to.include('<?xml version="1.0"');
-            expect(xml).to.include('<service-group>');
-            expect(xml).to.include('</service-group>');
-        });
-
-        it('should include service name', () => {
-            const xml = service.buildServiceXml('MyService', 8123, 'http://192.168.1.100:8123');
-
-            expect(xml).to.include('<name replace-wildcards="yes">MyService</name>');
-        });
-
-        it('should include port', () => {
-            const xml = service.buildServiceXml('Test', 9999, 'http://localhost:9999');
-
-            expect(xml).to.include('<port>9999</port>');
-        });
-
-        it('should include base_url and internal_url', () => {
-            const baseUrl = 'http://192.168.1.50:8123';
-            const xml = service.buildServiceXml('Test', 8123, baseUrl);
-
-            expect(xml).to.include(`<txt-record>base_url=${baseUrl}</txt-record>`);
-            expect(xml).to.include(`<txt-record>internal_url=${baseUrl}</txt-record>`);
-        });
-
-        it('should include HA version', () => {
-            const xml = service.buildServiceXml('Test', 8123, 'http://localhost:8123');
-
-            expect(xml).to.include(`<txt-record>version=${HA_VERSION}</txt-record>`);
-        });
-
-        it('should include UUID', () => {
-            const xml = service.buildServiceXml('Test', 8123, 'http://localhost:8123');
-
-            expect(xml).to.include(`<txt-record>uuid=${service.uuid}</txt-record>`);
-        });
-
-        it('should include location_name', () => {
-            const xml = service.buildServiceXml('LocationTest', 8123, 'http://localhost:8123');
-
-            expect(xml).to.include('<txt-record>location_name=LocationTest</txt-record>');
-        });
-
-        it('should include requires_api_password=True', () => {
-            const xml = service.buildServiceXml('Test', 8123, 'http://localhost:8123');
-
-            expect(xml).to.include('<txt-record>requires_api_password=True</txt-record>');
-        });
-
-        it('should use _home-assistant._tcp service type', () => {
-            const xml = service.buildServiceXml('Test', 8123, 'http://localhost:8123');
-
-            expect(xml).to.include('<type>_home-assistant._tcp</type>');
-        });
-
-        it('should use ipv4 protocol', () => {
-            const xml = service.buildServiceXml('Test', 8123, 'http://localhost:8123');
-
-            expect(xml).to.include('<service protocol="ipv4">');
-        });
+    it("should be active after start", () => {
+      service.start();
+      expect(service.active).to.be.true;
     });
 
-    describe('isAvahiRunning', () => {
-        it('should return a boolean', () => {
-            // This test is platform-dependent
-            // On Linux with avahi: true
-            // On macOS/Windows: false
-            const result = service.isAvahiRunning();
-            expect(result).to.be.a('boolean');
-        });
+    it("should log info on start", () => {
+      service.start();
+      const infoLogs = adapter._logs.filter((l) => l.level === "info");
+      expect(infoLogs.length).to.be.greaterThan(0);
+      expect(infoLogs[0].msg).to.include("mDNS: Broadcasting");
+      expect(infoLogs[0].msg).to.include("TestService");
     });
 
-    describe('start/stop lifecycle', () => {
-        it('should not throw when avahi is not running', () => {
-            // This test works on non-Linux systems where avahi is not available
-            expect(() => service.start()).to.not.throw();
-        });
-
-        it('should handle stop when not active', () => {
-            expect(service.active).to.be.false;
-            expect(() => service.stop()).to.not.throw();
-        });
+    it("should include port in start log", () => {
+      service.start();
+      const infoLogs = adapter._logs.filter((l) => l.level === "info");
+      expect(infoLogs[0].msg).to.include("8123");
     });
 
-    describe('logging', () => {
-        it('should log error when avahi is not running', () => {
-            // On systems without avahi, start() should log errors
-            service.start();
-
-            if (!service.active) {
-                // Avahi not running - should have logged errors
-                const errorLogs = adapter._logs.filter(l => l.level === 'error');
-                expect(errorLogs.length).to.be.greaterThan(0);
-            }
-        });
+    it("should not be active after stop", () => {
+      service.start();
+      expect(service.active).to.be.true;
+      service.stop();
+      expect(service.active).to.be.false;
     });
+
+    it("should handle stop when not active", () => {
+      expect(service.active).to.be.false;
+      expect(() => service.stop()).to.not.throw();
+    });
+
+    it("should handle multiple stop calls", () => {
+      service.start();
+      service.stop();
+      expect(() => service.stop()).to.not.throw();
+    });
+
+    it("should handle start-stop-start cycle", () => {
+      service.start();
+      expect(service.active).to.be.true;
+      service.stop();
+      expect(service.active).to.be.false;
+      service.start();
+      expect(service.active).to.be.true;
+    });
+  });
+
+  describe("service name", () => {
+    it("should use configured service name", () => {
+      service.start();
+      const infoLogs = adapter._logs.filter((l) => l.level === "info");
+      expect(infoLogs[0].msg).to.include("TestService._home-assistant._tcp");
+    });
+
+    it("should use ioBroker as default service name", () => {
+      const defaultConfig: AdapterConfig = {
+        ...config,
+        serviceName: "",
+      };
+      const defaultService = new MDNSService(adapter as never, defaultConfig);
+      defaultService.start();
+      const infoLogs = adapter._logs.filter((l) => l.level === "info");
+      expect(infoLogs[0].msg).to.include("ioBroker._home-assistant._tcp");
+      defaultService.stop();
+    });
+  });
 });
 
-describe('MDNSService with default serviceName', () => {
-    it('should use ioBroker as default service name', () => {
-        const adapter = createMockAdapter();
-        const defaultConfig: AdapterConfig = {
-            port: 8123,
-            bindAddress: '0.0.0.0',
-            visUrl: 'http://example.com',
-            authRequired: false,
-            username: '',
-            password: '',
-            mdnsEnabled: true,
-            serviceName: 'ioBroker',
-        };
-        const service = new MDNSService(adapter as never, defaultConfig);
-
-        // serviceName is not set, so buildServiceXml should get undefined
-        // The actual default is handled in the start() method
-        const xml = service.buildServiceXml('ioBroker', 8123, 'http://localhost:8123');
-        expect(xml).to.include('<name replace-wildcards="yes">ioBroker</name>');
+describe("MDNSService cross-platform", () => {
+  it("should work without avahi (cross-platform)", () => {
+    // bonjour-service works on all platforms — no avahi needed
+    const adapter = createMockAdapter();
+    const service = new MDNSService(adapter as never, {
+      port: 8123,
+      bindAddress: "0.0.0.0",
+      visUrl: "http://example.com",
+      authRequired: false,
+      username: "",
+      password: "",
+      mdnsEnabled: true,
+      serviceName: "CrossPlatformTest",
     });
+
+    service.start();
+    expect(service.active).to.be.true;
+
+    // No error logs — bonjour-service works everywhere
+    const errorLogs = adapter._logs.filter((l) => l.level === "error");
+    expect(errorLogs.length).to.equal(0);
+
+    service.stop();
+    expect(service.active).to.be.false;
+  });
 });

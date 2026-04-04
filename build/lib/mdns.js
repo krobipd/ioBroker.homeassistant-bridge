@@ -32,17 +32,16 @@ __export(mdns_exports, {
 });
 module.exports = __toCommonJS(mdns_exports);
 var import_node_crypto = __toESM(require("node:crypto"));
-var import_node_fs = __toESM(require("node:fs"));
 var import_node_os = __toESM(require("node:os"));
-var import_node_child_process = require("node:child_process");
+var import_bonjour_service = __toESM(require("bonjour-service"));
 var import_constants = require("./constants");
-const AVAHI_SERVICE_DIR = "/etc/avahi/services";
-const AVAHI_SERVICE_FILE = `${AVAHI_SERVICE_DIR}/homeassistant-bridge.service`;
 class MDNSService {
   adapter;
   config;
   uuid;
   active = false;
+  bonjour = null;
+  published = null;
   /**
    * Creates a new MDNSService instance
    *
@@ -69,103 +68,57 @@ class MDNSService {
     }
     return "127.0.0.1";
   }
-  /** Check if avahi-daemon is running */
-  isAvahiRunning() {
-    for (const cmd of ["systemctl is-active avahi-daemon", "pgrep avahi-daemon"]) {
-      try {
-        (0, import_node_child_process.execSync)(cmd, { stdio: "ignore" });
-        return true;
-      } catch {
-      }
-    }
-    return false;
-  }
-  /**
-   * Build Avahi service XML
-   *
-   * @param serviceName - Name of the service for mDNS discovery
-   * @param port - Port number for the service
-   * @param baseUrl - Base URL for the service
-   */
-  buildServiceXml(serviceName, port, baseUrl) {
-    return [
-      `<?xml version="1.0" standalone='no'?>`,
-      '<!DOCTYPE service-group SYSTEM "avahi-service.dtd">',
-      "<service-group>",
-      `  <name replace-wildcards="yes">${serviceName}</name>`,
-      '  <service protocol="ipv4">',
-      "    <type>_home-assistant._tcp</type>",
-      `    <port>${port}</port>`,
-      `    <txt-record>base_url=${baseUrl}</txt-record>`,
-      `    <txt-record>internal_url=${baseUrl}</txt-record>`,
-      "    <txt-record>external_url=</txt-record>",
-      `    <txt-record>version=${import_constants.HA_VERSION}</txt-record>`,
-      `    <txt-record>uuid=${this.uuid}</txt-record>`,
-      `    <txt-record>location_name=${serviceName}</txt-record>`,
-      "    <txt-record>requires_api_password=True</txt-record>",
-      "  </service>",
-      "</service-group>"
-    ].join("\n");
-  }
-  /** Reload avahi-daemon to pick up the new service file */
-  reloadAvahi() {
-    try {
-      (0, import_node_child_process.execSync)("avahi-daemon --reload 2>/dev/null || kill -HUP $(pgrep avahi-daemon)", {
-        stdio: "ignore",
-        shell: "/bin/sh"
-      });
-    } catch {
-    }
-  }
-  /** Start mDNS broadcasting via Avahi */
+  /** Start mDNS broadcasting via bonjour-service */
   start() {
-    if (!this.isAvahiRunning()) {
-      this.adapter.log.error("mDNS: Avahi daemon is not running!");
-      this.adapter.log.error(
-        "mDNS: Install: sudo apt install avahi-daemon && sudo systemctl enable --now avahi-daemon"
-      );
-      this.adapter.log.error("mDNS: Permission: sudo chown iobroker /etc/avahi/services");
-      this.adapter.log.warn(`mDNS: Fallback: enter http://YOUR_IP:${this.config.port} on the display`);
-      return;
-    }
     const localIP = this.getLocalIP();
     const baseUrl = `http://${localIP}:${this.config.port}`;
     const serviceName = this.config.serviceName || "ioBroker";
     try {
-      const serviceXml = this.buildServiceXml(serviceName, this.config.port, baseUrl);
-      if (!import_node_fs.default.existsSync(AVAHI_SERVICE_DIR)) {
-        import_node_fs.default.mkdirSync(AVAHI_SERVICE_DIR, { recursive: true });
-      }
-      import_node_fs.default.writeFileSync(AVAHI_SERVICE_FILE, serviceXml, "utf8");
+      this.bonjour = new import_bonjour_service.default();
+      this.published = this.bonjour.publish({
+        name: serviceName,
+        type: "home-assistant",
+        protocol: "tcp",
+        port: this.config.port,
+        txt: {
+          base_url: baseUrl,
+          internal_url: baseUrl,
+          external_url: "",
+          version: import_constants.HA_VERSION,
+          uuid: this.uuid,
+          location_name: serviceName,
+          requires_api_password: "True"
+        }
+      });
       this.active = true;
-      this.reloadAvahi();
       this.adapter.log.info(
         `mDNS: Broadcasting ${serviceName}._home-assistant._tcp.local on ${localIP}:${this.config.port}`
       );
-      this.adapter.log.info(`mDNS: UUID: ${this.uuid}`);
-      this.adapter.log.info("mDNS: Verify: avahi-browse _home-assistant._tcp -r -t");
+      this.adapter.log.debug(`mDNS: UUID: ${this.uuid}`);
     } catch (error) {
       const err = error;
-      this.adapter.log.error(`mDNS: Failed to write service file: ${err.message}`);
-      if (err.code === "EACCES") {
-        this.adapter.log.error("mDNS: Permission denied \u2014 run: sudo chown iobroker /etc/avahi/services");
-      }
+      this.adapter.log.warn(`mDNS: Failed to start: ${err.message}`);
     }
   }
-  /** Stop mDNS broadcasting and remove service file */
+  /** Stop mDNS broadcasting */
   stop() {
+    var _a, _b;
     if (!this.active) {
       return;
     }
     try {
-      if (import_node_fs.default.existsSync(AVAHI_SERVICE_FILE)) {
-        import_node_fs.default.unlinkSync(AVAHI_SERVICE_FILE);
-        this.reloadAvahi();
-        this.adapter.log.info("mDNS: Service file removed");
+      if (this.published) {
+        (_b = (_a = this.published).stop) == null ? void 0 : _b.call(_a);
+        this.published = null;
       }
+      if (this.bonjour) {
+        this.bonjour.destroy();
+        this.bonjour = null;
+      }
+      this.adapter.log.debug("mDNS: Service stopped");
     } catch (error) {
       const err = error;
-      this.adapter.log.warn(`mDNS: Could not remove service file: ${err.message}`);
+      this.adapter.log.warn(`mDNS: Could not stop cleanly: ${err.message}`);
     }
     this.active = false;
   }

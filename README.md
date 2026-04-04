@@ -18,7 +18,7 @@ Emulates a minimal Home Assistant server so that devices like the **Shelly Wall 
 ## Features
 
 - **Home Assistant Emulation** — minimal HA API compatible with Shelly Wall Display XL
-- **mDNS Discovery** — automatic detection via Avahi (`_home-assistant._tcp`)
+- **mDNS Discovery** — automatic detection via `_home-assistant._tcp` (cross-platform)
 - **OAuth2-like Auth Flow** — full login flow emulation, optional credential validation
 - **Flexible Redirect** — send the display to any ioBroker VIS, VIS-2, or custom web URL
 - **Modern Admin UI** — JSON-Config for easy configuration
@@ -30,7 +30,6 @@ Emulates a minimal Home Assistant server so that devices like the **Shelly Wall 
 - **Node.js >= 20**
 - **ioBroker js-controller >= 7.0.0**
 - **ioBroker Admin >= 7.6.20**
-- Linux system with Avahi (optional, for mDNS auto-discovery)
 
 ---
 
@@ -50,7 +49,7 @@ Configuration is done via the Admin UI (jsonConfig):
 |--------|-------------|---------|
 | **Bind to Interface** | Network interface to listen on | 0.0.0.0 (all) |
 | **Redirect URL** | Target URL for the display (e.g., VIS) | *must be set* |
-| **mDNS Enabled** | Avahi Service Discovery | enabled |
+| **mDNS Enabled** | mDNS Service Discovery | enabled |
 | **Service Name** | Name in the network | "ioBroker" |
 | **Auth Required** | Validate credentials | disabled |
 | **Username** | Login name (if auth enabled) | "admin" |
@@ -80,30 +79,26 @@ homeassistant-bridge.0.
 
 ### Display cannot find the server (mDNS)
 
-The adapter registers a `_home-assistant._tcp` service via Avahi. If the display does not find the server automatically, configure it manually:
+The adapter broadcasts a `_home-assistant._tcp` mDNS service. If the display does not find the server automatically, configure it manually:
 
 ```
 IP:   <ioBroker-IP>
 Port: 8123
 ```
 
-1. Check if Avahi is running:
-   ```bash
-   systemctl status avahi-daemon
-   ```
+1. Check if the adapter log shows "mDNS: Broadcasting" on startup.
 
-2. Check if the service is registered:
+2. Verify the service is visible on the network:
    ```bash
+   # macOS
+   dns-sd -B _home-assistant._tcp
+   # Linux (if avahi-utils installed)
    avahi-browse _home-assistant._tcp -r -t
    ```
 
-3. If mDNS doesn't work, use manual configuration on the display with the ioBroker server's IP address.
+3. Make sure mDNS port 5353/UDP is not blocked by a firewall.
 
-### Avahi Permission Error
-
-```bash
-sudo chown iobroker /etc/avahi/services
-```
+4. If mDNS doesn't work, use manual configuration on the display with the ioBroker server's IP address.
 
 ### Health Check
 
@@ -115,6 +110,9 @@ http://<IP>:8123/health
 ---
 
 ## Changelog
+
+### 0.9.0 (2026-04-04)
+- Replace Avahi mDNS with bonjour-service for cross-platform support (Linux, macOS, Windows)
 
 ### 0.8.12 (2026-04-03)
 - Modernize dev tooling (esbuild, TypeScript 5.9 pin, testing-action-check v2)
@@ -133,9 +131,6 @@ http://<IP>:8123/health
 
 ### 0.8.7 (2026-03-21)
 - Fix repository URL format for Admin UI GitHub installation
-
-### 0.8.6 (2026-03-19)
-- Admin UI fully translated into all 11 languages
 
 Older changelog: [CHANGELOG.md](CHANGELOG.md)
 

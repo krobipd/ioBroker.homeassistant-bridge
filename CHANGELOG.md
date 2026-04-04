@@ -1,4 +1,10 @@
 # Changelog
+## 0.9.0 (2026-04-04)
+
+- Replace Avahi mDNS with bonjour-service for cross-platform support (Linux, macOS, Windows)
+- No avahi-daemon required anymore — pure JavaScript mDNS broadcasting
+- Updated admin UI translations to remove Avahi-specific instructions
+
 ## 0.8.12 (2026-04-03)
 
 - Modernize dev tooling: esbuild via build-adapter, @tsconfig/node20, rimraf, TypeScript ~5.9.3 pin

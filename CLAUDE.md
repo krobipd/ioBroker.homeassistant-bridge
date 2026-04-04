@@ -30,7 +30,7 @@ src/
     ├── constants.ts    → Gemeinsame Konstanten (HA_VERSION, SESSION_TTL, etc.)
     ├── types.ts        → TypeScript Interfaces (AdapterConfig, SessionData, etc.)
     ├── webserver.ts    → Express 5 HTTP Server + HA API Emulation
-    └── mdns.ts         → Avahi mDNS Service Discovery (nur Linux)
+    └── mdns.ts         → mDNS Service Publishing via bonjour-service (cross-platform)
 build/                  → Kompilierter JavaScript Code (gitignored)
 admin/
 ├── jsonConfig.json     → Admin UI Konfiguration (Single Page, 4 Sektionen)
@@ -83,19 +83,19 @@ admin/
 - UUID pro Instanz generieren (nicht statisch!)
 - Auth-Flow muss vollständig durchlaufen werden
 
-### mDNS/Avahi
+### mDNS (bonjour-service)
 
 - Service-Typ: `_home-assistant._tcp`
-- Service-Datei: `/etc/avahi/services/homeassistant-bridge.service`
-- `sudo chown iobroker /etc/avahi/services` für Berechtigungen
-- Nur Linux unterstützt (Windows/macOS: manuelle URL-Eingabe)
+- Implementierung: `bonjour-service` npm-Paket (cross-platform: Linux, macOS, Windows)
+- Kein avahi-daemon mehr nötig — rein JavaScript-basiert
+- Konsistent mit homewizard-Adapter (beide verwenden bonjour-service)
 
 ## Häufige Probleme
 
 ### Shelly Display findet Server nicht
-1. mDNS prüfen: `avahi-browse _home-assistant._tcp -r -t`
-2. Service-Datei prüfen: `cat /etc/avahi/services/homeassistant-bridge.service`
-3. Avahi Status: `systemctl status avahi-daemon`
+1. mDNS prüfen: `dns-sd -B _home-assistant._tcp` (macOS) oder `avahi-browse _home-assistant._tcp -r -t` (Linux)
+2. Adapter-Log prüfen: "mDNS: Broadcasting" Meldung suchen
+3. Firewall prüfen: mDNS Port 5353/UDP muss offen sein
 
 ### localhost in visUrl
 - Display kann localhost nicht erreichen!
@@ -113,7 +113,7 @@ admin/
 
 ## Status
 
-**Auf npm veröffentlicht** ✅ — `iobroker.homeassistant-bridge@0.8.12`
+**Auf npm veröffentlicht** ✅ — `iobroker.homeassistant-bridge@0.9.0`
 **ioBroker Repository PR** ✅ — https://github.com/ioBroker/ioBroker.repositories/pull/5642 (ausstehend)
 **Release-Pipeline** ✅ — vollautomatisch via `test-and-release.yml` (einziger Workflow!)
 
@@ -127,6 +127,7 @@ admin/
 
 | Version | Änderungen |
 |---------|------------|
+| 0.9.0 | mDNS: Avahi durch bonjour-service ersetzt (cross-platform: Linux, macOS, Windows) |
 | 0.8.12 | Dev-Tooling modernisiert (esbuild, TS 5.9 Pin, testing-action-check v2) |
 | 0.8.11 | Error-Middleware für fehlerhafte JSON-Requests (400 statt 500) |
 | 0.8.10 | Konsistenter i18n-Key `supportHeader`, FUNDING.yml PayPal hinzugefügt |
@@ -156,7 +157,7 @@ npm run lint:fix
 npm run format
 npm run format:check
 
-# Tests (111 Tests)
+# Tests (108 Tests)
 npm test                  # Alle Tests
 npm run test:package      # Nur Package-Tests (für CI check-phase)
 npm run test:integration  # Alle Tests (für CI test-phase)
@@ -175,7 +176,9 @@ npm run check             # TypeScript Typ-Prüfung ohne Build
 # Adapter lokal testen
 node build/main.js
 
-# mDNS Service prüfen
+# mDNS Service prüfen (macOS)
+dns-sd -B _home-assistant._tcp
+# mDNS Service prüfen (Linux)
 avahi-browse _home-assistant._tcp -r -t
 ```
 
@@ -197,18 +200,18 @@ Features die diese Fragen mit "Nein" beantworten, wurden bewusst nicht implement
 
 - **Rate Limiting**: Nicht sinnvoll - der Adapter macht nur URL-Redirects, es gibt keine schützenswerten Daten.
 
-- **Windows/macOS mDNS (Bonjour)**: Manuelle IP-Eingabe funktioniert zuverlässig. ioBroker-Server laufen typischerweise auf Linux.
+- **~~Windows/macOS mDNS~~**: Seit v0.9.0 via `bonjour-service` cross-platform gelöst.
 
 ## Test-Abdeckung
 
 ```
 test/
 ├── testConstants.ts    → Shared Constants (10 Tests)
-├── testMdns.ts         → mDNS Service, XML Generation (17 Tests)
+├── testMdns.ts         → mDNS Service, bonjour-service Lifecycle (14 Tests)
 ├── testWebServer.ts    → HTTP Endpoints, Auth, Sessions, bindAddress (30 Tests)
 └── testPackageFiles.ts → @iobroker/testing Validierung (54 Tests)
 
-Total: 111 Tests (alle TypeScript)
+Total: 108 Tests (alle TypeScript)
 ```
 
 Die Tests werden mit `tsconfig.test.json` kompiliert und aus `build/test/` ausgeführt.
