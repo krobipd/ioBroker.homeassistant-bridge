@@ -99,18 +99,19 @@ describe("MDNSService", () => {
       expect(service.active).to.be.true;
     });
 
-    it("should log info on start", () => {
+    it("should log debug on start", () => {
       service.start();
-      const infoLogs = adapter._logs.filter((l) => l.level === "info");
-      expect(infoLogs.length).to.be.greaterThan(0);
-      expect(infoLogs[0].msg).to.include("mDNS: Broadcasting");
-      expect(infoLogs[0].msg).to.include("TestService");
+      const debugLogs = adapter._logs.filter((l) => l.level === "debug");
+      const broadcastLog = debugLogs.find((l) => l.msg.includes("mDNS: Broadcasting"));
+      expect(broadcastLog).to.not.be.undefined;
+      expect(broadcastLog!.msg).to.include("TestService");
     });
 
     it("should include port in start log", () => {
       service.start();
-      const infoLogs = adapter._logs.filter((l) => l.level === "info");
-      expect(infoLogs[0].msg).to.include("8123");
+      const debugLogs = adapter._logs.filter((l) => l.level === "debug");
+      const broadcastLog = debugLogs.find((l) => l.msg.includes("mDNS: Broadcasting"));
+      expect(broadcastLog!.msg).to.include("8123");
     });
 
     it("should not be active after stop", () => {
@@ -144,8 +145,9 @@ describe("MDNSService", () => {
   describe("service name", () => {
     it("should use configured service name", () => {
       service.start();
-      const infoLogs = adapter._logs.filter((l) => l.level === "info");
-      expect(infoLogs[0].msg).to.include("TestService._home-assistant._tcp");
+      const debugLogs = adapter._logs.filter((l) => l.level === "debug");
+      const broadcastLog = debugLogs.find((l) => l.msg.includes("mDNS: Broadcasting"));
+      expect(broadcastLog!.msg).to.include("TestService._home-assistant._tcp");
     });
 
     it("should use ioBroker as default service name", () => {
@@ -155,8 +157,9 @@ describe("MDNSService", () => {
       };
       const defaultService = new MDNSService(adapter as never, defaultConfig, crypto.randomUUID());
       defaultService.start();
-      const infoLogs = adapter._logs.filter((l) => l.level === "info");
-      expect(infoLogs[0].msg).to.include("ioBroker._home-assistant._tcp");
+      const debugLogs = adapter._logs.filter((l) => l.level === "debug");
+      const broadcastLog = debugLogs.find((l) => l.msg.includes("mDNS: Broadcasting"));
+      expect(broadcastLog!.msg).to.include("ioBroker._home-assistant._tcp");
       defaultService.stop();
     });
   });

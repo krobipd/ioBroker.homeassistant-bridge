@@ -335,7 +335,7 @@ export class WebServer {
 
             const bindAddress = this.config.bindAddress || '0.0.0.0';
             this.server = this.app.listen(this.config.port, bindAddress, () => {
-                this.adapter.log.info(`Web server listening on ${bindAddress}:${this.config.port}`);
+                this.adapter.log.debug(`Web server listening on ${bindAddress}:${this.config.port}`);
                 resolve();
             });
 

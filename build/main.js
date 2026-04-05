@@ -71,7 +71,10 @@ class HomeAssistantBridge extends utils.Adapter {
         this.log.debug("mDNS disabled \u2014 enter URL manually on the display");
       }
       await this.setStateAsync("info.connection", true, true);
-      this.log.info("Home Assistant Bridge running");
+      const bindAddr = config.bindAddress || "0.0.0.0";
+      this.log.info(
+        `Home Assistant Bridge running on ${bindAddr}:${config.port}${config.mdnsEnabled ? ", mDNS active" : ""}`
+      );
     } catch (error) {
       const err = error;
       this.log.error(`Failed to start: ${err.message}`);

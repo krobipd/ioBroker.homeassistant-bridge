@@ -68,7 +68,7 @@ export class MDNSService {
 
             this.active = true;
 
-            this.adapter.log.info(
+            this.adapter.log.debug(
                 `mDNS: Broadcasting ${serviceName}._home-assistant._tcp.local on ${localIP}:${this.config.port}`,
             );
             this.adapter.log.debug(`mDNS: UUID: ${this.uuid}`);
