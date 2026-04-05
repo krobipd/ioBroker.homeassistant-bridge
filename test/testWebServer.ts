@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import crypto from 'node:crypto';
 import http from 'node:http';
 import { WebServer } from '../src/lib/webserver';
 import { HA_VERSION } from '../src/lib/constants';
@@ -85,7 +86,7 @@ describe('WebServer', () => {
 
     before(async () => {
         adapter = createMockAdapter();
-        server = new WebServer(adapter as never, config);
+        server = new WebServer(adapter as never, config, crypto.randomUUID());
         await server.start();
     });
 
@@ -410,7 +411,7 @@ describe('WebServer without visUrl', () => {
             mdnsEnabled: false,
             serviceName: 'TestServer',
         };
-        server = new WebServer(adapter as never, noVisConfig);
+        server = new WebServer(adapter as never, noVisConfig, crypto.randomUUID());
         await server.start();
     });
 
@@ -449,7 +450,7 @@ describe('WebServer with auth required', () => {
             mdnsEnabled: false,
             serviceName: 'AuthServer',
         };
-        server = new WebServer(adapter as never, authConfig);
+        server = new WebServer(adapter as never, authConfig, crypto.randomUUID());
         await server.start();
     });
 
@@ -535,7 +536,7 @@ describe('WebServer bindAddress', () => {
             mdnsEnabled: false,
             serviceName: 'Test',
         };
-        const server = new WebServer(adapter as never, config);
+        const server = new WebServer(adapter as never, config, crypto.randomUUID());
         await server.start();
 
         const bound = server.boundAddress;
@@ -558,7 +559,7 @@ describe('WebServer bindAddress', () => {
             mdnsEnabled: false,
             serviceName: 'Test',
         };
-        const server = new WebServer(adapter as never, config);
+        const server = new WebServer(adapter as never, config, crypto.randomUUID());
         await server.start();
 
         const bound = server.boundAddress;
@@ -581,7 +582,7 @@ describe('WebServer bindAddress', () => {
             mdnsEnabled: false,
             serviceName: 'Test',
         };
-        const server = new WebServer(adapter as never, config);
+        const server = new WebServer(adapter as never, config, crypto.randomUUID());
         await server.start();
 
         const bound = server.boundAddress;
@@ -603,7 +604,7 @@ describe('WebServer bindAddress', () => {
             mdnsEnabled: false,
             serviceName: 'Test',
         };
-        const server = new WebServer(adapter as never, config);
+        const server = new WebServer(adapter as never, config, crypto.randomUUID());
 
         // Server not started yet
         expect(server.boundAddress).to.be.null;

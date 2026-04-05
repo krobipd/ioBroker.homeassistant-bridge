@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import * as utils from '@iobroker/adapter-core';
 import { MDNSService } from './lib/mdns';
 import { WebServer } from './lib/webserver';
@@ -51,6 +52,9 @@ class HomeAssistantBridge extends utils.Adapter {
                 serviceName: this.config.serviceName || 'ioBroker',
             };
 
+            // Single UUID shared between WebServer and mDNS for consistency
+            const instanceUuid = crypto.randomUUID();
+
             this.log.debug(`Config: port=${config.port}, auth=${config.authRequired}, mdns=${config.mdnsEnabled}`);
 
             if (config.visUrl) {
@@ -63,11 +67,11 @@ class HomeAssistantBridge extends utils.Adapter {
                 }
             }
 
-            this.webServer = new WebServer(this, config);
+            this.webServer = new WebServer(this, config, instanceUuid);
             await this.webServer.start();
 
             if (config.mdnsEnabled) {
-                this.mdnsService = new MDNSService(this, config);
+                this.mdnsService = new MDNSService(this, config, instanceUuid);
                 this.mdnsService.start();
             } else {
                 this.log.debug('mDNS disabled — enter URL manually on the display');

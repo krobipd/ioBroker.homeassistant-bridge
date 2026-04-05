@@ -21,6 +21,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
+var import_node_crypto = __toESM(require("node:crypto"));
 var utils = __toESM(require("@iobroker/adapter-core"));
 var import_mdns = require("./lib/mdns");
 var import_webserver = require("./lib/webserver");
@@ -51,6 +52,7 @@ class HomeAssistantBridge extends utils.Adapter {
         mdnsEnabled: this.config.mdnsEnabled !== false,
         serviceName: this.config.serviceName || "ioBroker"
       };
+      const instanceUuid = import_node_crypto.default.randomUUID();
       this.log.debug(`Config: port=${config.port}, auth=${config.authRequired}, mdns=${config.mdnsEnabled}`);
       if (config.visUrl) {
         this.log.debug(`Target URL: ${config.visUrl}`);
@@ -60,10 +62,10 @@ class HomeAssistantBridge extends utils.Adapter {
           );
         }
       }
-      this.webServer = new import_webserver.WebServer(this, config);
+      this.webServer = new import_webserver.WebServer(this, config, instanceUuid);
       await this.webServer.start();
       if (config.mdnsEnabled) {
-        this.mdnsService = new import_mdns.MDNSService(this, config);
+        this.mdnsService = new import_mdns.MDNSService(this, config, instanceUuid);
         this.mdnsService.start();
       } else {
         this.log.debug("mDNS disabled \u2014 enter URL manually on the display");

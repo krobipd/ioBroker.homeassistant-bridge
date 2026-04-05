@@ -60,7 +60,6 @@
   ],
   "scripts": {
     "prebuild": "rimraf build",
-    "build:ts": "build-adapter ts",
     "build": "build-adapter ts",
     "watch": "build-adapter ts --watch",
     "check": "tsc --noEmit",
@@ -73,7 +72,6 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "npm run build",
     "translate": "translate-adapter",
     "release": "release-script"
   }

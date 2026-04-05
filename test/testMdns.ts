@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import crypto from "node:crypto";
 import { MDNSService } from "../src/lib/mdns";
 import type { AdapterConfig } from "../src/lib/types";
 
@@ -55,7 +56,7 @@ describe("MDNSService", () => {
 
   beforeEach(() => {
     adapter = createMockAdapter();
-    service = new MDNSService(adapter as never, config);
+    service = new MDNSService(adapter as never, config, crypto.randomUUID());
   });
 
   afterEach(() => {
@@ -63,7 +64,7 @@ describe("MDNSService", () => {
   });
 
   describe("constructor", () => {
-    it("should generate a valid UUID", () => {
+    it("should use the provided UUID", () => {
       expect(service.uuid).to.match(
         /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
       );
@@ -73,8 +74,8 @@ describe("MDNSService", () => {
       expect(service.active).to.be.false;
     });
 
-    it("should generate unique UUIDs per instance", () => {
-      const service2 = new MDNSService(adapter as never, config);
+    it("should use different UUIDs when different UUIDs are provided", () => {
+      const service2 = new MDNSService(adapter as never, config, crypto.randomUUID());
       expect(service.uuid).to.not.equal(service2.uuid);
     });
   });
@@ -152,7 +153,7 @@ describe("MDNSService", () => {
         ...config,
         serviceName: "",
       };
-      const defaultService = new MDNSService(adapter as never, defaultConfig);
+      const defaultService = new MDNSService(adapter as never, defaultConfig, crypto.randomUUID());
       defaultService.start();
       const infoLogs = adapter._logs.filter((l) => l.level === "info");
       expect(infoLogs[0].msg).to.include("ioBroker._home-assistant._tcp");
@@ -174,7 +175,7 @@ describe("MDNSService cross-platform", () => {
       password: "",
       mdnsEnabled: true,
       serviceName: "CrossPlatformTest",
-    });
+    }, crypto.randomUUID());
 
     service.start();
     expect(service.active).to.be.true;

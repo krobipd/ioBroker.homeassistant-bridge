@@ -1,4 +1,3 @@
-import crypto from 'node:crypto';
 import os from 'node:os';
 import Bonjour, { type Service } from 'bonjour-service';
 import { HA_VERSION } from './constants';
@@ -18,11 +17,12 @@ export class MDNSService {
      *
      * @param adapter - Adapter interface for logging
      * @param config - Adapter configuration
+     * @param uuid - Shared UUID for consistent identity across WebServer and mDNS
      */
-    constructor(adapter: AdapterInterface, config: AdapterConfig) {
+    constructor(adapter: AdapterInterface, config: AdapterConfig, uuid: string) {
         this.adapter = adapter;
         this.config = config;
-        this.uuid = crypto.randomUUID();
+        this.uuid = uuid;
     }
 
     /** First non-internal IPv4 address */

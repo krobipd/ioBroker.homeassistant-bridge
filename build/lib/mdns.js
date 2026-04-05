@@ -31,7 +31,6 @@ __export(mdns_exports, {
   MDNSService: () => MDNSService
 });
 module.exports = __toCommonJS(mdns_exports);
-var import_node_crypto = __toESM(require("node:crypto"));
 var import_node_os = __toESM(require("node:os"));
 var import_bonjour_service = __toESM(require("bonjour-service"));
 var import_constants = require("./constants");
@@ -47,11 +46,12 @@ class MDNSService {
    *
    * @param adapter - Adapter interface for logging
    * @param config - Adapter configuration
+   * @param uuid - Shared UUID for consistent identity across WebServer and mDNS
    */
-  constructor(adapter, config) {
+  constructor(adapter, config, uuid) {
     this.adapter = adapter;
     this.config = config;
-    this.uuid = import_node_crypto.default.randomUUID();
+    this.uuid = uuid;
   }
   /** First non-internal IPv4 address */
   getLocalIP() {

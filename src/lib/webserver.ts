@@ -20,12 +20,13 @@ export class WebServer {
      *
      * @param adapter - Adapter interface for logging and state management
      * @param config - Adapter configuration
+     * @param instanceUuid - Shared UUID for consistent identity across WebServer and mDNS
      */
-    constructor(adapter: AdapterInterface, config: AdapterConfig) {
+    constructor(adapter: AdapterInterface, config: AdapterConfig, instanceUuid: string) {
         this.adapter = adapter;
         this.config = config;
         this.app = express();
-        this.instanceUuid = crypto.randomUUID();
+        this.instanceUuid = instanceUuid;
     }
 
     /** Configured service name */
