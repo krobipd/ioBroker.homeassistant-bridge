@@ -6,7 +6,7 @@
 
 **ioBroker HomeAssistant Bridge Adapter** — Emuliert minimalen HA-Server für Shelly Wall Displays → Redirect zu VIS Dashboard.
 
-- **Version:** 0.9.1 (April 2026)
+- **Version:** 0.9.2 (April 2026)
 - **GitHub:** https://github.com/krobipd/ioBroker.homeassistant-bridge
 - **npm:** https://www.npmjs.com/package/iobroker.homeassistant-bridge
 - **Repository PR:** ioBroker/ioBroker.repositories#5642
@@ -34,7 +34,7 @@ src/lib/mdns.ts          → mDNS Broadcasting via bonjour-service
 ## Design-Entscheidungen
 
 1. **Minimale Komplexität** — nur emulieren was Shelly braucht
-2. **Shared UUID** (seit v0.10.0) — eine UUID in main.ts, an WebServer + mDNS durchgereicht
+2. **Shared UUID** (seit v0.9.1) — eine UUID in main.ts, an WebServer + mDNS durchgereicht
 3. **Port 8123 fix** — Shelly-Anforderung, nicht konfigurierbar
 4. **mDNS kontinuierlich** — Broadcasting solange Adapter läuft (Shelly muss jederzeit finden können)
 5. **Kein HTTPS** — Shelly unterstützt es nicht für HA
@@ -60,6 +60,7 @@ test/testPackageFiles.ts → @iobroker/testing (54)
 
 | Version | Highlights |
 |---------|------------|
+| 0.9.2 | Kompakter Startup-Log, mDNS/WebServer Detail-Logs auf debug |
 | 0.9.1 | Shared UUID (WebServer + mDNS konsistent), cleanup redundante Scripts |
 | 0.9.0 | mDNS: Avahi durch bonjour-service ersetzt (cross-platform) |
 | 0.8.12 | Dev-Tooling modernisiert (esbuild, TS 5.9 Pin, testing-action-check v2) |
