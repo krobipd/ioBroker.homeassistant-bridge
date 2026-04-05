@@ -11,7 +11,7 @@
 
 <img src="https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg" width="100" />
 
-Emulates a minimal Home Assistant server so that devices like the **Shelly Wall Display XL** can be redirected to any custom web URL — without running a real Home Assistant Core.
+Emulates a minimal [Home Assistant](https://www.home-assistant.io) server so that devices like the [Shelly Wall Display XL](https://www.shelly.com) can be redirected to any custom web URL — without running a real Home Assistant Core.
 
 ---
 
