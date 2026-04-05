@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "news": {
+      "0.9.1": {
+        "en": "Fix UUID inconsistency between WebServer and mDNS, remove redundant scripts",
+        "de": "UUID-Inkonsistenz zwischen WebServer und mDNS behoben, redundante Scripts entfernt",
+        "ru": "Исправлена несогласованность UUID между WebServer и mDNS, удалены лишние скрипты",
+        "pt": "Corrigida inconsistencia de UUID entre WebServer e mDNS, scripts redundantes removidos",
+        "nl": "UUID-inconsistentie tussen WebServer en mDNS opgelost, overbodige scripts verwijderd",
+        "fr": "Correction de l inconsistance UUID entre WebServer et mDNS, suppression des scripts redondants",
+        "it": "Corretta incoerenza UUID tra WebServer e mDNS, rimossi script ridondanti",
+        "es": "Corregida inconsistencia de UUID entre WebServer y mDNS, eliminados scripts redundantes",
+        "pl": "Naprawiono niespojnosc UUID miedzy WebServer a mDNS, usunieto nadmiarowe skrypty",
+        "uk": "Виправлено неузгодженість UUID між WebServer та mDNS, видалено зайві скрипти",
+        "zh-cn": "修复 WebServer 和 mDNS 之间的 UUID 不一致，移除冗余脚本"
+      },
       "0.9.0": {
         "en": "Replace Avahi mDNS with bonjour-service for cross-platform support (Linux, macOS, Windows)",
         "de": "Avahi mDNS durch bonjour-service ersetzt für plattformübergreifende Unterstützung (Linux, macOS, Windows)",
@@ -80,19 +93,6 @@
         "pl": "Uproszczony interfejs administratora na jednej stronie, naprawiono synchronizację onUnload",
         "uk": "Спрощений інтерфейс адміністратора на одній сторінці, виправлено функцію Unload для синхронізації",
         "zh-cn": "将管理 UI 简化为单页，修复 onUnload 同步"
-      },
-      "0.8.7": {
-        "en": "Fix repository URL format for Admin UI GitHub installation",
-        "de": "Repository-URL-Format für Admin UI GitHub-Installation korrigiert",
-        "ru": "Исправлен формат URL репозитория для установки через Admin UI с GitHub",
-        "pt": "Corrigido o formato do URL do repositório para instalação via Admin UI do GitHub",
-        "nl": "Repository URL-formaat gecorrigeerd voor Admin UI GitHub-installatie",
-        "fr": "Correction du format de l'URL du dépôt pour l'installation via Admin UI GitHub",
-        "it": "Corretto il formato dell'URL del repository per l'installazione tramite Admin UI GitHub",
-        "es": "Corregido el formato de la URL del repositorio para la instalación mediante Admin UI de GitHub",
-        "pl": "Naprawiono format URL repozytorium dla instalacji z GitHub przez Admin UI",
-        "uk": "Виправлено формат URL репозиторію для встановлення через Admin UI з GitHub",
-        "zh-cn": "修复存储库URL格式以支持通过管理界面从GitHub安装"
       }
     },
     "titleLang": {

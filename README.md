@@ -111,6 +111,10 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.9.1 (2026-04-05)
+- Fix UUID inconsistency between WebServer and mDNS (now shared)
+- Remove redundant scripts
+
 ### 0.9.0 (2026-04-04)
 - Replace Avahi mDNS with bonjour-service for cross-platform support (Linux, macOS, Windows)
 
@@ -128,9 +132,6 @@ http://<IP>:8123/health
 
 ### 0.8.8 (2026-03-25)
 - Simplified admin UI to single page, fixed synchronous shutdown
-
-### 0.8.7 (2026-03-21)
-- Fix repository URL format for Admin UI GitHub installation
 
 Older changelog: [CHANGELOG.md](CHANGELOG.md)
 
