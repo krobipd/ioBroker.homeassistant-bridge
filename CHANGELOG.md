@@ -1,4 +1,9 @@
 # Changelog
+## 0.9.2 (2026-04-05)
+
+- Compact startup log (single info line instead of three)
+- Move mDNS and web server detail logs to debug level
+
 ## 0.9.1 (2026-04-05)
 
 - Fix UUID inconsistency between WebServer and mDNS (now shared from main.ts)

@@ -111,6 +111,10 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.9.2 (2026-04-05)
+- Compact startup log (single info line instead of three)
+- Move mDNS and web server detail logs to debug level
+
 ### 0.9.1 (2026-04-05)
 - Fix UUID inconsistency between WebServer and mDNS (now shared)
 - Remove redundant scripts
@@ -129,9 +133,6 @@ http://<IP>:8123/health
 
 ### 0.8.9 (2026-03-28)
 - Use adapter timer methods, add Windows/macOS to CI, full MIT license text
-
-### 0.8.8 (2026-03-25)
-- Simplified admin UI to single page, fixed synchronous shutdown
 
 Older changelog: [CHANGELOG.md](CHANGELOG.md)
 

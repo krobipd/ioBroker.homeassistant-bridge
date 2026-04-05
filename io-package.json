@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "news": {
+      "0.9.2": {
+        "en": "Compact startup log (single info line), move mDNS/server details to debug",
+        "de": "Kompakte Startup-Meldung (eine Info-Zeile), mDNS/Server-Details auf Debug verschoben",
+        "ru": "Компактный лог запуска (одна инфор��ационная строка), детали mDNS/сервера перенесены в debug",
+        "pt": "Log de inicialização compacto (uma linha info), detalhes mDNS/servidor movidos para debug",
+        "nl": "Compact opstartlog (één inforegel), mDNS/serverdetails naar debug verplaatst",
+        "fr": "Log de démarrage compact (une ligne info), détails mDNS/serveur déplacés en debug",
+        "it": "Log di avvio compatto (una riga info), dettagli mDNS/server spostati a debug",
+        "es": "Log de inicio compacto (una línea info), detalles mDNS/servidor movidos a debug",
+        "pl": "Kompaktowy log startowy (jedna linia info), szczegóły mDNS/serwera przeniesione do debug",
+        "uk": "Компактний лог запуску (один рядок info), деталі mDNS/сервера перенесено в debug",
+        "zh-cn": "精简启动日志（单行信息），将mDNS/服务器详情移至debug级别"
+      },
       "0.9.1": {
         "en": "Fix UUID inconsistency between WebServer and mDNS, remove redundant scripts",
         "de": "UUID-Inkonsistenz zwischen WebServer und mDNS behoben, redundante Scripts entfernt",
@@ -80,19 +93,6 @@
         "pl": "Używanie metod timera adaptera zamiast natywnego setInterval, Windows/macOS dodane do CI, licencja README z pełnym tekstem MIT, stary changelog rozdzielony",
         "uk": "Використання методів таймера адаптера замість нативного setInterval, додано Windows/macOS до CI, ліцензія README з повним текстом MIT, старий журнал змін розділено",
         "zh-cn": "使用适配器定时器方法代替原生setInterval，CI添加Windows/macOS，README许可证包含完整MIT文本，拆分旧更新日志"
-      },
-      "0.8.8": {
-        "en": "Simplified admin UI to single page, fixed onUnload to be synchronous",
-        "de": "Vereinfachte Admin-Benutzeroberfläche auf eine einzelne Seite, onUnload wurde auf Synchronität korrigiert",
-        "ru": "Упрощенный пользовательский интерфейс администратора до одной страницы, исправлена ​​синхронизация onUnload.",
-        "pt": "UI de administração simplificada para página única, onUnload corrigido para ser síncrono",
-        "nl": "Vereenvoudigde beheerdersinterface naar één pagina, opgelost bij Unload om synchroon te zijn",
-        "fr": "Interface utilisateur d'administration simplifiée sur une seule page, correction de onUnload pour être synchrone",
-        "it": "Interfaccia utente di amministrazione semplificata su una singola pagina, corretta la modalità di scaricamento in modo sincrono",
-        "es": "Interfaz de usuario de administración simplificada para una sola página, fijada en la descarga para que sea sincrónica",
-        "pl": "Uproszczony interfejs administratora na jednej stronie, naprawiono synchronizację onUnload",
-        "uk": "Спрощений інтерфейс адміністратора на одній сторінці, виправлено функцію Unload для синхронізації",
-        "zh-cn": "将管理 UI 简化为单页，修复 onUnload 同步"
       }
     },
     "titleLang": {
