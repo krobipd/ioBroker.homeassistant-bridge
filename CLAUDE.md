@@ -9,7 +9,7 @@
 - **Version:** 0.9.3 (April 2026)
 - **GitHub:** https://github.com/krobipd/ioBroker.homeassistant-bridge
 - **npm:** https://www.npmjs.com/package/iobroker.homeassistant-bridge
-- **Repository PR:** ioBroker/ioBroker.repositories#5642
+- **Repository PR:** ioBroker/ioBroker.repositories#5788
 - **Runtime-Deps:** `@iobroker/adapter-core`, `express` (v5), `bonjour-service`
 
 ## Shelly Wall Display — Limitationen
