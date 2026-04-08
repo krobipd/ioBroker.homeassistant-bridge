@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "homeassistant-bridge",
-    "version": "0.9.2",
+    "version": "0.9.3",
     "news": {
+      "0.9.3": {
+        "en": "Restore standard GitHub-based tests, remove CHANGELOG.md",
+        "de": "Standard GitHub-Tests wiederhergestellt, CHANGELOG.md entfernt",
+        "ru": "Восстановлены стандартные тесты GitHub, удалён CHANGELOG.md",
+        "pt": "Restaurados testes padrão GitHub, removido CHANGELOG.md",
+        "nl": "Standaard GitHub-tests hersteld, CHANGELOG.md verwijderd",
+        "fr": "Tests GitHub standard restaurés, CHANGELOG.md supprimé",
+        "it": "Ripristinati test GitHub standard, rimosso CHANGELOG.md",
+        "es": "Restauradas pruebas estándar GitHub, eliminado CHANGELOG.md",
+        "pl": "Przywrócono standardowe testy GitHub, usunięto CHANGELOG.md",
+        "uk": "Відновлено стандартні тести GitHub, видалено CHANGELOG.md",
+        "zh-cn": "恢复标准GitHub测试，删除CHANGELOG.md"
+      },
       "0.9.2": {
         "en": "Compact startup log (single info line), move mDNS/server details to debug",
         "de": "Kompakte Startup-Meldung (eine Info-Zeile), mDNS/Server-Details auf Debug verschoben",
@@ -80,19 +93,6 @@
         "pl": "Spójne klucze i18n w admin UI, PayPal dodany do FUNDING.yml",
         "uk": "Узгоджені ключі i18n в Admin UI, PayPal додано до FUNDING.yml",
         "zh-cn": "一致的管理界面 i18n 键，FUNDING.yml 中添加 PayPal"
-      },
-      "0.8.9": {
-        "en": "Use adapter timer methods instead of native setInterval, add Windows/macOS to CI, README license with full MIT text, split old changelog",
-        "de": "Adapter-Timer-Methoden statt nativem setInterval verwenden, Windows/macOS zur CI hinzugefügt, README-Lizenz mit vollständigem MIT-Text, alte Changelog-Einträge ausgelagert",
-        "ru": "Использование адаптерных методов таймера вместо нативного setInterval, добавлены Windows/macOS в CI, README лицензия с полным текстом MIT, разделение старого журнала изменений",
-        "pt": "Usar métodos de timer do adaptador em vez de setInterval nativo, Windows/macOS adicionados ao CI, licença README com texto MIT completo, separação do changelog antigo",
-        "nl": "Adapter-timermethoden gebruiken in plaats van native setInterval, Windows/macOS toegevoegd aan CI, README-licentie met volledige MIT-tekst, oud changelog gesplitst",
-        "fr": "Utiliser les méthodes de timer de l adaptateur au lieu de setInterval natif, Windows/macOS ajoutés au CI, licence README avec texte MIT complet, ancien changelog séparé",
-        "it": "Utilizzo dei metodi timer dell adattatore invece di setInterval nativo, Windows/macOS aggiunti al CI, licenza README con testo MIT completo, changelog vecchio separato",
-        "es": "Usar métodos de temporizador del adaptador en lugar de setInterval nativo, Windows/macOS añadidos al CI, licencia README con texto MIT completo, changelog antiguo separado",
-        "pl": "Używanie metod timera adaptera zamiast natywnego setInterval, Windows/macOS dodane do CI, licencja README z pełnym tekstem MIT, stary changelog rozdzielony",
-        "uk": "Використання методів таймера адаптера замість нативного setInterval, додано Windows/macOS до CI, ліцензія README з повним текстом MIT, старий журнал змін розділено",
-        "zh-cn": "使用适配器定时器方法代替原生setInterval，CI添加Windows/macOS，README许可证包含完整MIT文本，拆分旧更新日志"
       }
     },
     "titleLang": {

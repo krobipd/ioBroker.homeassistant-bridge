@@ -1,6 +1,6 @@
 {
   "name": "iobroker.homeassistant-bridge",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Emulates a minimal Home Assistant server so devices expecting a Home Assistant dashboard can display any custom web URL.",
   "author": {
     "name": "krobi",
@@ -63,10 +63,10 @@
     "build": "build-adapter ts",
     "watch": "build-adapter ts --watch",
     "check": "tsc --noEmit",
-    "test": "npm run build:test && mocha --exit \"build/test/**/*.js\"",
-    "test:ci": "npm run build:test && mocha --exit --reporter spec \"build/test/**/*.js\"",
-    "test:package": "npm run build:test && mocha --exit \"build/test/testPackageFiles.js\"",
-    "test:integration": "npm run build:test && mocha --exit \"build/test/**/*.js\"",
+    "test:ts": "npm run build:test && mocha --exit \"build/test/testConstants.js\" \"build/test/testMdns.js\" \"build/test/testWebServer.js\"",
+    "test:package": "mocha test/package --exit",
+    "test:integration": "mocha test/integration --exit",
+    "test": "npm run test:ts && npm run test:package",
     "build:test": "rm -rf ./build && tsc -p tsconfig.test.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix",

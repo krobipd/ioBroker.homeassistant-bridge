@@ -111,6 +111,9 @@ http://<IP>:8123/health
 
 ## Changelog
 
+### 0.9.3 (2026-04-08)
+- Restore standard GitHub-based tests, remove CHANGELOG.md
+
 ### 0.9.2 (2026-04-05)
 - Compact startup log (single info line instead of three)
 - Move mDNS and web server detail logs to debug level
@@ -125,16 +128,7 @@ http://<IP>:8123/health
 ### 0.8.12 (2026-04-03)
 - Modernize dev tooling (esbuild, TypeScript 5.9 pin, testing-action-check v2)
 
-### 0.8.11 (2026-03-28)
-- Add error middleware for malformed JSON requests (returns 400 instead of 500)
-
-### 0.8.10 (2026-03-28)
-- Consistent admin UI i18n keys, add PayPal to FUNDING.yml
-
-### 0.8.9 (2026-03-28)
-- Use adapter timer methods, add Windows/macOS to CI, full MIT license text
-
-Older changelog: [CHANGELOG.md](CHANGELOG.md)
+Older changelog: [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
 
 ---
 

@@ -20,6 +20,7 @@ admin/i18n/flat.txt
 
 # Build & Test
 build/test/
+build/src/
 coverage/
 .nyc_output/
 
