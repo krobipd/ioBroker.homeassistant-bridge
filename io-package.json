@@ -1,208 +1,208 @@
 {
-  "common": {
-    "name": "homeassistant-bridge",
-    "version": "0.9.3",
-    "news": {
-      "0.9.3": {
-        "en": "Restore standard GitHub-based tests, remove CHANGELOG.md",
-        "de": "Standard GitHub-Tests wiederhergestellt, CHANGELOG.md entfernt",
-        "ru": "Восстановлены стандартные тесты GitHub, удалён CHANGELOG.md",
-        "pt": "Restaurados testes padrão GitHub, removido CHANGELOG.md",
-        "nl": "Standaard GitHub-tests hersteld, CHANGELOG.md verwijderd",
-        "fr": "Tests GitHub standard restaurés, CHANGELOG.md supprimé",
-        "it": "Ripristinati test GitHub standard, rimosso CHANGELOG.md",
-        "es": "Restauradas pruebas estándar GitHub, eliminado CHANGELOG.md",
-        "pl": "Przywrócono standardowe testy GitHub, usunięto CHANGELOG.md",
-        "uk": "Відновлено стандартні тести GitHub, видалено CHANGELOG.md",
-        "zh-cn": "恢复标准GitHub测试，删除CHANGELOG.md"
-      },
-      "0.9.2": {
-        "en": "Compact startup log (single info line), move mDNS/server details to debug",
-        "de": "Kompakte Startup-Meldung (eine Info-Zeile), mDNS/Server-Details auf Debug verschoben",
-        "ru": "Компактный лог запуска (одна инфор��ационная строка), детали mDNS/сервера перенесены в debug",
-        "pt": "Log de inicialização compacto (uma linha info), detalhes mDNS/servidor movidos para debug",
-        "nl": "Compact opstartlog (één inforegel), mDNS/serverdetails naar debug verplaatst",
-        "fr": "Log de démarrage compact (une ligne info), détails mDNS/serveur déplacés en debug",
-        "it": "Log di avvio compatto (una riga info), dettagli mDNS/server spostati a debug",
-        "es": "Log de inicio compacto (una línea info), detalles mDNS/servidor movidos a debug",
-        "pl": "Kompaktowy log startowy (jedna linia info), szczegóły mDNS/serwera przeniesione do debug",
-        "uk": "Компактний лог запуску (один рядок info), деталі mDNS/сервера перенесено в debug",
-        "zh-cn": "精简启动日志（单行信息），将mDNS/服务器详情移至debug级别"
-      },
-      "0.9.1": {
-        "en": "Fix UUID inconsistency between WebServer and mDNS, remove redundant scripts",
-        "de": "UUID-Inkonsistenz zwischen WebServer und mDNS behoben, redundante Scripts entfernt",
-        "ru": "Исправлена несогласованность UUID между WebServer и mDNS, удалены лишние скрипты",
-        "pt": "Corrigida inconsistencia de UUID entre WebServer e mDNS, scripts redundantes removidos",
-        "nl": "UUID-inconsistentie tussen WebServer en mDNS opgelost, overbodige scripts verwijderd",
-        "fr": "Correction de l inconsistance UUID entre WebServer et mDNS, suppression des scripts redondants",
-        "it": "Corretta incoerenza UUID tra WebServer e mDNS, rimossi script ridondanti",
-        "es": "Corregida inconsistencia de UUID entre WebServer y mDNS, eliminados scripts redundantes",
-        "pl": "Naprawiono niespojnosc UUID miedzy WebServer a mDNS, usunieto nadmiarowe skrypty",
-        "uk": "Виправлено неузгодженість UUID між WebServer та mDNS, видалено зайві скрипти",
-        "zh-cn": "修复 WebServer 和 mDNS 之间的 UUID 不一致，移除冗余脚本"
-      },
-      "0.9.0": {
-        "en": "Replace Avahi mDNS with bonjour-service for cross-platform support (Linux, macOS, Windows)",
-        "de": "Avahi mDNS durch bonjour-service ersetzt für plattformübergreifende Unterstützung (Linux, macOS, Windows)",
-        "ru": "Замена Avahi mDNS на bonjour-service для кроссплатформенной поддержки (Linux, macOS, Windows)",
-        "pt": "Substituição do Avahi mDNS pelo bonjour-service para suporte multiplataforma (Linux, macOS, Windows)",
-        "nl": "Avahi mDNS vervangen door bonjour-service voor cross-platform ondersteuning (Linux, macOS, Windows)",
-        "fr": "Remplacement d'Avahi mDNS par bonjour-service pour le support multiplateforme (Linux, macOS, Windows)",
-        "it": "Sostituzione di Avahi mDNS con bonjour-service per supporto multipiattaforma (Linux, macOS, Windows)",
-        "es": "Reemplazo de Avahi mDNS por bonjour-service para soporte multiplataforma (Linux, macOS, Windows)",
-        "pl": "Zamiana Avahi mDNS na bonjour-service dla obsługi wieloplatformowej (Linux, macOS, Windows)",
-        "uk": "Заміна Avahi mDNS на bonjour-service для кросплатформної підтримки (Linux, macOS, Windows)",
-        "zh-cn": "将 Avahi mDNS 替换为 bonjour-service 以支持跨平台（Linux、macOS、Windows）"
-      },
-      "0.8.12": {
-        "en": "Modernize dev tooling (esbuild, TypeScript 5.9 pin, testing-action-check v2)",
-        "de": "Dev-Tooling modernisiert (esbuild, TypeScript 5.9 Pin, testing-action-check v2)",
-        "ru": "Модернизация инструментов разработки (esbuild, TypeScript 5.9, testing-action-check v2)",
-        "pt": "Modernização das ferramentas de desenvolvimento (esbuild, TypeScript 5.9, testing-action-check v2)",
-        "nl": "Ontwikkeltools gemoderniseerd (esbuild, TypeScript 5.9 pin, testing-action-check v2)",
-        "fr": "Modernisation des outils de développement (esbuild, TypeScript 5.9, testing-action-check v2)",
-        "it": "Modernizzazione degli strumenti di sviluppo (esbuild, TypeScript 5.9, testing-action-check v2)",
-        "es": "Modernización de herramientas de desarrollo (esbuild, TypeScript 5.9, testing-action-check v2)",
-        "pl": "Modernizacja narzędzi programistycznych (esbuild, TypeScript 5.9, testing-action-check v2)",
-        "uk": "Модернізація інструментів розробки (esbuild, TypeScript 5.9, testing-action-check v2)",
-        "zh-cn": "开发工具现代化（esbuild、TypeScript 5.9 固定、testing-action-check v2）"
-      },
-      "0.8.11": {
-        "en": "Add error middleware for malformed JSON requests (400 instead of 500)",
-        "de": "Fehler-Middleware für fehlerhafte JSON-Anfragen hinzugefügt (400 statt 500)",
-        "ru": "Добавлена обработка ошибок для некорректных JSON-запросов (400 вместо 500)",
-        "pt": "Adicionado middleware de erro para requisições JSON malformadas (400 em vez de 500)",
-        "nl": "Fout middleware toegevoegd voor ongeldige JSON-verzoeken (400 in plaats van 500)",
-        "fr": "Ajout d'un middleware d'erreur pour les requêtes JSON malformées (400 au lieu de 500)",
-        "it": "Aggiunto middleware errore per richieste JSON malformate (400 invece di 500)",
-        "es": "Añadido middleware de error para solicitudes JSON malformadas (400 en lugar de 500)",
-        "pl": "Dodano middleware obsługi błędów dla nieprawidłowych żądań JSON (400 zamiast 500)",
-        "uk": "Додано проміжне ПЗ для помилкових JSON-запитів (400 замість 500)",
-        "zh-cn": "添加错误中间件处理格式错误的JSON请求（400替代500）"
-      },
-      "0.8.10": {
-        "en": "Consistent admin UI i18n keys, add PayPal to FUNDING.yml",
-        "de": "Konsistente Admin-UI i18n-Keys, PayPal zur FUNDING.yml hinzugefügt",
-        "ru": "Согласованные ключи i18n в Admin UI, добавлен PayPal в FUNDING.yml",
-        "pt": "Chaves i18n consistentes na UI admin, PayPal adicionado ao FUNDING.yml",
-        "nl": "Consistente admin-UI i18n-sleutels, PayPal toegevoegd aan FUNDING.yml",
-        "fr": "Clés i18n cohérentes dans l interface admin, PayPal ajouté à FUNDING.yml",
-        "it": "Chiavi i18n coerenti nell interfaccia admin, PayPal aggiunto a FUNDING.yml",
-        "es": "Claves i18n consistentes en la UI de admin, PayPal añadido a FUNDING.yml",
-        "pl": "Spójne klucze i18n w admin UI, PayPal dodany do FUNDING.yml",
-        "uk": "Узгоджені ключі i18n в Admin UI, PayPal додано до FUNDING.yml",
-        "zh-cn": "一致的管理界面 i18n 键，FUNDING.yml 中添加 PayPal"
-      }
+    "common": {
+        "name": "homeassistant-bridge",
+        "version": "0.10.0",
+        "news": {
+            "0.9.3": {
+                "en": "Restore standard GitHub-based tests, remove CHANGELOG.md",
+                "de": "Standard GitHub-Tests wiederhergestellt, CHANGELOG.md entfernt",
+                "ru": "Восстановлены стандартные тесты GitHub, удалён CHANGELOG.md",
+                "pt": "Restaurados testes padrão GitHub, removido CHANGELOG.md",
+                "nl": "Standaard GitHub-tests hersteld, CHANGELOG.md verwijderd",
+                "fr": "Tests GitHub standard restaurés, CHANGELOG.md supprimé",
+                "it": "Ripristinati test GitHub standard, rimosso CHANGELOG.md",
+                "es": "Restauradas pruebas estándar GitHub, eliminado CHANGELOG.md",
+                "pl": "Przywrócono standardowe testy GitHub, usunięto CHANGELOG.md",
+                "uk": "Відновлено стандартні тести GitHub, видалено CHANGELOG.md",
+                "zh-cn": "恢复标准GitHub测试，删除CHANGELOG.md"
+            },
+            "0.9.2": {
+                "en": "Compact startup log (single info line), move mDNS/server details to debug",
+                "de": "Kompakte Startup-Meldung (eine Info-Zeile), mDNS/Server-Details auf Debug verschoben",
+                "ru": "Компактный лог запуска (одна инфор��ационная строка), детали mDNS/сервера перенесены в debug",
+                "pt": "Log de inicialização compacto (uma linha info), detalhes mDNS/servidor movidos para debug",
+                "nl": "Compact opstartlog (één inforegel), mDNS/serverdetails naar debug verplaatst",
+                "fr": "Log de démarrage compact (une ligne info), détails mDNS/serveur déplacés en debug",
+                "it": "Log di avvio compatto (una riga info), dettagli mDNS/server spostati a debug",
+                "es": "Log de inicio compacto (una línea info), detalles mDNS/servidor movidos a debug",
+                "pl": "Kompaktowy log startowy (jedna linia info), szczegóły mDNS/serwera przeniesione do debug",
+                "uk": "Компактний лог запуску (один рядок info), деталі mDNS/сервера перенесено в debug",
+                "zh-cn": "精简启动日志（单行信息），将mDNS/服务器详情移至debug级别"
+            },
+            "0.9.1": {
+                "en": "Fix UUID inconsistency between WebServer and mDNS, remove redundant scripts",
+                "de": "UUID-Inkonsistenz zwischen WebServer und mDNS behoben, redundante Scripts entfernt",
+                "ru": "Исправлена несогласованность UUID между WebServer и mDNS, удалены лишние скрипты",
+                "pt": "Corrigida inconsistencia de UUID entre WebServer e mDNS, scripts redundantes removidos",
+                "nl": "UUID-inconsistentie tussen WebServer en mDNS opgelost, overbodige scripts verwijderd",
+                "fr": "Correction de l inconsistance UUID entre WebServer et mDNS, suppression des scripts redondants",
+                "it": "Corretta incoerenza UUID tra WebServer e mDNS, rimossi script ridondanti",
+                "es": "Corregida inconsistencia de UUID entre WebServer y mDNS, eliminados scripts redundantes",
+                "pl": "Naprawiono niespojnosc UUID miedzy WebServer a mDNS, usunieto nadmiarowe skrypty",
+                "uk": "Виправлено неузгодженість UUID між WebServer та mDNS, видалено зайві скрипти",
+                "zh-cn": "修复 WebServer 和 mDNS 之间的 UUID 不一致，移除冗余脚本"
+            },
+            "0.9.0": {
+                "en": "Replace Avahi mDNS with bonjour-service for cross-platform support (Linux, macOS, Windows)",
+                "de": "Avahi mDNS durch bonjour-service ersetzt für plattformübergreifende Unterstützung (Linux, macOS, Windows)",
+                "ru": "Замена Avahi mDNS на bonjour-service для кроссплатформенной поддержки (Linux, macOS, Windows)",
+                "pt": "Substituição do Avahi mDNS pelo bonjour-service para suporte multiplataforma (Linux, macOS, Windows)",
+                "nl": "Avahi mDNS vervangen door bonjour-service voor cross-platform ondersteuning (Linux, macOS, Windows)",
+                "fr": "Remplacement d'Avahi mDNS par bonjour-service pour le support multiplateforme (Linux, macOS, Windows)",
+                "it": "Sostituzione di Avahi mDNS con bonjour-service per supporto multipiattaforma (Linux, macOS, Windows)",
+                "es": "Reemplazo de Avahi mDNS por bonjour-service para soporte multiplataforma (Linux, macOS, Windows)",
+                "pl": "Zamiana Avahi mDNS na bonjour-service dla obsługi wieloplatformowej (Linux, macOS, Windows)",
+                "uk": "Заміна Avahi mDNS на bonjour-service для кросплатформної підтримки (Linux, macOS, Windows)",
+                "zh-cn": "将 Avahi mDNS 替换为 bonjour-service 以支持跨平台（Linux、macOS、Windows）"
+            },
+            "0.8.12": {
+                "en": "Modernize dev tooling (esbuild, TypeScript 5.9 pin, testing-action-check v2)",
+                "de": "Dev-Tooling modernisiert (esbuild, TypeScript 5.9 Pin, testing-action-check v2)",
+                "ru": "Модернизация инструментов разработки (esbuild, TypeScript 5.9, testing-action-check v2)",
+                "pt": "Modernização das ferramentas de desenvolvimento (esbuild, TypeScript 5.9, testing-action-check v2)",
+                "nl": "Ontwikkeltools gemoderniseerd (esbuild, TypeScript 5.9 pin, testing-action-check v2)",
+                "fr": "Modernisation des outils de développement (esbuild, TypeScript 5.9, testing-action-check v2)",
+                "it": "Modernizzazione degli strumenti di sviluppo (esbuild, TypeScript 5.9, testing-action-check v2)",
+                "es": "Modernización de herramientas de desarrollo (esbuild, TypeScript 5.9, testing-action-check v2)",
+                "pl": "Modernizacja narzędzi programistycznych (esbuild, TypeScript 5.9, testing-action-check v2)",
+                "uk": "Модернізація інструментів розробки (esbuild, TypeScript 5.9, testing-action-check v2)",
+                "zh-cn": "开发工具现代化（esbuild、TypeScript 5.9 固定、testing-action-check v2）"
+            },
+            "0.8.11": {
+                "en": "Add error middleware for malformed JSON requests (400 instead of 500)",
+                "de": "Fehler-Middleware für fehlerhafte JSON-Anfragen hinzugefügt (400 statt 500)",
+                "ru": "Добавлена обработка ошибок для некорректных JSON-запросов (400 вместо 500)",
+                "pt": "Adicionado middleware de erro para requisições JSON malformadas (400 em vez de 500)",
+                "nl": "Fout middleware toegevoegd voor ongeldige JSON-verzoeken (400 in plaats van 500)",
+                "fr": "Ajout d'un middleware d'erreur pour les requêtes JSON malformées (400 au lieu de 500)",
+                "it": "Aggiunto middleware errore per richieste JSON malformate (400 invece di 500)",
+                "es": "Añadido middleware de error para solicitudes JSON malformadas (400 en lugar de 500)",
+                "pl": "Dodano middleware obsługi błędów dla nieprawidłowych żądań JSON (400 zamiast 500)",
+                "uk": "Додано проміжне ПЗ для помилкових JSON-запитів (400 замість 500)",
+                "zh-cn": "添加错误中间件处理格式错误的JSON请求（400替代500）"
+            },
+            "0.8.10": {
+                "en": "Consistent admin UI i18n keys, add PayPal to FUNDING.yml",
+                "de": "Konsistente Admin-UI i18n-Keys, PayPal zur FUNDING.yml hinzugefügt",
+                "ru": "Согласованные ключи i18n в Admin UI, добавлен PayPal в FUNDING.yml",
+                "pt": "Chaves i18n consistentes na UI admin, PayPal adicionado ao FUNDING.yml",
+                "nl": "Consistente admin-UI i18n-sleutels, PayPal toegevoegd aan FUNDING.yml",
+                "fr": "Clés i18n cohérentes dans l interface admin, PayPal ajouté à FUNDING.yml",
+                "it": "Chiavi i18n coerenti nell interfaccia admin, PayPal aggiunto a FUNDING.yml",
+                "es": "Claves i18n consistentes en la UI de admin, PayPal añadido a FUNDING.yml",
+                "pl": "Spójne klucze i18n w admin UI, PayPal dodany do FUNDING.yml",
+                "uk": "Узгоджені ключі i18n в Admin UI, PayPal додано до FUNDING.yml",
+                "zh-cn": "一致的管理界面 i18n 键，FUNDING.yml 中添加 PayPal"
+            }
+        },
+        "titleLang": {
+            "en": "Home Assistant Emulation Bridge",
+            "de": "Home Assistant Emulation Bridge",
+            "ru": "Мост эмуляции Home Assistant",
+            "pt": "Ponte de Emulação do Home Assistant",
+            "nl": "Home Assistant Emulatiebrug",
+            "fr": "Pont d'Émulation Home Assistant",
+            "it": "Bridge di Emulazione Home Assistant",
+            "es": "Puente de Emulación de Home Assistant",
+            "pl": "Most emulacji Home Assistant",
+            "uk": "Міст емуляції Home Assistant",
+            "zh-cn": "Home Assistant仿真桥"
+        },
+        "desc": {
+            "en": "Emulates a minimal Home Assistant server so devices expecting a Home Assistant dashboard can display any custom web URL.",
+            "de": "Emuliert einen minimalen Home Assistant Server, sodass Geräte mit Home-Assistant-Dashboard-Unterstützung beliebige Web-URLs anzeigen können.",
+            "ru": "Эмулирует минимальный сервер Home Assistant, чтобы устройства, ожидающие панель управления Home Assistant, могли отображать любой пользовательский URL.",
+            "pt": "Emula um servidor Home Assistant mínimo para que dispositivos que esperam um painel do Home Assistant possam exibir qualquer URL web personalizado.",
+            "nl": "Emuleert een minimale Home Assistant server zodat apparaten die een Home Assistant dashboard verwachten elke aangepaste web-URL kunnen weergeven.",
+            "fr": "Émule un serveur Home Assistant minimal pour que les appareils attendant un tableau de bord Home Assistant puissent afficher n'importe quelle URL web personnalisée.",
+            "it": "Emula un server Home Assistant minimale in modo che i dispositivi che si aspettano una dashboard Home Assistant possano visualizzare qualsiasi URL web personalizzato.",
+            "es": "Emula un servidor Home Assistant mínimo para que los dispositivos que esperan un panel de Home Assistant puedan mostrar cualquier URL web personalizada.",
+            "pl": "Emuluje minimalny serwer Home Assistant, dzięki czemu urządzenia oczekujące pulpitu nawigacyjnego Home Assistant mogą wyświetlać dowolny niestandardowy adres URL.",
+            "uk": "Емулює мінімальний сервер Home Assistant, щоб пристрої, що очікують панель Home Assistant, могли відображати будь-яку користувацьку URL-адресу.",
+            "zh-cn": "模拟一个最小的Home Assistant服务器，使期望Home Assistant仪表板的设备能够显示任何自定义网址。"
+        },
+        "authors": [
+            "krobi <krobi@power-dreams.com>"
+        ],
+        "keywords": [
+            "homeassistant",
+            "home-assistant",
+            "shelly",
+            "wall display",
+            "vis",
+            "bridge"
+        ],
+        "licenseInformation": {
+            "license": "MIT",
+            "type": "free"
+        },
+        "platform": "Javascript/Node.js",
+        "icon": "homeassistant-bridge.svg",
+        "extIcon": "https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg",
+        "readme": "https://github.com/krobipd/ioBroker.homeassistant-bridge/blob/main/README.md",
+        "enabled": true,
+        "tier": 3,
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "infrastructure",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "push",
+        "adminUI": {
+            "config": "json"
+        },
+        "supportedMessages": {
+            "stopInstance": true
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=7.0.0"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=7.6.20"
+            }
+        ]
     },
-    "titleLang": {
-      "en": "Home Assistant Emulation Bridge",
-      "de": "Home Assistant Emulation Bridge",
-      "ru": "Мост эмуляции Home Assistant",
-      "pt": "Ponte de Emulação do Home Assistant",
-      "nl": "Home Assistant Emulatiebrug",
-      "fr": "Pont d'Émulation Home Assistant",
-      "it": "Bridge di Emulazione Home Assistant",
-      "es": "Puente de Emulación de Home Assistant",
-      "pl": "Most emulacji Home Assistant",
-      "uk": "Міст емуляції Home Assistant",
-      "zh-cn": "Home Assistant仿真桥"
-    },
-    "desc": {
-      "en": "Emulates a minimal Home Assistant server so devices expecting a Home Assistant dashboard can display any custom web URL.",
-      "de": "Emuliert einen minimalen Home Assistant Server, sodass Geräte mit Home-Assistant-Dashboard-Unterstützung beliebige Web-URLs anzeigen können.",
-      "ru": "Эмулирует минимальный сервер Home Assistant, чтобы устройства, ожидающие панель управления Home Assistant, могли отображать любой пользовательский URL.",
-      "pt": "Emula um servidor Home Assistant mínimo para que dispositivos que esperam um painel do Home Assistant possam exibir qualquer URL web personalizado.",
-      "nl": "Emuleert een minimale Home Assistant server zodat apparaten die een Home Assistant dashboard verwachten elke aangepaste web-URL kunnen weergeven.",
-      "fr": "Émule un serveur Home Assistant minimal pour que les appareils attendant un tableau de bord Home Assistant puissent afficher n'importe quelle URL web personnalisée.",
-      "it": "Emula un server Home Assistant minimale in modo che i dispositivi che si aspettano una dashboard Home Assistant possano visualizzare qualsiasi URL web personalizzato.",
-      "es": "Emula un servidor Home Assistant mínimo para que los dispositivos que esperan un panel de Home Assistant puedan mostrar cualquier URL web personalizada.",
-      "pl": "Emuluje minimalny serwer Home Assistant, dzięki czemu urządzenia oczekujące pulpitu nawigacyjnego Home Assistant mogą wyświetlać dowolny niestandardowy adres URL.",
-      "uk": "Емулює мінімальний сервер Home Assistant, щоб пристрої, що очікують панель Home Assistant, могли відображати будь-яку користувацьку URL-адресу.",
-      "zh-cn": "模拟一个最小的Home Assistant服务器，使期望Home Assistant仪表板的设备能够显示任何自定义网址。"
-    },
-    "authors": [
-      "krobi <krobi@power-dreams.com>"
+    "encryptedNative": [
+        "password"
     ],
-    "keywords": [
-      "homeassistant",
-      "home-assistant",
-      "shelly",
-      "wall display",
-      "vis",
-      "bridge"
+    "protectedNative": [
+        "password"
     ],
-    "licenseInformation": {
-      "license": "MIT",
-      "type": "free"
+    "native": {
+        "port": 8123,
+        "bindAddress": "0.0.0.0",
+        "visUrl": "",
+        "authRequired": false,
+        "username": "admin",
+        "password": "",
+        "mdnsEnabled": true,
+        "serviceName": "ioBroker"
     },
-    "platform": "Javascript/Node.js",
-    "icon": "homeassistant-bridge.svg",
-    "extIcon": "https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg",
-    "readme": "https://github.com/krobipd/ioBroker.homeassistant-bridge/blob/main/README.md",
-    "enabled": true,
-    "tier": 3,
-    "loglevel": "info",
-    "mode": "daemon",
-    "type": "infrastructure",
-    "compact": true,
-    "connectionType": "local",
-    "dataSource": "push",
-    "adminUI": {
-      "config": "json"
-    },
-    "supportedMessages": {
-      "stopInstance": true
-    },
-    "dependencies": [
-      {
-        "js-controller": ">=7.0.0"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=7.6.20"
-      }
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Server is running",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
     ]
-  },
-  "encryptedNative": [
-    "password"
-  ],
-  "protectedNative": [
-    "password"
-  ],
-  "native": {
-    "port": 8123,
-    "bindAddress": "0.0.0.0",
-    "visUrl": "",
-    "authRequired": false,
-    "username": "admin",
-    "password": "",
-    "mdnsEnabled": true,
-    "serviceName": "ioBroker"
-  },
-  "objects": [],
-  "instanceObjects": [
-    {
-      "_id": "info",
-      "type": "channel",
-      "common": {
-        "name": "Information"
-      },
-      "native": {}
-    },
-    {
-      "_id": "info.connection",
-      "type": "state",
-      "common": {
-        "role": "indicator.connected",
-        "name": "Server is running",
-        "type": "boolean",
-        "read": true,
-        "write": false,
-        "def": false
-      },
-      "native": {}
-    }
-  ]
 }

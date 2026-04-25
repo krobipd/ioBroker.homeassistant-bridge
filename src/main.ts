@@ -33,6 +33,10 @@ class HomeAssistantBridge extends utils.Adapter {
     }
 
     private async onReady(): Promise<void> {
+        this.log.warn(
+            'This adapter is DEPRECATED. Development continues as ioBroker.hassemu. Please install ioBroker.hassemu (same Home Assistant emulation for Shelly Wall Displays, actively maintained). See https://github.com/krobipd/ioBroker.hassemu',
+        );
+
         try {
             await this.setStateAsync('info.connection', false, true);
 

@@ -11,6 +11,12 @@
 
 <img src="https://raw.githubusercontent.com/krobipd/ioBroker.homeassistant-bridge/main/admin/homeassistant-bridge.svg" width="100" />
 
+> ## ⚠️ Deprecated — please migrate to [ioBroker.hassemu](https://github.com/krobipd/ioBroker.hassemu)
+>
+> Development of this adapter has moved to **hassemu** under a clearer name. ioBroker.hassemu provides the same Home Assistant emulation for Shelly Wall Displays plus active maintenance. This adapter receives no further updates.
+>
+> **Veraltet — bitte zu [ioBroker.hassemu](https://github.com/krobipd/ioBroker.hassemu) wechseln.** Die Weiterentwicklung läuft unter dem klareren Namen hassemu. Gleiche Home-Assistant-Emulation für Shelly Wall Displays, dort aktiv gepflegt. Dieser Adapter bekommt keine weiteren Updates.
+
 Emulates a minimal [Home Assistant](https://www.home-assistant.io) server so that devices like the [Shelly Wall Display XL](https://www.shelly.com) can be redirected to any custom web URL — without running a real Home Assistant Core.
 
 ---
