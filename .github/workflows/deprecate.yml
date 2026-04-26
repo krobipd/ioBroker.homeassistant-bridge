@@ -1,0 +1,28 @@
+name: Deprecate npm package
+
+# Manual workflow to run `npm deprecate` for this package via the same OIDC
+# trusted-publisher path that test-and-release.yml uses for `npm publish`.
+# Avoids the need for a local 2FA login on a developer machine.
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "Deprecation message users will see on `npm install`"
+        required: true
+        default: "DEPRECATED — development continues as iobroker.hassemu (same Home Assistant emulation for Shelly Wall Displays, actively maintained). https://www.npmjs.com/package/iobroker.hassemu"
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+      - name: Run npm deprecate
+        run: npm deprecate iobroker.homeassistant-bridge "${{ inputs.message }}"
